@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.Toolbar;
+import android.widget.ImageView;
 import android.widget.TextView;
 import com.example.yen.rottentomato.R;
 import com.example.yen.rottentomato.data.model.Movie;
@@ -23,6 +24,7 @@ public class DetailActivity extends BaseActivity implements HasComponent<Activit
     private static final String INSTANCESTATE_PARAM_MOVIE     = "INSTANCESTATE_PARAM_MOVIE";
 
     @Bind(R.id.toolbar)         Toolbar toolbar;
+    @Bind(R.id.iv_pic)          ImageView picture;
     @Bind(R.id.tv_title)        TextView title;
     @Bind(R.id.tv_rating)       TextView rating;
     @Bind(R.id.tv_description)  TextView des;
@@ -67,6 +69,7 @@ public class DetailActivity extends BaseActivity implements HasComponent<Activit
     }
 
     private void setUI() {
+        picasso.load(movie.getPoster().getOriginal()).into(picture);
         title.setText(movie.getTitle());
         rating.setText(movie.getMpaaRating());
         des.setText(movie.getSynopsis());

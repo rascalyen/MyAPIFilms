@@ -9,6 +9,7 @@ import com.example.yen.rottentomato.ui.dependency.component.ActivityComponent;
 import com.example.yen.rottentomato.ui.dependency.component.ApplicationComponent;
 import com.example.yen.rottentomato.ui.dependency.module.ActivityModule;
 import com.example.yen.rottentomato.ui.navigation.Navigator;
+import com.squareup.picasso.Picasso;
 
 import javax.inject.Inject;
 
@@ -18,6 +19,7 @@ import javax.inject.Inject;
 public class BaseActivity extends AppCompatActivity {
 
     @Inject Navigator navigator;
+    @Inject Picasso picasso;
     ActivityComponent activityComponent;
 
 

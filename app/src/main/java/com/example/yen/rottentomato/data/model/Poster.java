@@ -3,11 +3,13 @@ package com.example.yen.rottentomato.data.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.io.Serializable;
+
 /**
  * Created by yenhuang on 2/11/16.
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Poster {
+public class Poster implements Serializable {
 
     @JsonProperty("thumbnail")
     private String thumbnail;

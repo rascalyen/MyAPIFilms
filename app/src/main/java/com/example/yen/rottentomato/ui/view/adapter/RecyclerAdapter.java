@@ -23,9 +23,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Custom
     @Inject Picasso picasso;
     private List<Movie> movieList;
     private Context mContext;
-    private static ClickListener clickListener;
+    private ClickListener clickListener;
 
-    public static class CustomViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public static class CustomViewHolder extends RecyclerView.ViewHolder {
 
         @Bind(R.id.iv_icon)         ImageView icon;
         @Bind(R.id.tv_first)        TextView first;
@@ -36,25 +36,30 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Custom
             ButterKnife.bind(this, view);
         }
 
-        @Override
-        public void onClick(View v) {
-            clickListener.onItemClick(getAdapterPosition(), v);
+        public void addListener(final Movie movie, final ClickListener listener) {
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onItemClick(movie);
+                }
+            });
         }
-
     }
 
-    public void setOnItemClickListener(ClickListener clickListener) {
-        RecyclerAdapter.clickListener = clickListener;
-    }
 
     public interface ClickListener {
-        void onItemClick(int position, View v);
+        void onItemClick(Movie movie);
     }
 
 
     public RecyclerAdapter(Context context, List<Movie> movieList) {
         this.movieList = movieList;
         this.mContext = context;
+    }
+
+    public void setOnItemClickListener(ClickListener clickListener) {
+        this.clickListener = clickListener;
     }
 
     @Override
@@ -72,6 +77,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Custom
         picasso.load(movie.getPoster().getThumbnail()).resize(216, 288).centerCrop().into(holder.icon);
         holder.first.setText(movie.getTitle());
         holder.second.setText(movie.getMpaaRating());
+        holder.addListener(movieList.get(i), clickListener);
     }
 
     @Override

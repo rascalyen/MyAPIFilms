@@ -29,7 +29,7 @@ public class ResultFragment extends BaseFragment implements ResultView {
     @Bind(R.id.recycler)        RecyclerView recyclerView;
     @Inject ResultPresenter resultPresenter;
     private RecyclerAdapter listAdapter;
-    private ResultListener mResultListener;
+    private ResultListener  mResultListener;
 
 
     public static ResultFragment newInstance(String query) {
@@ -71,8 +71,8 @@ public class ResultFragment extends BaseFragment implements ResultView {
         listAdapter = new RecyclerAdapter(this.getContext(), new ArrayList<Movie>());
         listAdapter.setOnItemClickListener(new RecyclerAdapter.ClickListener() {
             @Override
-            public void onItemClick(int position, View v) {
-                mResultListener.moveToDetail(listAdapter.getItem(position));
+            public void onItemClick(Movie movie) {
+                mResultListener.moveToDetail(movie);
             }
         });
         recyclerView.setAdapter(listAdapter);
