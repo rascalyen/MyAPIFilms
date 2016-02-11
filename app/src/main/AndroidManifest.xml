@@ -39,6 +39,12 @@
                 android:resource="@xml/searchable" />
         </activity>
 
+        <activity
+            android:name=".ui.view.activity.DetailActivity"
+            android:label="@string/title_activity_result"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+
     </application>
 
 </manifest>
