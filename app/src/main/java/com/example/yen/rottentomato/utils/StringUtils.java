@@ -7,6 +7,6 @@ public abstract class StringUtils {
 
     public static String encodeSpace(String s) {
 
-        return s.replaceAll(" ", "%20");
+        return s.replaceAll(" ", "+");
     }
 }
