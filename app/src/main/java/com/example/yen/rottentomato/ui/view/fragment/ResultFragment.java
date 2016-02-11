@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import com.example.yen.rottentomato.R;
 import com.example.yen.rottentomato.data.model.Movie;
-import com.example.yen.rottentomato.ui.adapter.RecyclerAdapter;
+import com.example.yen.rottentomato.ui.view.adapter.RecyclerAdapter;
 import com.example.yen.rottentomato.ui.dependency.component.FragmentComponent;
 import com.example.yen.rottentomato.ui.presenter.ResultPresenter;
 import com.example.yen.rottentomato.ui.view.ResultView;

@@ -1,4 +1,4 @@
-package com.example.yen.rottentomato.ui.adapter;
+package com.example.yen.rottentomato.ui.view.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
