@@ -3,6 +3,7 @@ package com.example.yen.rottentomato.ui.dependency.module;
 import android.app.Application;
 
 import com.example.yen.rottentomato.configs.Configuration;
+import com.example.yen.rottentomato.ui.navigation.Navigator;
 import com.example.yen.rottentomato.web.TomatoClient;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.picasso.Picasso;
@@ -30,9 +31,9 @@ public class ApplicationModule {
         return application;
     }
 
-    /*@Provides @Singleton Navigator provideNavigator(Properties properties) {
+    @Provides @Singleton Navigator provideNavigator(Properties properties) {
         return new Navigator(properties);
-    }*/
+    }
 
     @Provides @Singleton Configuration provideConfiguration() {
         return new Configuration(application);
