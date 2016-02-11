@@ -1,0 +1,8 @@
+baseURL =  http://api.rottentomatoes.com/api/public/v1.0
+apikey = yy5at44a4hzqqbsgnm4u47ju
+pageLimit = 10
+
+connectTimeoutSec = 12
+readTimeoutSec = 12
+diskCacheSizeMB = 256
+diskCachePath = TOMATO_HTTP
