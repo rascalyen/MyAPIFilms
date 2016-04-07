@@ -1,10 +1,8 @@
 package com.example.yen.rottentomato.web.configuration;
 
-import com.squareup.okhttp.OkHttpClient;
-
-import retrofit.RestAdapter;
-import retrofit.client.OkClient;
-import retrofit.converter.JacksonConverter;
+import okhttp3.OkHttpClient;
+import retrofit2.Retrofit;
+import retrofit2.converter.jackson.JacksonConverterFactory;
 
 /**
  * Created by yenhuang on 2/10/16.
@@ -13,13 +11,12 @@ public class RestClientGenerator {
 
     public static <S> S createService(Class<S> serviceClass, OkHttpClient okHttpClient, String baseUrl) {
 
-        RestAdapter.Builder builder = new RestAdapter.Builder()
-                .setEndpoint(baseUrl)
-                .setConverter(new JacksonConverter())
-                .setLogLevel(RestAdapter.LogLevel.BASIC)
-                .setClient(new OkClient( okHttpClient ));
+        Retrofit.Builder builder = new Retrofit.Builder()
+                .baseUrl(baseUrl)
+                .addConverterFactory(JacksonConverterFactory.create())
+                .client(okHttpClient);
 
-        RestAdapter adapter = builder.build();
+        Retrofit adapter = builder.build();
 
         return adapter.create(serviceClass);
     }

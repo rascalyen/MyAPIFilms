@@ -1,19 +1,15 @@
 package com.example.yen.rottentomato.ui.dependency.module;
 
 import android.app.Application;
-
 import com.example.yen.rottentomato.configs.Configuration;
 import com.example.yen.rottentomato.ui.navigation.Navigator;
 import com.example.yen.rottentomato.web.TomatoClient;
-import com.squareup.okhttp.OkHttpClient;
 import com.squareup.picasso.Picasso;
-
 import java.util.Properties;
-
 import javax.inject.Singleton;
-
 import dagger.Module;
 import dagger.Provides;
+import okhttp3.OkHttpClient;
 
 /**
  * Created by yenhuang on 2/10/16.
@@ -43,7 +39,8 @@ public class ApplicationModule {
         return config.getProperties();
     }
 
-    @Provides OkHttpClient provideOkHttpClient(Configuration config) {
+    @Provides
+    OkHttpClient provideOkHttpClient(Configuration config) {
         return config.getOkHttpClient();
     }
 

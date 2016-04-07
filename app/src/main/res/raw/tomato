@@ -1,5 +1,5 @@
-baseURL =  http://api.rottentomatoes.com/api/public/v1.0
-apikey = yy5at44a4hzqqbsgnm4u47ju
+baseURL =  http://www.myapifilms.com/imdb/
+apikey = 159ab6ca-37ea-4351-ba42-9ef903beacc3
 pageLimit = 10
 
 connectTimeoutSec = 12

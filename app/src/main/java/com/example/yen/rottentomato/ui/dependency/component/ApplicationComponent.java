@@ -1,16 +1,12 @@
 package com.example.yen.rottentomato.ui.dependency.component;
 
 import android.app.Application;
-
 import com.example.yen.rottentomato.TomatoApplication;
 import com.example.yen.rottentomato.ui.dependency.module.ApplicationModule;
 import com.example.yen.rottentomato.web.TomatoClient;
 import com.squareup.picasso.Picasso;
-
 import java.util.Properties;
-
 import javax.inject.Singleton;
-
 import dagger.Component;
 
 /**

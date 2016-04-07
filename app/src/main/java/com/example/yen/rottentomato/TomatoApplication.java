@@ -1,7 +1,6 @@
 package com.example.yen.rottentomato;
 
 import android.app.Application;
-
 import com.example.yen.rottentomato.ui.dependency.component.ApplicationComponent;
 import com.squareup.leakcanary.LeakCanary;
 

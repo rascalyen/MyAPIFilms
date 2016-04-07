@@ -2,11 +2,9 @@ package com.example.yen.rottentomato.web;
 
 import com.example.yen.rottentomato.web.configuration.RestClientGenerator;
 import com.example.yen.rottentomato.web.service.TomatoService;
-import com.squareup.okhttp.OkHttpClient;
-
 import java.util.Properties;
-
 import javax.inject.Inject;
+import okhttp3.OkHttpClient;
 
 /**
  * Created by yenhuang on 2/10/16.

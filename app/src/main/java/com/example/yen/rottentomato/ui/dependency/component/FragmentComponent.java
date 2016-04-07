@@ -4,7 +4,6 @@ import com.example.yen.rottentomato.ui.view.adapter.RecyclerAdapter;
 import com.example.yen.rottentomato.ui.dependency.module.ActivityModule;
 import com.example.yen.rottentomato.ui.dependency.scope.PerActivity;
 import com.example.yen.rottentomato.ui.view.fragment.ResultFragment;
-
 import dagger.Component;
 
 /**
