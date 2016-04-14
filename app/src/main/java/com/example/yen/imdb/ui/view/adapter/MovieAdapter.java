@@ -12,7 +12,6 @@ import com.example.yen.imdb.data.entity.MovieEntity;
 import com.example.yen.imdb.ui.navigation.Navigator;
 import com.example.yen.imdb.utils.StringUtils;
 import com.squareup.picasso.Picasso;
-import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
 import butterknife.Bind;
@@ -26,8 +25,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieHolder>
     private List<MovieEntity> movies;
 
 
-    public MovieAdapter() {
-        this.movies = new ArrayList<>();
+    public MovieAdapter(List<MovieEntity> movies) {
+        this.movies = movies;
     }
 
 
@@ -82,7 +81,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieHolder>
             this.movies.addAll(movies);
         }
         else {
-            this.movies = movies;
+            this.movies.addAll(movies);
         }
         notifyDataSetChanged();
     }

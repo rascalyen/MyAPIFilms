@@ -14,6 +14,8 @@ import com.example.yen.imdb.ui.dependency.component.FragmentComponent;
 import com.example.yen.imdb.ui.presenter.MainPresenter;
 import com.example.yen.imdb.ui.view.MainView;
 import com.example.yen.imdb.ui.view.adapter.MovieAdapter;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
 import butterknife.Bind;
@@ -27,6 +29,7 @@ public class MainFragment extends BaseFragment implements MainView {
     @Bind(R.id.recycler)        RecyclerView recyclerView;
     @Inject MainPresenter mainPresenter;
     private MovieAdapter movieAdapter;
+    private static String MOVIES_STATE = "MOVIES_STATE";
     private List<MovieEntity> movieEntities;
 
 
@@ -55,31 +58,40 @@ public class MainFragment extends BaseFragment implements MainView {
 
         View view = inflater.inflate(R.layout.fragment_movies, container, false);
         ButterKnife.bind(this, view);
-        setRecyclerView();
         return view;
     }
 
-    private void setRecyclerView() {
-        movieAdapter = new MovieAdapter();
-        recyclerView.setAdapter(movieAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putSerializable(MOVIES_STATE, (Serializable) movieEntities);
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        if (savedInstanceState != null)
+            movieEntities = (List<MovieEntity>) savedInstanceState.getSerializable(MOVIES_STATE);
+        else if (movieEntities == null)
+            movieEntities = new ArrayList<>();
+
+        setRecyclerView();
         initialize();
+    }
+
+    private void setRecyclerView() {
+        movieAdapter = new MovieAdapter(movieEntities);
+        recyclerView.setAdapter(movieAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
     }
 
     private void initialize() {
         this.getComponent(FragmentComponent.class).inject(this);
         this.getComponent(FragmentComponent.class).inject(movieAdapter);
         mainPresenter.setMainView(this);
-
-        if (movieEntities == null)
+        if (movieEntities.isEmpty())
             mainPresenter.initialize();
-        else
-            mainPresenter.viewMovies(movieEntities);
     }
 
     @Override public void onResume() {
@@ -95,6 +107,7 @@ public class MainFragment extends BaseFragment implements MainView {
     @Override public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
+        mainPresenter.cancelCall();
     }
 
     @Override public void onDestroy() {
@@ -139,7 +152,7 @@ public class MainFragment extends BaseFragment implements MainView {
     public void clearMovies() {
         if (movieAdapter != null) {
             movieAdapter.clearAll();
-            movieEntities = null;
+            movieEntities.clear();
         }
     }
 

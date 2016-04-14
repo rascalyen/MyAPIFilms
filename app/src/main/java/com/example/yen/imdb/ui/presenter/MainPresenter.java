@@ -19,6 +19,7 @@ public class MainPresenter implements Presenter {
     private IMDBClient IMDBClient;
     private Properties properties;
     private MainView mainView;
+    private Call<IMDBResponse> call;
 
 
     @Inject public MainPresenter(IMDBClient IMDBClient, Properties properties) {
@@ -37,7 +38,7 @@ public class MainPresenter implements Presenter {
     }
 
     private void getInTheaters() {
-        Call<IMDBResponse> call = IMDBClient.getIMDBService().getInTheaters(properties.getProperty("token"));
+        call = IMDBClient.getIMDBService().getInTheaters(properties.getProperty("token"));
 
         call.enqueue(new Callback<IMDBResponse>() {
             @Override
@@ -63,15 +64,18 @@ public class MainPresenter implements Presenter {
         });
     }
 
+    public void cancelCall() {
+
+        if (call != null && !call.isCanceled()) {
+            call.cancel();
+            System.out.println("Call got cancelled.");
+        }
+    }
+
     @Override
     public void resume() {}
 
     @Override
     public void pause() {}
-
-
-    public void viewMovies(List<MovieEntity> movieEntities) {
-        mainView.viewMovies(movieEntities);
-    }
 
 }
