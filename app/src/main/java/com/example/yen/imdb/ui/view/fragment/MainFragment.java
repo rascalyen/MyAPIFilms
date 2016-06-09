@@ -89,19 +89,9 @@ public class MainFragment extends BaseFragment implements MainView {
     private void initialize() {
         this.getComponent(FragmentComponent.class).inject(this);
         this.getComponent(FragmentComponent.class).inject(movieAdapter);
-        mainPresenter.setMainView(this);
+        mainPresenter.attachViewMVP(this);
         if (movieEntities.isEmpty())
             mainPresenter.initialize();
-    }
-
-    @Override public void onResume() {
-        super.onResume();
-        mainPresenter.resume();
-    }
-
-    @Override public void onPause() {
-        super.onPause();
-        mainPresenter.pause();
     }
 
     @Override public void onDestroyView() {
@@ -112,8 +102,7 @@ public class MainFragment extends BaseFragment implements MainView {
 
     @Override public void onDestroy() {
         super.onDestroy();
-        mainPresenter = null;
-        //mMainListener = null;
+        mainPresenter.detachViewMVP();
     }
 
 

@@ -14,7 +14,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class MainPresenter implements Presenter {
+public class MainPresenter implements Presenter<MainView> {
 
     private IMDBClient IMDBClient;
     private Properties properties;
@@ -27,9 +27,6 @@ public class MainPresenter implements Presenter {
         this.properties = properties;
     }
 
-    public void setMainView(@NonNull MainView mainView) {
-        this.mainView = mainView;
-    }
 
     public void initialize() {
         mainView.clearMovies();
@@ -48,8 +45,10 @@ public class MainPresenter implements Presenter {
                     IMDBResponse imdbResponse = response.body();
                     List<MovieEntity> movies = imdbResponse.getData().getInTheaters().get(1).getMovies();
                     movies.addAll(imdbResponse.getData().getInTheaters().get(0).getMovies());
-                    mainView.viewMovies(movies);
-                    mainView.hideProgress();
+                    if (mainView != null) {
+                        mainView.viewMovies(movies);
+                        mainView.hideProgress();
+                    }
                 }
                 else {
                     int statusCode = response.code();
@@ -73,9 +72,13 @@ public class MainPresenter implements Presenter {
     }
 
     @Override
-    public void resume() {}
+    public void attachViewMVP(@NonNull MainView mainView) {
+        this.mainView = mainView;
+    }
 
     @Override
-    public void pause() {}
+    public void detachViewMVP() {
+        this.mainView = null;
+    }
 
 }

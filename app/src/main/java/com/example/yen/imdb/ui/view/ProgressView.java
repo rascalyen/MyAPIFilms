@@ -3,7 +3,7 @@ package com.example.yen.imdb.ui.view;
 import android.content.Context;
 
 
-public interface ProgressView {
+public interface ProgressView extends ViewMVP {
 
     /**
      * Show a view with a progress bar indicating a loading process.
