@@ -12,9 +12,7 @@ import com.example.yen.imdb.R;
 import com.example.yen.imdb.data.entity.MovieEntity;
 import com.example.yen.imdb.dependency.component.FragmentComponent;
 import com.example.yen.imdb.ui.BaseFragment;
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 import javax.inject.Inject;
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -28,7 +26,7 @@ public class MainFragment extends BaseFragment implements MainViewMVP {
     @Inject MainPresenter mainPresenter;
     private MovieAdapter movieAdapter;
     private static String MOVIES_STATE = "MOVIES_STATE";
-    private List<MovieEntity> movieEntities;
+    private ArrayList<MovieEntity> movieEntities;
 
 
     public static MainFragment newInstance() {
@@ -62,7 +60,7 @@ public class MainFragment extends BaseFragment implements MainViewMVP {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putSerializable(MOVIES_STATE, (Serializable) movieEntities);
+        outState.putParcelableArrayList(MOVIES_STATE, movieEntities);
     }
 
     @Override
@@ -70,7 +68,7 @@ public class MainFragment extends BaseFragment implements MainViewMVP {
         super.onActivityCreated(savedInstanceState);
 
         if (savedInstanceState != null)
-            movieEntities = (List<MovieEntity>) savedInstanceState.getSerializable(MOVIES_STATE);
+            movieEntities = savedInstanceState.getParcelableArrayList(MOVIES_STATE);
         else if (movieEntities == null)
             movieEntities = new ArrayList<>();
 
@@ -144,7 +142,7 @@ public class MainFragment extends BaseFragment implements MainViewMVP {
     }
 
     @Override
-    public void viewMovies(List<MovieEntity> movies) {
+    public void viewMovies(ArrayList<MovieEntity> movies) {
         if (movieAdapter != null) {
             movieAdapter.addAll(movies);
             movieEntities = movies;

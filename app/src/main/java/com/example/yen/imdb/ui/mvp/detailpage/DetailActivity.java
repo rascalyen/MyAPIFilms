@@ -57,7 +57,7 @@ public class DetailActivity extends BaseActivity implements HasComponent<Activit
     }
 
     private void initializeActivity() {
-        movie = (MovieEntity) getIntent().getSerializableExtra(EXTRA_MOVIE);
+        movie = getIntent().getParcelableExtra(EXTRA_MOVIE);
 
         setupActionBar();
         setupMovieDetail();

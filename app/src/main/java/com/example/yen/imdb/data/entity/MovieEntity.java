@@ -1,15 +1,15 @@
 package com.example.yen.imdb.data.entity;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class MovieEntity implements Serializable {
+public class MovieEntity implements Parcelable {
 
     @JsonProperty("title")
     private String title;
@@ -222,5 +222,75 @@ public class MovieEntity implements Serializable {
     public void setType(String type) {
         this.type = type;
     }
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.title);
+        dest.writeString(this.originalTitle);
+        dest.writeString(this.year);
+        dest.writeString(this.releaseDate);
+        dest.writeTypedList(this.directors);
+        dest.writeTypedList(this.writers);
+        dest.writeString(this.runtime);
+        dest.writeString(this.urlPoster);
+        dest.writeStringList(this.countries);
+        dest.writeStringList(this.languages);
+        dest.writeStringList(this.genres);
+        dest.writeString(this.plot);
+        dest.writeString(this.simplePlot);
+        dest.writeString(this.idIMDB);
+        dest.writeString(this.urlIMDB);
+        dest.writeString(this.rating);
+        dest.writeString(this.metascore);
+        dest.writeStringList(this.filmingLocations);
+        dest.writeString(this.rated);
+        dest.writeString(this.votes);
+        dest.writeString(this.type);
+    }
+
+    public MovieEntity() {
+    }
+
+    protected MovieEntity(Parcel in) {
+        this.title = in.readString();
+        this.originalTitle = in.readString();
+        this.year = in.readString();
+        this.releaseDate = in.readString();
+        this.directors = in.createTypedArrayList(PersonEntity.CREATOR);
+        this.writers = in.createTypedArrayList(PersonEntity.CREATOR);
+        this.runtime = in.readString();
+        this.urlPoster = in.readString();
+        this.countries = in.createStringArrayList();
+        this.languages = in.createStringArrayList();
+        this.genres = in.createStringArrayList();
+        this.plot = in.readString();
+        this.simplePlot = in.readString();
+        this.idIMDB = in.readString();
+        this.urlIMDB = in.readString();
+        this.rating = in.readString();
+        this.metascore = in.readString();
+        this.filmingLocations = in.createStringArrayList();
+        this.rated = in.readString();
+        this.votes = in.readString();
+        this.type = in.readString();
+    }
+
+    public static final Creator<MovieEntity> CREATOR = new Creator<MovieEntity>() {
+        @Override
+        public MovieEntity createFromParcel(Parcel source) {
+            return new MovieEntity(source);
+        }
+
+        @Override
+        public MovieEntity[] newArray(int size) {
+            return new MovieEntity[size];
+        }
+    };
 
 }

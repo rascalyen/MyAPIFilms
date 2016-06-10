@@ -5,7 +5,7 @@ import com.example.yen.imdb.data.entity.MovieEntity;
 import com.example.yen.imdb.data.response.IMDBResponse;
 import com.example.yen.imdb.ui.Presenter;
 import com.example.yen.imdb.web.IMDBClient;
-import java.util.List;
+import java.util.ArrayList;
 import java.util.Properties;
 import javax.inject.Inject;
 import okhttp3.ResponseBody;
@@ -43,7 +43,7 @@ public class MainPresenter implements Presenter<MainViewMVP> {
 
                 if (response.isSuccessful()) {
                     IMDBResponse imdbResponse = response.body();
-                    List<MovieEntity> movies = imdbResponse.getData().getInTheaters().get(1).getMovies();
+                    ArrayList<MovieEntity> movies = imdbResponse.getData().getInTheaters().get(1).getMovies();
                     movies.addAll(imdbResponse.getData().getInTheaters().get(0).getMovies());
                     if (mainView != null) {
                         mainView.viewMovies(movies);
