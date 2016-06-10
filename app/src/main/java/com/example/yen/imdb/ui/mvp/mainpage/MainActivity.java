@@ -49,7 +49,7 @@ public class MainActivity extends BaseActivity implements HasComponent<ActivityC
     @OnClick(R.id.text_refresh)
     public void onRefresh() {
         MainFragment mainFragment = (MainFragment) getSupportFragmentManager().findFragmentByTag(MAIN_TAG);
-        if (mainFragment != null)
+        if (mainFragment != null && mainFragment.isVisible())
             mainFragment.getMainPresenter().initialize();
     }
 
