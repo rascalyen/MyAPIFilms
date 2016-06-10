@@ -1,4 +1,4 @@
-package com.example.yen.imdb.ui.dependency.scope;
+package com.example.yen.imdb.dependency.scope;
 
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 import java.lang.annotation.Retention;

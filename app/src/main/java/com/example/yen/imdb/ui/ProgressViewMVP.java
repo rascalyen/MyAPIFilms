@@ -1,9 +1,9 @@
-package com.example.yen.imdb.ui.view;
+package com.example.yen.imdb.ui;
 
 import android.content.Context;
 
 
-public interface ProgressView extends ViewMVP {
+public interface ProgressViewMVP extends ViewMVP {
 
     /**
      * Show a view with a progress bar indicating a loading process.

@@ -1,4 +1,4 @@
-package com.example.yen.imdb.ui.dependency;
+package com.example.yen.imdb.dependency;
 
 
 public interface HasComponent<C> {

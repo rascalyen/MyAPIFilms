@@ -1,9 +1,9 @@
-package com.example.yen.imdb.ui.presenter;
+package com.example.yen.imdb.ui.mvp.mainpage;
 
 import android.support.annotation.NonNull;
 import com.example.yen.imdb.data.entity.MovieEntity;
 import com.example.yen.imdb.data.response.IMDBResponse;
-import com.example.yen.imdb.ui.view.MainView;
+import com.example.yen.imdb.ui.Presenter;
 import com.example.yen.imdb.web.IMDBClient;
 import java.util.List;
 import java.util.Properties;
@@ -14,11 +14,11 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class MainPresenter implements Presenter<MainView> {
+public class MainPresenter implements Presenter<MainViewMVP> {
 
     private IMDBClient IMDBClient;
     private Properties properties;
-    private MainView mainView;
+    private MainViewMVP mainView;
     private Call<IMDBResponse> call;
 
 
@@ -72,7 +72,7 @@ public class MainPresenter implements Presenter<MainView> {
     }
 
     @Override
-    public void attachViewMVP(@NonNull MainView mainView) {
+    public void attachViewMVP(@NonNull MainViewMVP mainView) {
         this.mainView = mainView;
     }
 

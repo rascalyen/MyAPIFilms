@@ -1,4 +1,4 @@
-package com.example.yen.imdb.ui.dependency.module;
+package com.example.yen.imdb.dependency.module;
 
 import android.app.Application;
 import com.example.yen.imdb.configs.Configuration;

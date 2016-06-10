@@ -1,18 +1,15 @@
-package com.example.yen.imdb.ui.view.activity;
+package com.example.yen.imdb.ui;
 
 import android.app.FragmentManager;
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-
 import com.example.yen.imdb.IMDBApplication;
-import com.example.yen.imdb.ui.dependency.component.ActivityComponent;
-import com.example.yen.imdb.ui.dependency.component.ApplicationComponent;
-import com.example.yen.imdb.ui.dependency.module.ActivityModule;
+import com.example.yen.imdb.dependency.component.ActivityComponent;
+import com.example.yen.imdb.dependency.component.ApplicationComponent;
+import com.example.yen.imdb.dependency.module.ActivityModule;
 import com.example.yen.imdb.ui.navigation.Navigator;
 import com.squareup.picasso.Picasso;
-
 import javax.inject.Inject;
 
 
@@ -20,7 +17,7 @@ public class BaseActivity extends AppCompatActivity {
 
     @Inject Navigator navigator;
     @Inject Picasso picasso;
-    ActivityComponent activityComponent;
+    public ActivityComponent activityComponent;
 
 
     @Override
@@ -44,11 +41,11 @@ public class BaseActivity extends AppCompatActivity {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }*/
 
-    void addFragment(int containerViewId, Fragment fragment, String tag) {
+    public void addFragment(int containerViewId, Fragment fragment, String tag) {
         this.getSupportFragmentManager().beginTransaction().add(containerViewId, fragment, tag).commit();
     }
 
-    void replaceFragment(int containerViewId, Fragment fragment) {
+    public void replaceFragment(int containerViewId, Fragment fragment) {
         this.getSupportFragmentManager().beginTransaction().replace(containerViewId, fragment).addToBackStack(null).commit();
     }
 
@@ -56,12 +53,24 @@ public class BaseActivity extends AppCompatActivity {
         this.getSupportFragmentManager().popBackStack();
     }
 
-    ApplicationComponent getApplicationComponent() {
+    public ApplicationComponent getApplicationComponent() {
         return ((IMDBApplication)getApplication()).getApplicationComponent();
     }
 
-    ActivityModule getActivityModule() {
+    public ActivityModule getActivityModule() {
         return new ActivityModule(this);
+    }
+
+    public Navigator getNavigator() {
+        return navigator;
+    }
+
+    public void setNavigator(Navigator navigator) {
+        this.navigator = navigator;
+    }
+
+    public Picasso getPicasso() {
+        return picasso;
     }
 
 }

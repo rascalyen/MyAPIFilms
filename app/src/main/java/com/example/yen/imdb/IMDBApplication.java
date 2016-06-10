@@ -1,7 +1,7 @@
 package com.example.yen.imdb;
 
 import android.app.Application;
-import com.example.yen.imdb.ui.dependency.component.ApplicationComponent;
+import com.example.yen.imdb.dependency.component.ApplicationComponent;
 import com.squareup.leakcanary.LeakCanary;
 
 

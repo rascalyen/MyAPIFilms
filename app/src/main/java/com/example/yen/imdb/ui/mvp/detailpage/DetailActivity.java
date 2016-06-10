@@ -1,4 +1,4 @@
-package com.example.yen.imdb.ui.view.activity;
+package com.example.yen.imdb.ui.mvp.detailpage;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,9 +8,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.example.yen.imdb.R;
 import com.example.yen.imdb.data.entity.MovieEntity;
-import com.example.yen.imdb.ui.dependency.HasComponent;
-import com.example.yen.imdb.ui.dependency.component.ActivityComponent;
-import com.example.yen.imdb.ui.dependency.component.FragmentComponent;
+import com.example.yen.imdb.dependency.HasComponent;
+import com.example.yen.imdb.dependency.component.ActivityComponent;
+import com.example.yen.imdb.dependency.component.FragmentComponent;
+import com.example.yen.imdb.ui.BaseActivity;
 import com.example.yen.imdb.utils.StringUtils;
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -63,7 +64,7 @@ public class DetailActivity extends BaseActivity implements HasComponent<Activit
     }
 
     private void setupMovieDetail() {
-        picasso.load(movie.getUrlPoster()).fit().into(poster);
+        getPicasso().load(movie.getUrlPoster()).fit().into(poster);
 
         StringBuilder sb = new StringBuilder();
         sb.append(StringUtils.makeMinToHour(movie.getRuntime()));

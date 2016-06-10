@@ -1,8 +1,8 @@
-package com.example.yen.imdb.ui.dependency.component;
+package com.example.yen.imdb.dependency.component;
 
 import android.app.Application;
 import com.example.yen.imdb.IMDBApplication;
-import com.example.yen.imdb.ui.dependency.module.ApplicationModule;
+import com.example.yen.imdb.dependency.module.ApplicationModule;
 import com.example.yen.imdb.web.IMDBClient;
 import com.squareup.picasso.Picasso;
 import java.util.Properties;

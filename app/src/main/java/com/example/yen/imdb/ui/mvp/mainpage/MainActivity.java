@@ -1,12 +1,12 @@
-package com.example.yen.imdb.ui.view.activity;
+package com.example.yen.imdb.ui.mvp.mainpage;
 
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import com.example.yen.imdb.R;
-import com.example.yen.imdb.ui.dependency.HasComponent;
-import com.example.yen.imdb.ui.dependency.component.ActivityComponent;
-import com.example.yen.imdb.ui.dependency.component.FragmentComponent;
-import com.example.yen.imdb.ui.view.fragment.MainFragment;
+import com.example.yen.imdb.dependency.HasComponent;
+import com.example.yen.imdb.dependency.component.ActivityComponent;
+import com.example.yen.imdb.dependency.component.FragmentComponent;
+import com.example.yen.imdb.ui.BaseActivity;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;

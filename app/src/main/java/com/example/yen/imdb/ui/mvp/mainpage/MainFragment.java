@@ -1,4 +1,4 @@
-package com.example.yen.imdb.ui.view.fragment;
+package com.example.yen.imdb.ui.mvp.mainpage;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -10,10 +10,8 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import com.example.yen.imdb.R;
 import com.example.yen.imdb.data.entity.MovieEntity;
-import com.example.yen.imdb.ui.dependency.component.FragmentComponent;
-import com.example.yen.imdb.ui.presenter.MainPresenter;
-import com.example.yen.imdb.ui.view.MainView;
-import com.example.yen.imdb.ui.view.adapter.MovieAdapter;
+import com.example.yen.imdb.dependency.component.FragmentComponent;
+import com.example.yen.imdb.ui.BaseFragment;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +20,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 
-public class MainFragment extends BaseFragment implements MainView {
+public class MainFragment extends BaseFragment implements MainViewMVP {
 
     @Bind(R.id.rl_progress)     RelativeLayout progressView;
     @Bind(R.id.rl_retry)        RelativeLayout noResultView;
@@ -101,8 +99,8 @@ public class MainFragment extends BaseFragment implements MainView {
     }
 
     @Override public void onDestroy() {
-        super.onDestroy();
         mainPresenter.detachViewMVP();
+        super.onDestroy();
     }
 
 

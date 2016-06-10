@@ -1,7 +1,7 @@
-package com.example.yen.imdb.ui.dependency.module;
+package com.example.yen.imdb.dependency.module;
 
 import android.app.Activity;
-import com.example.yen.imdb.ui.view.adapter.MovieAdapter;
+
 import dagger.Module;
 import dagger.Provides;
 

@@ -1,4 +1,4 @@
-package com.example.yen.imdb.ui.view.adapter;
+package com.example.yen.imdb.ui.mvp.mainpage;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
