@@ -1,8 +1,12 @@
 # MyAPIFilms IMDB
 
 Showcase common android implementation with [MyAPIFilms](http://api.myapifilms.com/index.do) IMDB API
-
-
+<!--
+<img height="380" src="https://github.com/rascalyen/ApiMovies/blob/master/screenshot/00.png" />
+<img height="380" src="https://github.com/rascalyen/ApiMovies/blob/master/screenshot/01.png" />
+<img height="380" src="https://github.com/rascalyen/ApiMovies/blob/master/screenshot/02.png" />
+<br>
+-->
 [Click here for demo video](http://tinyurl.com/zcpotsl)
 
 
