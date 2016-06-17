@@ -20,6 +20,7 @@ From this project you should find useful examples like,
 * [Picasso](http://square.github.io/picasso/) as image client
 * [LeakCanary](https://github.com/square/leakcanary) to find memory leak EARLY.
 * Read properties from /res/raw resource
+* How to save/restore Fragment's state
 * Use RecyclerView and CardView
 
 
