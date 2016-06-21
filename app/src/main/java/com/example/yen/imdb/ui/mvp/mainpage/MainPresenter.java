@@ -4,11 +4,11 @@ import android.support.annotation.NonNull;
 import com.example.yen.imdb.data.entity.MovieEntity;
 import com.example.yen.imdb.data.response.IMDBResponse;
 import com.example.yen.imdb.ui.Presenter;
+import com.example.yen.imdb.utils.ModelMapper;
 import com.example.yen.imdb.web.IMDBClient;
 import java.util.ArrayList;
 import java.util.Properties;
 import javax.inject.Inject;
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -41,18 +41,19 @@ public class MainPresenter implements Presenter<MainViewMVP> {
             @Override
             public void onResponse(Call<IMDBResponse> call, Response<IMDBResponse> response) {
 
-                if (response.isSuccessful()) {
+                if (response.isSuccessful() && response.body().getError() == null) {
                     IMDBResponse imdbResponse = response.body();
-                    ArrayList<MovieEntity> movies = imdbResponse.getData().getInTheaters().get(1).getMovies();
-                    movies.addAll(imdbResponse.getData().getInTheaters().get(0).getMovies());
+                    ArrayList<MovieEntity> movieEntities = imdbResponse.getData().getInTheaters().get(1).getMovies();
+                    movieEntities.addAll(imdbResponse.getData().getInTheaters().get(0).getMovies());
                     if (mainView != null) {
-                        mainView.viewMovies(movies);
+                        mainView.viewMovies(ModelMapper.toMovieModel(movieEntities));
                         mainView.hideProgress();
                     }
                 }
                 else {
-                    int statusCode = response.code();
-                    ResponseBody errorBody = response.errorBody();
+                    mainView.showMessage(response.body().getError().getCode()
+                            + " : " + response.body().getError().getMessage());
+                    mainView.hideProgress();
                 }
             }
 

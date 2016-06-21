@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.example.yen.imdb.R;
-import com.example.yen.imdb.data.entity.MovieEntity;
+import com.example.yen.imdb.data.model.Movie;
 import com.example.yen.imdb.ui.navigation.Navigator;
 import com.example.yen.imdb.utils.StringUtils;
 import com.squareup.picasso.Picasso;
@@ -22,10 +22,10 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieHolder>
 
     @Inject Picasso picasso;
     @Inject Navigator navigator;
-    private List<MovieEntity> movies;
+    private List<Movie> movies;
 
 
-    public MovieAdapter(List<MovieEntity> movies) {
+    public MovieAdapter(List<Movie> movies) {
         this.movies = movies;
     }
 
@@ -43,7 +43,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieHolder>
     public void onBindViewHolder(MovieHolder holder, int position) {
 
         final Context context = holder.itemView.getContext();
-        final MovieEntity movie = movies.get(position);
+        final Movie movie = movies.get(position);
 
         holder.title.setText(movie.getTitle());
         setInfoText(holder, movie);
@@ -57,7 +57,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieHolder>
 
     }
 
-    private void setInfoText(MovieHolder holder, MovieEntity movie) {
+    private void setInfoText(MovieHolder holder, Movie movie) {
 
         StringBuilder sb = new StringBuilder();
         sb.append((movie.getRated() == null || movie.getRated().isEmpty()) ? "Not Rated" : movie.getRated());
@@ -75,7 +75,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieHolder>
         return movies == null ? 0 : movies.size();
     }
 
-    public void addAll(List<MovieEntity> movies) {
+    public void addAll(List<Movie> movies) {
         if ( !this.movies.isEmpty()) {
             this.movies.clear();
             this.movies.addAll(movies);

@@ -7,7 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.example.yen.imdb.R;
-import com.example.yen.imdb.data.entity.MovieEntity;
+import com.example.yen.imdb.data.model.Movie;
 import com.example.yen.imdb.dependency.HasComponent;
 import com.example.yen.imdb.dependency.component.ActivityComponent;
 import com.example.yen.imdb.dependency.component.FragmentComponent;
@@ -29,10 +29,10 @@ public class DetailActivity extends BaseActivity implements HasComponent<Activit
     @Bind(R.id.text_lang)           TextView language;
     @Bind(R.id.text_plot)           TextView plot;
 
-    private MovieEntity movie;
+    private Movie movie;
 
 
-    public static Intent getCalled(Context context, MovieEntity movie) {
+    public static Intent getCalled(Context context, Movie movie) {
         Intent intent = new Intent(context, DetailActivity.class);
         intent.putExtra(EXTRA_MOVIE, movie);
         return intent;

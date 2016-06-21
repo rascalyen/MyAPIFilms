@@ -1,7 +1,5 @@
 baseURL =  http://api.myapifilms.com/imdb/
-token = a9a9459c-c675-4ab1-9327-8cf692545116
-pageLimit = 10
-
+token = 159ab6ca-37ea-4351-ba42-9ef903beacc3
 connectTimeoutSec = 12
 readTimeoutSec = 12
 diskCacheSizeMB = 256
