@@ -3,7 +3,7 @@ package com.example.yen.imdb.ui.navigation;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import com.example.yen.imdb.data.model.Movie;
-import com.example.yen.imdb.ui.mvp.detailpage.DetailActivity;
+import com.example.yen.imdb.ui.mvvm.detailpage.DetailActivity;
 import javax.inject.Inject;
 
 

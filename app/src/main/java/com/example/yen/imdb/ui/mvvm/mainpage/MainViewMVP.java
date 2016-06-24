@@ -1,4 +1,4 @@
-package com.example.yen.imdb.ui.mvp.mainpage;
+package com.example.yen.imdb.ui.mvvm.mainpage;
 
 import com.example.yen.imdb.data.model.Movie;
 import com.example.yen.imdb.ui.ProgressViewMVP;

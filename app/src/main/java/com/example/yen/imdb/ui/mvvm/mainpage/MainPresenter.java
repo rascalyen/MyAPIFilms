@@ -1,4 +1,4 @@
-package com.example.yen.imdb.ui.mvp.mainpage;
+package com.example.yen.imdb.ui.mvvm.mainpage;
 
 import android.support.annotation.NonNull;
 import com.example.yen.imdb.data.entity.MovieEntity;

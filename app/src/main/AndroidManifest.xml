@@ -11,7 +11,7 @@
         android:largeHeap="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ui.mvp.mainpage.MainActivity"
+            android:name=".ui.mvvm.mainpage.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,7 +21,7 @@
         </activity>
 
         <activity
-            android:name=".ui.mvp.detailpage.DetailActivity"
+            android:name=".ui.mvvm.detailpage.DetailActivity"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
 

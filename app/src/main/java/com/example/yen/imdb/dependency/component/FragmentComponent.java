@@ -2,8 +2,8 @@ package com.example.yen.imdb.dependency.component;
 
 import com.example.yen.imdb.dependency.module.ActivityModule;
 import com.example.yen.imdb.dependency.scope.PerActivity;
-import com.example.yen.imdb.ui.mvp.mainpage.MovieAdapter;
-import com.example.yen.imdb.ui.mvp.mainpage.MainFragment;
+import com.example.yen.imdb.ui.mvvm.mainpage.MovieAdapter;
+import com.example.yen.imdb.ui.mvvm.mainpage.MainFragment;
 import dagger.Component;
 
 

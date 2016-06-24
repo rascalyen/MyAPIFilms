@@ -1,4 +1,4 @@
-package com.example.yen.imdb.ui.mvp.mainpage;
+package com.example.yen.imdb.ui.mvvm.mainpage;
 
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
