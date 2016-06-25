@@ -5,7 +5,6 @@ import android.support.v7.widget.Toolbar;
 import com.example.yen.imdb.R;
 import com.example.yen.imdb.dependency.HasComponent;
 import com.example.yen.imdb.dependency.component.ActivityComponent;
-import com.example.yen.imdb.dependency.component.FragmentComponent;
 import com.example.yen.imdb.ui.BaseActivity;
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -21,19 +20,12 @@ public class MainActivity extends BaseActivity implements HasComponent<ActivityC
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         preSetViews();
-        injectComponent();
         initializeActivity();
     }
 
     private void preSetViews() {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-    }
-
-    private void injectComponent() {
-        activityComponent = FragmentComponent.Initializer
-                .init(getApplicationComponent(), getActivityModule());
-        activityComponent.injectActivity(this);
     }
 
     private void initializeActivity() {

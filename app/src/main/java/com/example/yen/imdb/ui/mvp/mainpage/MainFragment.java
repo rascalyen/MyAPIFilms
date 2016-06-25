@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import com.example.yen.imdb.R;
 import com.example.yen.imdb.data.model.Movie;
-import com.example.yen.imdb.dependency.component.FragmentComponent;
+import com.example.yen.imdb.dependency.component.ActivityComponent;
 import com.example.yen.imdb.ui.BaseFragment;
 import java.util.ArrayList;
 import javax.inject.Inject;
@@ -24,7 +24,7 @@ public class MainFragment extends BaseFragment implements MainViewMVP {
     @Bind(R.id.rl_retry)        RelativeLayout noResultView;
     @Bind(R.id.recycler)        RecyclerView recyclerView;
     @Inject MainPresenter mainPresenter;
-    private MovieAdapter movieAdapter;
+    @Inject MovieAdapter movieAdapter;
     private static String MOVIES_STATE = "MOVIES_STATE";
     private ArrayList<Movie> movies;
 
@@ -72,20 +72,24 @@ public class MainFragment extends BaseFragment implements MainViewMVP {
         else if (movies == null)
             movies = new ArrayList<>();
 
+        injectComponent();
         setRecyclerView();
         initialize();
     }
 
+    private void injectComponent() {
+        this.getComponent(ActivityComponent.class).inject(this);
+    }
+
     private void setRecyclerView() {
-        movieAdapter = new MovieAdapter(movies);
+        movieAdapter.setMovies(movies);
         recyclerView.setAdapter(movieAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
     }
 
     private void initialize() {
-        this.getComponent(FragmentComponent.class).inject(this);
-        this.getComponent(FragmentComponent.class).inject(movieAdapter);
         mainPresenter.attachViewMVP(this);
+
         if (movies.isEmpty())
             mainPresenter.initialize();
     }

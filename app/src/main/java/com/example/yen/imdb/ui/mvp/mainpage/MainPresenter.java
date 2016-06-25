@@ -30,6 +30,7 @@ public class MainPresenter implements Presenter<MainViewMVP> {
 
     public void initialize() {
         mainView.clearMovies();
+        mainView.hideRetry();
         mainView.showProgress();
         getInTheaters();
     }
@@ -51,9 +52,12 @@ public class MainPresenter implements Presenter<MainViewMVP> {
                     }
                 }
                 else {
-                    mainView.showMessage(response.body().getError().getCode()
-                            + " : " + response.body().getError().getMessage());
-                    mainView.hideProgress();
+                    if (mainView != null) {
+                        mainView.showRetry();
+                        mainView.hideProgress();
+                        mainView.showMessage(response.body().getError().getCode()
+                                + " : " + response.body().getError().getMessage());
+                    }
                 }
             }
 
@@ -66,10 +70,8 @@ public class MainPresenter implements Presenter<MainViewMVP> {
 
     public void cancelCall() {
 
-        if (call != null && !call.isCanceled()) {
+        if (call != null && !call.isCanceled())
             call.cancel();
-            System.out.println("Call got cancelled.");
-        }
     }
 
     @Override

@@ -1,7 +1,6 @@
 package com.example.yen.imdb.dependency.module;
 
 import android.app.Activity;
-
 import dagger.Module;
 import dagger.Provides;
 

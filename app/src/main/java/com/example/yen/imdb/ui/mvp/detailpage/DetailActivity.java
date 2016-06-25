@@ -8,16 +8,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.example.yen.imdb.R;
 import com.example.yen.imdb.data.model.Movie;
-import com.example.yen.imdb.dependency.HasComponent;
-import com.example.yen.imdb.dependency.component.ActivityComponent;
-import com.example.yen.imdb.dependency.component.FragmentComponent;
 import com.example.yen.imdb.ui.BaseActivity;
 import com.example.yen.imdb.utils.StringUtils;
+import com.squareup.picasso.Picasso;
+import javax.inject.Inject;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
 
-public class DetailActivity extends BaseActivity implements HasComponent<ActivityComponent> {
+public class DetailActivity extends BaseActivity {
 
     private static final String EXTRA_MOVIE = "EXTRA_MOVIE";
 
@@ -28,7 +27,7 @@ public class DetailActivity extends BaseActivity implements HasComponent<Activit
     @Bind(R.id.text_director)       TextView director;
     @Bind(R.id.text_lang)           TextView language;
     @Bind(R.id.text_plot)           TextView plot;
-
+    @Inject Picasso picasso;
     private Movie movie;
 
 
@@ -51,9 +50,7 @@ public class DetailActivity extends BaseActivity implements HasComponent<Activit
     }
 
     private void injectComponent() {
-        activityComponent = FragmentComponent.Initializer
-                .init(getApplicationComponent(), getActivityModule());
-        activityComponent.injectActivity(this);
+        activityComponent.inject(this);
     }
 
     private void initializeActivity() {
@@ -64,7 +61,7 @@ public class DetailActivity extends BaseActivity implements HasComponent<Activit
     }
 
     private void setupMovieDetail() {
-        getPicasso().load(movie.getUrlPoster()).fit().into(poster);
+        picasso.load(movie.getUrlPoster()).fit().into(poster);
 
         StringBuilder sb = new StringBuilder();
         sb.append(StringUtils.makeMinToHour(movie.getRuntime()));
@@ -89,11 +86,6 @@ public class DetailActivity extends BaseActivity implements HasComponent<Activit
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(movie.getTitle());
-    }
-
-    @Override
-    public ActivityComponent getComponent() {
-        return activityComponent;
     }
 
 }
