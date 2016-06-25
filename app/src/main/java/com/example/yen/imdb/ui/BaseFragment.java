@@ -20,7 +20,7 @@ public abstract class BaseFragment extends Fragment {
      */
     public void showToastMessage(String message) {
         try {
-            Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
         }
         catch (NullPointerException ex) {}
     }

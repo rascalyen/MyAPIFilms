@@ -20,15 +20,20 @@ import butterknife.ButterKnife;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieHolder> {
 
-    @Inject Picasso picasso;
-    @Inject Navigator navigator;
+    private Picasso picasso;
+    private Navigator navigator;
     private List<Movie> movies;
 
 
-    public MovieAdapter(List<Movie> movies) {
-        this.movies = movies;
+    @Inject public MovieAdapter(Picasso picasso, Navigator navigator) {
+        this.picasso = picasso;
+        this.navigator = navigator;
     }
 
+
+    public void setMovies(List<Movie> movies) {
+        this.movies = movies;
+    }
 
     @Override
     public MovieHolder onCreateViewHolder(ViewGroup parent, int viewType) {

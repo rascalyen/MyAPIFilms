@@ -7,15 +7,15 @@ import android.os.Bundle;
 import com.example.yen.imdb.R;
 import com.example.yen.imdb.data.model.Movie;
 import com.example.yen.imdb.databinding.ActivityDetailBinding;
-import com.example.yen.imdb.dependency.component.FragmentComponent;
 import com.example.yen.imdb.ui.BaseActivity;
+import javax.inject.Inject;
 
 
 public class DetailActivity extends BaseActivity {
 
     private static final String EXTRA_MOVIE = "EXTRA_MOVIE";
     private ActivityDetailBinding binding;
-    private DetailViewModel detailViewModel;
+    @Inject DetailViewModel detailViewModel;
     private Movie movie;
 
 
@@ -37,17 +37,15 @@ public class DetailActivity extends BaseActivity {
     }
 
     private void injectComponent() {
-        activityComponent = FragmentComponent.Initializer
-                .init(getApplicationComponent(), getActivityModule());
-        activityComponent.injectActivity(this);
+        activityComponent.inject(this);
     }
 
     private void initializeActivity() {
         movie = getIntent().getParcelableExtra(EXTRA_MOVIE);
         setupActionBar();
 
-        detailViewModel = new DetailViewModel(this, movie);
         binding.setViewModel(detailViewModel);
+        detailViewModel.setMovie(movie);
     }
 
     private void setupActionBar() {

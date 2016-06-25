@@ -1,6 +1,5 @@
 package com.example.yen.imdb.ui.mvvm.detailpage;
 
-import android.content.Context;
 import android.databinding.BaseObservable;
 import android.databinding.BindingAdapter;
 import android.widget.ImageView;
@@ -8,17 +7,21 @@ import com.example.yen.imdb.data.model.Movie;
 import com.example.yen.imdb.ui.ViewModel;
 import com.example.yen.imdb.utils.StringUtils;
 import com.squareup.picasso.Picasso;
+import javax.inject.Inject;
 
 
 public class DetailViewModel extends BaseObservable implements ViewModel {
 
-    private Context context;
     private Movie movie;
 
 
-    public DetailViewModel (Context context, Movie movie) {
-        this.context = context;
+    @Inject DetailViewModel() {}
+
+
+    // Update this ViewModel when movie is changed
+    public void setMovie(Movie movie) {
         this.movie = movie;
+        notifyChange();
     }
 
     public String getPosterUrl() {
@@ -26,7 +29,7 @@ public class DetailViewModel extends BaseObservable implements ViewModel {
     }
 
     @BindingAdapter({"posterUrl"})
-    public static void loadImage(ImageView view, String posterUrl) {
+    public static void loadPosterImage(ImageView view, String posterUrl) {
         Picasso.with(view.getContext()).load(posterUrl).fit().into(view);
     }
 
@@ -58,12 +61,6 @@ public class DetailViewModel extends BaseObservable implements ViewModel {
 
     public String getPlot() {
         return movie.getPlot();
-    }
-
-    // Update this ViewModel when movie is changed
-    public void setMovie(Movie movie) {
-        this.movie = movie;
-        notifyChange();
     }
 
     @Override public void onDestroy() {}
