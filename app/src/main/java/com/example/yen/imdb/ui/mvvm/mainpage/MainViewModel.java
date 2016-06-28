@@ -29,8 +29,8 @@ public class MainViewModel implements ViewModel {
     @Inject public MainViewModel(IMDBClient IMDBClient, Properties properties) {
         this.IMDBClient = IMDBClient;
         this.properties = properties;
-        progressVisible = new ObservableInt(View.GONE);
         retryVisible = new ObservableInt(View.GONE);
+        progressVisible = new ObservableInt(View.GONE);
     }
 
 

@@ -90,7 +90,7 @@
                     android:background="?android:attr/selectableItemBackground"
                     android:textColor="@color/colorPrimary"
                     android:text="@string/text_view"
-                    android:onClick="@{viewModel.onItemClick}"/>
+                    android:onClick="@{viewModel::onItemClick}"/>
 
             </RelativeLayout>
         </RelativeLayout>

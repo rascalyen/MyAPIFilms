@@ -24,10 +24,11 @@
             android:layout_height="match_parent"/>
 
         <include layout="@layout/view_progress"
-            android:visibility="@{viewModel.progressVisible}"/>
+            app:viewModel="@{viewModel}"/>
 
         <include layout="@layout/view_retry"
-            android:visibility="@{viewModel.retryVisible}"/>
+            app:viewModel="@{viewModel}"/>
 
     </RelativeLayout>
+
 </layout>
