@@ -12,7 +12,7 @@ public class Navigator {
 
     @Inject public Navigator() {}
 
-    public void navigateToCoupon(@NonNull Context context, Movie movie) {
+    public void navigateToDetail(@NonNull Context context, Movie movie) {
         context.startActivity(DetailActivity.getCalled(context, movie));
     }
 
