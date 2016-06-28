@@ -56,7 +56,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieHolder>
         holder.viewDetail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                navigator.navigateToCoupon(context, movie);
+                navigator.navigateToDetail(context, movie);
             }
         });
 
