@@ -15,10 +15,10 @@ From this project you should find useful examples like,
 
 * Build android with MVP design pattern
 * Use Dependency Injection ([Dagger2](http://google.github.io/dagger/)) to separate configuration (properties, imageClient, httpClient, etc.) and UI usage. In brief, configuration in application scope and UI usage in activity scope.
-* Use [Butterknife](https://github.com/JakeWharton/butterknife) for view injection in Activity/Fragment.
+* Use [Butterknife](https://github.com/JakeWharton/butterknife) for view injection in Activity/Fragment
 * Use [Retrofit2](http://square.github.io/retrofit/) and [Jackson](https://github.com/FasterXML/jackson) to call RESTful API and parse returned JSON response
 * [Picasso](http://square.github.io/picasso/) as image client
-* [LeakCanary](https://github.com/square/leakcanary) to find memory leak EARLY.
+* [LeakCanary](https://github.com/square/leakcanary) to find memory leak EARLY
 * Read properties from /res/raw resource
 * How to save/restore Fragment's state
 * Use RecyclerView and CardView
@@ -31,6 +31,6 @@ From this project you should find useful examples like,
 
 
 ### TODO
-- MVVM + Data binding
+- <s>MVVM + Data binding</s>  -> see branch [dataBinding](https://github.com/rascalyen/ApiMovies/tree/dataBinding)
 - RxJava/RxAndroid
 - Kotlin
