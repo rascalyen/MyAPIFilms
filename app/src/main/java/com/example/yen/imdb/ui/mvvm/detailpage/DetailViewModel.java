@@ -4,13 +4,12 @@ import android.databinding.BaseObservable;
 import android.databinding.BindingAdapter;
 import android.widget.ImageView;
 import com.example.yen.imdb.data.model.Movie;
-import com.example.yen.imdb.ui.ViewModel;
 import com.example.yen.imdb.utils.StringUtils;
 import com.squareup.picasso.Picasso;
 import javax.inject.Inject;
 
 
-public class DetailViewModel extends BaseObservable implements ViewModel {
+public class DetailViewModel extends BaseObservable {
 
     private Movie movie;
 
@@ -18,7 +17,6 @@ public class DetailViewModel extends BaseObservable implements ViewModel {
     @Inject DetailViewModel() {}
 
 
-    // Update this ViewModel when movie is changed
     public void setMovie(Movie movie) {
         this.movie = movie;
         notifyChange();
@@ -62,7 +60,5 @@ public class DetailViewModel extends BaseObservable implements ViewModel {
     public String getPlot() {
         return movie.getPlot();
     }
-
-    @Override public void onDestroy() {}
 
 }

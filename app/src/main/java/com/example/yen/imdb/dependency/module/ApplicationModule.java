@@ -2,7 +2,6 @@ package com.example.yen.imdb.dependency.module;
 
 import android.app.Application;
 import com.example.yen.imdb.configs.Configuration;
-import com.example.yen.imdb.ui.navigation.Navigator;
 import com.example.yen.imdb.web.IMDBClient;
 import com.squareup.picasso.Picasso;
 import java.util.Properties;
@@ -23,10 +22,6 @@ public class ApplicationModule {
 
     @Provides @Singleton Application provideApplication() {
         return application;
-    }
-
-    @Provides @Singleton Navigator provideNavigator() {
-        return new Navigator();
     }
 
     @Provides @Singleton Configuration provideConfiguration() {

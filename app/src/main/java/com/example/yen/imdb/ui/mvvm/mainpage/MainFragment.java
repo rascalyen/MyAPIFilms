@@ -1,32 +1,27 @@
 package com.example.yen.imdb.ui.mvvm.mainpage;
 
-import android.content.Context;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 import com.example.yen.imdb.R;
 import com.example.yen.imdb.data.model.Movie;
+import com.example.yen.imdb.databinding.FragmentMoviesBinding;
 import com.example.yen.imdb.dependency.component.ActivityComponent;
 import com.example.yen.imdb.ui.BaseFragment;
 import java.util.ArrayList;
 import javax.inject.Inject;
-import butterknife.Bind;
-import butterknife.ButterKnife;
 
 
-public class MainFragment extends BaseFragment implements MainViewMVP {
+public class MainFragment extends BaseFragment implements MainViewModel.MainListener {
 
-    @Bind(R.id.rl_progress)     RelativeLayout progressView;
-    @Bind(R.id.rl_retry)        RelativeLayout noResultView;
-    @Bind(R.id.recycler)        RecyclerView recyclerView;
-    @Inject MainPresenter mainPresenter;
-    @Inject MovieAdapter movieAdapter;
     private static String MOVIES_STATE = "MOVIES_STATE";
+    private FragmentMoviesBinding binding;
     private ArrayList<Movie> movies;
+    @Inject MainViewModel mainViewModel;
+    @Inject MovieAdapter movieAdapter;
 
 
     public static MainFragment newInstance() {
@@ -37,14 +32,6 @@ public class MainFragment extends BaseFragment implements MainViewMVP {
         super();
     }
 
-    @Override public void onAttach(Context context) {
-        super.onAttach(context);
-        try {
-            //mMainListener = (MainListener) context;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(context.toString() + " must implement MainListener");
-        }
-    }
 
     @Override public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,9 +39,8 @@ public class MainFragment extends BaseFragment implements MainViewMVP {
 
     @Override public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_movies, container, false);
-        ButterKnife.bind(this, view);
-        return view;
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_movies, container, false);
+        return binding.getRoot();
     }
 
     @Override
@@ -79,57 +65,24 @@ public class MainFragment extends BaseFragment implements MainViewMVP {
 
     private void injectComponent() {
         this.getComponent(ActivityComponent.class).inject(this);
+        mainViewModel.setMainListener(this);
+        binding.setViewModel(mainViewModel);
     }
 
     private void setRecyclerView() {
         movieAdapter.setMovies(movies);
-        recyclerView.setAdapter(movieAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        binding.recycler.setAdapter(movieAdapter);
+        binding.recycler.setLayoutManager(new LinearLayoutManager(this.getContext()));
     }
 
     private void initialize() {
-        mainPresenter.attachViewMVP(this);
-
         if (movies.isEmpty())
-            mainPresenter.initialize();
+            mainViewModel.initialize();
     }
 
     @Override public void onDestroyView() {
         super.onDestroyView();
-        ButterKnife.unbind(this);
-        mainPresenter.cancelCall();
-    }
-
-    @Override public void onDestroy() {
-        mainPresenter.detachViewMVP();
-        super.onDestroy();
-    }
-
-
-    @Override
-    public void showProgress() {
-        if (progressView != null) {
-            progressView.setVisibility(View.VISIBLE);
-            this.getActivity().setProgressBarIndeterminateVisibility(true);
-        }
-    }
-
-    @Override
-    public void hideProgress() {
-        if (progressView != null) {
-            progressView.setVisibility(View.GONE);
-            this.getActivity().setProgressBarIndeterminateVisibility(false);
-        }
-    }
-
-    @Override
-    public void showRetry() {
-        noResultView.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public void hideRetry() {
-        noResultView.setVisibility(View.GONE);
+        mainViewModel.onDestroy();
     }
 
     @Override
@@ -153,8 +106,8 @@ public class MainFragment extends BaseFragment implements MainViewMVP {
         }
     }
 
-    public MainPresenter getMainPresenter() {
-        return mainPresenter;
+    public MainViewModel getMainViewModel() {
+        return mainViewModel;
     }
 
 }

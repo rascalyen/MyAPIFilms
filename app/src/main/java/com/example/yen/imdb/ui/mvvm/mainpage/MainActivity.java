@@ -1,20 +1,19 @@
 package com.example.yen.imdb.ui.mvvm.mainpage;
 
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
+import android.view.View;
 import com.example.yen.imdb.R;
+import com.example.yen.imdb.databinding.ActivityMainBinding;
 import com.example.yen.imdb.dependency.HasComponent;
 import com.example.yen.imdb.dependency.component.ActivityComponent;
 import com.example.yen.imdb.ui.BaseActivity;
-import butterknife.Bind;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 
 public class MainActivity extends BaseActivity implements HasComponent<ActivityComponent> {
 
-    @Bind(R.id.toolbar)     Toolbar toolbar;
     private final String MAIN_TAG = "MAIN";
+    private ActivityMainBinding binding;
 
 
     @Override protected void onCreate(Bundle savedInstanceState) {
@@ -24,12 +23,19 @@ public class MainActivity extends BaseActivity implements HasComponent<ActivityC
     }
 
     private void preSetViews() {
-        setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        setSupportActionBar(binding.toolbar);
+
+        // You can make this as MenuItem, either way.
+        binding.textRefresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onRefresh();
+            }
+        });
     }
 
     private void initializeActivity() {
-        setSupportActionBar(toolbar);
 
         MainFragment mainFragment = (MainFragment) getSupportFragmentManager().findFragmentByTag(MAIN_TAG);
         if (mainFragment == null)
@@ -38,11 +44,10 @@ public class MainActivity extends BaseActivity implements HasComponent<ActivityC
             replaceFragment(R.id.fl_base, mainFragment);
     }
 
-    @OnClick(R.id.text_refresh)
     public void onRefresh() {
         MainFragment mainFragment = (MainFragment) getSupportFragmentManager().findFragmentByTag(MAIN_TAG);
         if (mainFragment != null && mainFragment.isVisible())
-            mainFragment.getMainPresenter().initialize();
+            mainFragment.getMainViewModel().initialize();
     }
 
     @Override

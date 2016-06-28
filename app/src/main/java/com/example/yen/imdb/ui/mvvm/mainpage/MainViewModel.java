@@ -1,9 +1,11 @@
 package com.example.yen.imdb.ui.mvvm.mainpage;
 
-import android.support.annotation.NonNull;
+import android.databinding.ObservableInt;
+import android.view.View;
 import com.example.yen.imdb.data.entity.MovieEntity;
+import com.example.yen.imdb.data.model.Movie;
 import com.example.yen.imdb.data.response.IMDBResponse;
-import com.example.yen.imdb.ui.Presenter;
+import com.example.yen.imdb.ui.ViewModel;
 import com.example.yen.imdb.utils.ModelMapper;
 import com.example.yen.imdb.web.IMDBClient;
 import java.util.ArrayList;
@@ -14,24 +16,32 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class MainPresenter implements Presenter<MainViewMVP> {
+public class MainViewModel implements ViewModel {
 
+    public ObservableInt progressVisible;
+    public ObservableInt retryVisible;
     private IMDBClient IMDBClient;
     private Properties properties;
-    private MainViewMVP mainView;
     private Call<IMDBResponse> call;
+    private MainListener mainListener;
 
 
-    @Inject public MainPresenter(IMDBClient IMDBClient, Properties properties) {
+    @Inject public MainViewModel(IMDBClient IMDBClient, Properties properties) {
         this.IMDBClient = IMDBClient;
         this.properties = properties;
+        progressVisible = new ObservableInt(View.GONE);
+        retryVisible = new ObservableInt(View.GONE);
     }
 
 
+    public void setMainListener(MainListener mainListener) {
+        this.mainListener = mainListener;
+    }
+
     public void initialize() {
-        mainView.clearMovies();
-        mainView.hideRetry();
-        mainView.showProgress();
+        mainListener.clearMovies();
+        retryVisible.set(View.GONE);
+        progressVisible.set(View.VISIBLE);
         getInTheaters();
     }
 
@@ -46,18 +56,18 @@ public class MainPresenter implements Presenter<MainViewMVP> {
                     IMDBResponse imdbResponse = response.body();
                     ArrayList<MovieEntity> movieEntities = imdbResponse.getData().getInTheaters().get(1).getMovies();
                     movieEntities.addAll(imdbResponse.getData().getInTheaters().get(0).getMovies());
-                    if (mainView != null) {
-                        mainView.viewMovies(ModelMapper.toMovieModel(movieEntities));
-                        mainView.hideProgress();
+                    if (mainListener != null) {
+                        mainListener.viewMovies(ModelMapper.toMovieModel(movieEntities));
+                        progressVisible.set(View.GONE);
                     }
                 }
                 else {
-                    if (mainView != null) {
-                        mainView.showRetry();
-                        mainView.hideProgress();
-                        mainView.showMessage(response.body().getError().getCode()
+                    retryVisible.set(View.VISIBLE);
+                    progressVisible.set(View.GONE);
+
+                    if (mainListener != null)
+                        mainListener.showMessage(response.body().getError().getCode()
                                 + " : " + response.body().getError().getMessage());
-                    }
                 }
             }
 
@@ -68,20 +78,17 @@ public class MainPresenter implements Presenter<MainViewMVP> {
         });
     }
 
-    public void cancelCall() {
-
+    @Override
+    public void onDestroy() {
         if (call != null && !call.isCanceled())
             call.cancel();
     }
 
-    @Override
-    public void attachViewMVP(@NonNull MainViewMVP mainView) {
-        this.mainView = mainView;
-    }
 
-    @Override
-    public void detachViewMVP() {
-        this.mainView = null;
+    public interface MainListener {
+        void showMessage(String message);
+        void clearMovies();
+        void viewMovies(ArrayList<Movie> movies);
     }
 
 }
