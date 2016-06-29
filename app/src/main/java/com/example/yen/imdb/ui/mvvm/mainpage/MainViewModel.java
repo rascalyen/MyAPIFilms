@@ -18,8 +18,8 @@ import retrofit2.Response;
 
 public class MainViewModel implements ViewModel {
 
-    public ObservableInt progressVisible;
-    public ObservableInt retryVisible;
+    public final ObservableInt progressVisible;
+    public final ObservableInt retryVisible;
     private IMDBClient IMDBClient;
     private Properties properties;
     private Call<IMDBResponse> call;

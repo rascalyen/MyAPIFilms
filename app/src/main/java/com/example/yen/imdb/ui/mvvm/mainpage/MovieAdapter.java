@@ -1,10 +1,8 @@
 package com.example.yen.imdb.ui.mvvm.mainpage;
 
-import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-import com.example.yen.imdb.R;
 import com.example.yen.imdb.data.model.Movie;
 import com.example.yen.imdb.databinding.ItemMovieBinding;
 import java.util.List;
@@ -25,11 +23,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieHolder>
 
     @Override
     public MovieHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
-        ItemMovieBinding binding = DataBindingUtil.inflate(
-                LayoutInflater.from(parent.getContext()), R.layout.item_movie, parent, false);
-
-        return new MovieHolder(binding);
+        return MovieHolder.create(LayoutInflater.from(parent.getContext()), parent);
     }
 
     @Override
@@ -66,9 +60,14 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieHolder>
 
         final ItemMovieBinding binding;
 
+
         MovieHolder(ItemMovieBinding binding) {
-            super(binding.cardView);
+            super(binding.getRoot());
             this.binding = binding;
+        }
+
+        static MovieHolder create(LayoutInflater inflater, ViewGroup parent) {
+            return new MovieHolder(ItemMovieBinding.inflate(inflater, parent, false));
         }
 
         void bindMovie(Movie movie) {
@@ -76,6 +75,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieHolder>
                 binding.setViewModel(new MovieItemViewModel(itemView.getContext(), movie));
             else
                 binding.getViewModel().setMovie(movie);
+
+            binding.executePendingBindings();
         }
 
     }
