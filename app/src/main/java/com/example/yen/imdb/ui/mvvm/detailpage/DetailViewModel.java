@@ -12,9 +12,12 @@ import javax.inject.Inject;
 public class DetailViewModel extends BaseObservable {
 
     private Movie movie;
+    private Picasso picasso;
 
 
-    @Inject DetailViewModel() {}
+    @Inject DetailViewModel(Picasso picasso) {
+        this.picasso = picasso;
+    }
 
 
     public void setMovie(Movie movie) {
@@ -26,9 +29,16 @@ public class DetailViewModel extends BaseObservable {
         return movie.getUrlPoster();
     }
 
+    /**
+     * Please notice here is none-static BindingAdapter.
+     * This class is bound with default DataBindingComponent.
+     *
+     * @param view
+     * @param posterUrl
+     */
     @BindingAdapter({"posterUrl"})
-    public static void loadPosterImage(ImageView view, String posterUrl) {
-        Picasso.with(view.getContext()).load(posterUrl).fit().into(view);
+    public void loadPosterImage(ImageView view, String posterUrl) {
+        picasso.load(posterUrl).fit().into(view);
     }
 
     public String getInfo() {

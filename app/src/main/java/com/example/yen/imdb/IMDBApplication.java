@@ -1,6 +1,7 @@
 package com.example.yen.imdb;
 
 import android.app.Application;
+import android.databinding.DataBindingUtil;
 import com.example.yen.imdb.dependency.component.ApplicationComponent;
 import com.squareup.leakcanary.LeakCanary;
 
@@ -18,6 +19,7 @@ public class IMDBApplication extends Application {
     private void injectComponent() {
         applicationComponent = ApplicationComponent.Initializer.init(this);
         applicationComponent.injectApplication(this);
+        DataBindingUtil.setDefaultComponent(applicationComponent);
     }
 
     public ApplicationComponent getApplicationComponent() {

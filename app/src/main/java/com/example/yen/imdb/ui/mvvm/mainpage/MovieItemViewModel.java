@@ -13,13 +13,15 @@ import com.squareup.picasso.Picasso;
 
 public class MovieItemViewModel extends BaseObservable {
 
+    private static Picasso picasso;
     private Context context;
     private Movie movie;
 
 
-    public MovieItemViewModel(Context context, Movie movie) {
+    public MovieItemViewModel(Context context, Movie movie, Picasso picasso) {
         this.context = context;
         this.movie = movie;
+        this.picasso = picasso;
     }
 
 
@@ -35,7 +37,7 @@ public class MovieItemViewModel extends BaseObservable {
 
     @BindingAdapter({"posterUrl"})
     public static void loadPosterImage(ImageView view, String posterUrl) {
-        Picasso.with(view.getContext()).load(posterUrl).fit().into(view);
+        picasso.load(posterUrl).fit().into(view);
     }
 
     public String getTitle() {

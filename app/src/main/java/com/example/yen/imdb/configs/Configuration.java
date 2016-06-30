@@ -38,7 +38,7 @@ public class Configuration {
                 .listener(new Picasso.Listener() {
                     @Override
                     public void onImageLoadFailed(Picasso picasso, Uri uri, Exception exception) {
-                        Log.e("com.interush.b88c", "Can't load image: " + uri);
+                        Log.e("com.example.yen.imdb", "Can't load image: " + uri);
                     }
                 }).build();
     }
