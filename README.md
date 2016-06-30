@@ -13,8 +13,9 @@ Showcase common android implementation with [MyAPIFilms](http://api.myapifilms.c
 ### Technical Features
 From this project you should find useful examples like,
 
-* Build android with <b>MVVM design pattern + data binding library</b>
+* Build android with <b>MVVM design pattern + [Data Binding Library](https://developer.android.com/topic/libraries/data-binding/index.html)</b>
 * Use Dependency Injection ([Dagger2](http://google.github.io/dagger/)) to separate configuration (properties, imageClient, httpClient, etc.) and UI usage. In brief, configuration in application scope and UI usage in activity scope.
+* Work [DataBindingComponent](https://developer.android.com/reference/android/databinding/DataBindingComponent.html) with Dagger2 to inject none-static [BindingAdapter](https://developer.android.com/reference/android/databinding/BindingAdapter.html) instances
 * <s>Use [Butterknife](https://github.com/JakeWharton/butterknife) for view injection in Activity/Fragment</s> -> replace by data binding
 * Use [Retrofit2](http://square.github.io/retrofit/) and [Jackson](https://github.com/FasterXML/jackson) to call RESTful API and parse returned JSON response
 * [Picasso](http://square.github.io/picasso/) as image client
@@ -25,9 +26,9 @@ From this project you should find useful examples like,
 
 
 ### References
-- [Introduction to MVP on Android](https://github.com/konmik/konmik.github.io/wiki/Introduction-to-Model-View-Presenter-on-Android)
-- [Architecting Android… The clean way?](http://fernandocejas.com/2014/09/03/architecting-android-the-clean-way/)
+- [Marshmallow Brings Data Bindings to Android](https://realm.io/news/data-binding-android-boyar-mount/)
 - [Dependency Injection with Dagger 2](https://guides.codepath.com/android/Dependency-Injection-with-Dagger-2)
+- ivacf's [Archi repository](https://github.com/ivacf/archi)
 
 
 ### TODO
