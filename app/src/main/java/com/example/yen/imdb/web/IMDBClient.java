@@ -19,6 +19,10 @@ public class IMDBClient {
         IMDBService = RestClientGenerator.createService(IMDBService.class, okHttpClient, baseURL);
     }
 
+    public IMDBClient(IMDBService imdbService) {
+        this.IMDBService = imdbService;
+        this.baseURL = null;
+    }
 
     public String getBaseURL() {
         return baseURL;

@@ -10,36 +10,31 @@ import java.util.List;
 
 public class ModelMapper {
 
-    public static ArrayList<Movie> toMovieModel(List<MovieEntity> entityList) {
+    public static Movie toMovieModel(MovieEntity movieEntity) {
 
-        ArrayList<Movie> movieList = new ArrayList<>();
-        for(MovieEntity movieEntity : entityList) {
-            Movie movie = new Movie();
-            movie.setTitle(movieEntity.getTitle());
-            movie.setRuntime(movieEntity.getRuntime());
-            movie.setPlot(movieEntity.getPlot());
-            movie.setRated(movieEntity.getRated());
-            movie.setUrlPoster(movieEntity.getUrlPoster());
+        Movie movie = new Movie();
+        movie.setTitle(movieEntity.getTitle());
+        movie.setRuntime(movieEntity.getRuntime());
+        movie.setPlot(movieEntity.getPlot());
+        movie.setRated(movieEntity.getRated());
+        movie.setUrlPoster(movieEntity.getUrlPoster());
 
-            List<String> languageList = new ArrayList<>();
-            for (String language : movieEntity.getLanguages())
-                languageList.add(language);
-            movie.setLanguages(languageList);
+        List<String> languageList = new ArrayList<>();
+        for (String language : movieEntity.getLanguages())
+            languageList.add(language);
+        movie.setLanguages(languageList);
 
-            List<String> genreList = new ArrayList<>();
-            for (String genre : movieEntity.getGenres())
-                genreList.add(genre);
-            movie.setGenres(genreList);
+        List<String> genreList = new ArrayList<>();
+        for (String genre : movieEntity.getGenres())
+            genreList.add(genre);
+        movie.setGenres(genreList);
 
-            List<Person> directorList = new ArrayList<>();
-            for (PersonEntity personEntity : movieEntity.getDirectors())
-                directorList.add(new Person(personEntity.getName()));
-            movie.setDirectors(directorList);
+        List<Person> directorList = new ArrayList<>();
+        for (PersonEntity personEntity : movieEntity.getDirectors())
+            directorList.add(new Person(personEntity.getName()));
+        movie.setDirectors(directorList);
 
-            movieList.add(movie);
-        }
-
-        return movieList;
+        return movie;
     }
 
 }
