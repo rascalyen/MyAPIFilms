@@ -8,6 +8,7 @@ import com.example.yen.imdb.ui.Presenter;
 import com.example.yen.imdb.utils.ModelMapper;
 import com.example.yen.imdb.web.IMDBClient;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 import javax.inject.Inject;
 import retrofit2.Call;
@@ -36,30 +37,17 @@ public class MainPresenter implements Presenter<MainViewMVP> {
         getInTheaters();
     }
 
-    private void getInTheaters() {
+    protected void getInTheaters() {
         call = IMDBClient.getIMDBService().getInTheaters(properties.getProperty("token"));
 
         call.enqueue(new Callback<IMDBResponse>() {
             @Override
             public void onResponse(Call<IMDBResponse> call, Response<IMDBResponse> response) {
 
-                if (response.isSuccessful() && response.body().getError() == null) {
-                    IMDBResponse imdbResponse = response.body();
-                    ArrayList<MovieEntity> movieEntities = imdbResponse.getData().getInTheaters().get(1).getMovies();
-                    movieEntities.addAll(imdbResponse.getData().getInTheaters().get(0).getMovies());
-                    if (mainView != null) {
-                        mainView.viewMovies(createMovieList(movieEntities));
-                        mainView.hideProgress();
-                    }
-                }
-                else {
-                    if (mainView != null) {
-                        mainView.showRetry();
-                        mainView.hideProgress();
-                        mainView.showMessage(response.body().getError().getCode()
-                                + " : " + response.body().getError().getMessage());
-                    }
-                }
+                if (response.isSuccessful() && response.body().getError() == null)
+                    onSuccess(response.body());
+                else
+                    onError(response.body());
             }
 
             @Override
@@ -69,8 +57,26 @@ public class MainPresenter implements Presenter<MainViewMVP> {
         });
     }
 
-    private ArrayList<Movie> createMovieList(ArrayList<MovieEntity> movieEntities) {
-        ArrayList<Movie> movies = new ArrayList<>();
+    protected void onSuccess(IMDBResponse imdbResponse) {
+        List<MovieEntity> movieEntities = imdbResponse.getData().getInTheaters().get(1).getMovies();
+        movieEntities.addAll(imdbResponse.getData().getInTheaters().get(0).getMovies());
+        if (mainView != null) {
+            mainView.viewMovies(createMovieList(movieEntities));
+            mainView.hideProgress();
+        }
+    }
+
+    protected void onError(IMDBResponse imdbResponse) {
+        if (mainView != null) {
+            mainView.showRetry();
+            mainView.hideProgress();
+            mainView.showMessage(imdbResponse.getError().getCode()
+                    + " : " + imdbResponse.getError().getMessage());
+        }
+    }
+
+    private List<Movie> createMovieList(List<MovieEntity> movieEntities) {
+        List<Movie> movies = new ArrayList<>();
 
         for (MovieEntity entity : movieEntities)
             movies.add(ModelMapper.toMovieModel(entity));

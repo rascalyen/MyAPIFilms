@@ -3,6 +3,7 @@ package com.example.yen.imdb.data.entity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.ArrayList;
+import java.util.List;
 
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -13,7 +14,7 @@ public class InTheaterEntity {
     @JsonProperty("inTheatersNow")
     private String inTheatersNow;
     @JsonProperty("movies")
-    private ArrayList<MovieEntity> movies = new ArrayList<>();
+    private List<MovieEntity> movies = new ArrayList<>();
 
 
     public String getOpeningThisWeek() {
@@ -24,11 +25,11 @@ public class InTheaterEntity {
         this.openingThisWeek = openingThisWeek;
     }
 
-    public ArrayList<MovieEntity> getMovies() {
+    public List<MovieEntity> getMovies() {
         return movies;
     }
 
-    public void setMovies(ArrayList<MovieEntity> movies) {
+    public void setMovies(List<MovieEntity> movies) {
         this.movies = movies;
     }
 

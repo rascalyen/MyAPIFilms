@@ -13,6 +13,7 @@ import com.example.yen.imdb.data.model.Movie;
 import com.example.yen.imdb.dependency.component.ActivityComponent;
 import com.example.yen.imdb.ui.BaseFragment;
 import java.util.ArrayList;
+import java.util.List;
 import javax.inject.Inject;
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -146,10 +147,10 @@ public class MainFragment extends BaseFragment implements MainViewMVP {
     }
 
     @Override
-    public void viewMovies(ArrayList<Movie> movies) {
+    public void viewMovies(List<Movie> movies) {
         if (movieAdapter != null) {
             movieAdapter.addAll(movies);
-            this.movies = movies;
+            this.movies = (ArrayList<Movie>) movies;
         }
     }
 
