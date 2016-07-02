@@ -14,7 +14,7 @@ public abstract class BaseFragment extends Fragment {
     }
 
     /**
-     * Shows a {@link android.widget.Toast} message.
+     * Show a {@link android.widget.Toast} message.
      *
      * @param message An string representing a message to be shown.
      */
@@ -26,7 +26,7 @@ public abstract class BaseFragment extends Fragment {
     }
 
     /**
-     * Gets a component for dependency injection by its type.
+     * Get a component for dependency injection by its type.
      */
     public <C> C getComponent(Class<C> componentType) {
         return componentType.cast( ((HasComponent<C>) getActivity()).getComponent() );

@@ -1,6 +1,5 @@
 package com.example.yen.imdb.ui.mvp.mainpage;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -36,15 +35,6 @@ public class MainFragment extends BaseFragment implements MainViewMVP {
 
     public MainFragment() {
         super();
-    }
-
-    @Override public void onAttach(Context context) {
-        super.onAttach(context);
-        try {
-            //mMainListener = (MainListener) context;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(context.toString() + " must implement MainListener");
-        }
     }
 
     @Override public void onCreate(Bundle savedInstanceState) {

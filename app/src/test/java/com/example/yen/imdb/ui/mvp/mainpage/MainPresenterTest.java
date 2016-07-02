@@ -29,7 +29,6 @@ import static org.mockito.Mockito.verify;
 
 public class MainPresenterTest extends RobolectricTestCase {
 
-    @Mock IMDBClient IMDBClient;
     @Mock IMDBService imdbService;
     @Mock Properties properties;
     @Mock MainViewMVP mainView;
@@ -40,6 +39,7 @@ public class MainPresenterTest extends RobolectricTestCase {
     @Mock InTheaterEntity inTheaterEntity;
     @Mock MovieEntity movieEntity;
     @Captor ArgumentCaptor<Callback<IMDBResponse>> callbackCaptor;
+    private IMDBClient imdbClient;
     private MainPresenter mainPresenter;
     private List<InTheaterEntity> theaters = new ArrayList<>();
     private List<MovieEntity> movies = new ArrayList<>();
@@ -48,7 +48,8 @@ public class MainPresenterTest extends RobolectricTestCase {
     @Before public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        mainPresenter = new MainPresenter(IMDBClient, properties);
+        imdbClient = new IMDBClient(imdbService);
+        mainPresenter = new MainPresenter(imdbClient, properties);
         mainPresenter.attachViewMVP(mainView);
         createMockInTheater();
     }
@@ -62,8 +63,7 @@ public class MainPresenterTest extends RobolectricTestCase {
 
 
     @Test public void initialize() {
-        given(IMDBClient.getIMDBService()).willReturn(imdbService);
-        given(IMDBClient.getIMDBService().getInTheaters(properties.getProperty("token"))).willReturn(call);
+        given(imdbClient.getIMDBService().getInTheaters(properties.getProperty("token"))).willReturn(call);
 
         mainPresenter.initialize();
 
@@ -74,13 +74,12 @@ public class MainPresenterTest extends RobolectricTestCase {
 
     @Test public void getInTheaters() {
         given(properties.getProperty("token")).willReturn("string");
-        given(IMDBClient.getIMDBService()).willReturn(imdbService);
-        given(IMDBClient.getIMDBService().getInTheaters(properties.getProperty("token"))).willReturn(call);
+        given(imdbClient.getIMDBService().getInTheaters(properties.getProperty("token"))).willReturn(call);
 
         mainPresenter.getInTheaters();
 
-        verify(IMDBClient.getIMDBService()).getInTheaters(anyString());
-        verify(IMDBClient.getIMDBService().getInTheaters(properties.getProperty("token"))).enqueue(callbackCaptor.capture());
+        verify(imdbClient.getIMDBService()).getInTheaters(anyString());
+        verify(imdbClient.getIMDBService().getInTheaters(properties.getProperty("token"))).enqueue(callbackCaptor.capture());
     }
 
     @Test public void onSuccess() {
@@ -104,8 +103,7 @@ public class MainPresenterTest extends RobolectricTestCase {
     }
 
     @Test public void cancelCall() {
-        given(IMDBClient.getIMDBService()).willReturn(imdbService);
-        given(IMDBClient.getIMDBService().getInTheaters(properties.getProperty("token"))).willReturn(call);
+        given(imdbClient.getIMDBService().getInTheaters(properties.getProperty("token"))).willReturn(call);
 
         mainPresenter.initialize();
         mainPresenter.cancelCall();
@@ -114,7 +112,7 @@ public class MainPresenterTest extends RobolectricTestCase {
     }
 
     @After public void tearDown() {
-        IMDBClient = null;
+        imdbClient = null;
         imdbService = null;
         properties = null;
         mainView = null;
