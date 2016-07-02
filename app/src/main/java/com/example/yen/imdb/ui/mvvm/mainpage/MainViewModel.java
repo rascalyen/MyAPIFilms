@@ -9,6 +9,7 @@ import com.example.yen.imdb.ui.ViewModel;
 import com.example.yen.imdb.utils.ModelMapper;
 import com.example.yen.imdb.web.IMDBClient;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 import javax.inject.Inject;
 import retrofit2.Call;
@@ -45,30 +46,17 @@ public class MainViewModel implements ViewModel {
         getInTheaters();
     }
 
-    private void getInTheaters() {
+    protected void getInTheaters() {
         call = IMDBClient.getIMDBService().getInTheaters(properties.getProperty("token"));
 
         call.enqueue(new Callback<IMDBResponse>() {
             @Override
             public void onResponse(Call<IMDBResponse> call, Response<IMDBResponse> response) {
 
-                if (response.isSuccessful() && response.body().getError() == null) {
-                    IMDBResponse imdbResponse = response.body();
-                    ArrayList<MovieEntity> movieEntities = imdbResponse.getData().getInTheaters().get(1).getMovies();
-                    movieEntities.addAll(imdbResponse.getData().getInTheaters().get(0).getMovies());
-                    if (mainListener != null) {
-                        mainListener.viewMovies(ModelMapper.toMovieModel(movieEntities));
-                        progressVisible.set(View.GONE);
-                    }
-                }
-                else {
-                    retryVisible.set(View.VISIBLE);
-                    progressVisible.set(View.GONE);
-
-                    if (mainListener != null)
-                        mainListener.showMessage(response.body().getError().getCode()
-                                + " : " + response.body().getError().getMessage());
-                }
+                if (response.isSuccessful() && response.body().getError() == null)
+                    onSuccess(response.body());
+                else
+                    onError(response.body());
             }
 
             @Override
@@ -76,6 +64,33 @@ public class MainViewModel implements ViewModel {
                 System.out.println("######  MOM  I failed.....");
             }
         });
+    }
+
+    protected void onSuccess(IMDBResponse imdbResponse) {
+        List<MovieEntity> movieEntities = imdbResponse.getData().getInTheaters().get(1).getMovies();
+        movieEntities.addAll(imdbResponse.getData().getInTheaters().get(0).getMovies());
+        if (mainListener != null) {
+            mainListener.viewMovies(createMovieList(movieEntities));
+            progressVisible.set(View.GONE);
+        }
+    }
+
+    protected void onError(IMDBResponse imdbResponse) {
+        retryVisible.set(View.VISIBLE);
+        progressVisible.set(View.GONE);
+
+        if (mainListener != null)
+            mainListener.showMessage(imdbResponse.getError().getCode()
+                    + " : " + imdbResponse.getError().getMessage());
+    }
+
+    private List<Movie> createMovieList(List<MovieEntity> movieEntities) {
+        List<Movie> movies = new ArrayList<>();
+
+        for (MovieEntity entity : movieEntities)
+            movies.add(ModelMapper.toMovieModel(entity));
+
+        return movies;
     }
 
     @Override
@@ -88,7 +103,7 @@ public class MainViewModel implements ViewModel {
     public interface MainListener {
         void showMessage(String message);
         void clearMovies();
-        void viewMovies(ArrayList<Movie> movies);
+        void viewMovies(List<Movie> movies);
     }
 
 }
