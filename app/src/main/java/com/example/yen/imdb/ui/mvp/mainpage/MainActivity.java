@@ -14,7 +14,7 @@ import butterknife.OnClick;
 public class MainActivity extends BaseActivity implements HasComponent<ActivityComponent> {
 
     @Bind(R.id.toolbar)     Toolbar toolbar;
-    private final String MAIN_TAG = "MAIN";
+    private static final String MAIN_TAG = "MAIN";
 
 
     @Override protected void onCreate(Bundle savedInstanceState) {

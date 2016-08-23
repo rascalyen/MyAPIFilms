@@ -18,7 +18,7 @@ public abstract class BaseFragment extends Fragment {
      *
      * @param message An string representing a message to be shown.
      */
-    public void showToastMessage(String message) {
+    protected void showToastMessage(String message) {
         try {
             Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
         }
@@ -28,7 +28,7 @@ public abstract class BaseFragment extends Fragment {
     /**
      * Get a component for dependency injection by its type.
      */
-    public <C> C getComponent(Class<C> componentType) {
+    protected <C> C getComponent(Class<C> componentType) {
         return componentType.cast( ((HasComponent<C>) getActivity()).getComponent() );
     }
 

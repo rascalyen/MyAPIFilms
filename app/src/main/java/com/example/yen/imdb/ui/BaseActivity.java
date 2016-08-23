@@ -12,7 +12,7 @@ import com.example.yen.imdb.dependency.component.ApplicationComponent;
 
 public class BaseActivity extends AppCompatActivity {
 
-    public ActivityComponent activityComponent;
+    protected ActivityComponent activityComponent;
 
 
     @Override protected void onCreate(Bundle savedInstanceState) {
@@ -39,19 +39,19 @@ public class BaseActivity extends AppCompatActivity {
     }
 
 
-    public void addFragment(int containerViewId, Fragment fragment, String tag) {
+    protected void addFragment(int containerViewId, Fragment fragment, String tag) {
         this.getSupportFragmentManager().beginTransaction().add(containerViewId, fragment, tag).commit();
     }
 
-    public void replaceFragment(int containerViewId, Fragment fragment) {
+    protected void replaceFragment(int containerViewId, Fragment fragment) {
         this.getSupportFragmentManager().beginTransaction().replace(containerViewId, fragment).addToBackStack(null).commit();
     }
 
-    public void goToPreviousFragment() {
+    protected void goToPreviousFragment() {
         this.getSupportFragmentManager().popBackStack();
     }
 
-    public ApplicationComponent getApplicationComponent() {
+    protected ApplicationComponent getApplicationComponent() {
         return ((IMDBApplication)getApplication()).getApplicationComponent();
     }
 
