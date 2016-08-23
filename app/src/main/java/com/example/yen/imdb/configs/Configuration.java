@@ -13,6 +13,7 @@ import java.io.InputStream;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 
@@ -48,6 +49,7 @@ public class Configuration {
     }
 
 
+    @SuppressFBWarnings("ICAST_INTEGER_MULTIPLY_CAST_TO_LONG")
     private OkHttpClient setOkHttpClient(@NonNull Context context) {
 
         return new OkHttpClient.Builder()
