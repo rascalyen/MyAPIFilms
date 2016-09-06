@@ -16,6 +16,7 @@ import java.util.List;
 import javax.inject.Inject;
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 
 public class MainFragment extends BaseFragment implements MainViewMVP {
@@ -136,6 +137,7 @@ public class MainFragment extends BaseFragment implements MainViewMVP {
         }
     }
 
+    @SuppressFBWarnings("BC_BAD_CAST_TO_CONCRETE_COLLECTION")
     @Override
     public void viewMovies(List<Movie> movies) {
         if (movieAdapter != null) {
