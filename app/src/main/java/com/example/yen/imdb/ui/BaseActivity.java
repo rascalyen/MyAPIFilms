@@ -40,11 +40,12 @@ public class BaseActivity extends AppCompatActivity {
 
 
     protected void addFragment(int containerViewId, Fragment fragment, String tag) {
-        this.getSupportFragmentManager().beginTransaction().add(containerViewId, fragment, tag).commit();
+        getSupportFragmentManager().beginTransaction().add(containerViewId, fragment, tag).commit();
     }
 
     protected void replaceFragment(int containerViewId, Fragment fragment) {
-        this.getSupportFragmentManager().beginTransaction().replace(containerViewId, fragment).addToBackStack(null).commit();
+        getSupportFragmentManager().beginTransaction()
+                .replace(containerViewId, fragment).addToBackStack(null).commit();
     }
 
     protected void goToPreviousFragment() {
@@ -52,7 +53,7 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     protected ApplicationComponent getApplicationComponent() {
-        return ((IMDBApplication)getApplication()).getApplicationComponent();
+        return ((IMDBApplication) getApplication()).getApplicationComponent();
     }
 
 }

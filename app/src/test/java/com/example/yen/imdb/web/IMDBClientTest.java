@@ -23,7 +23,7 @@ public class IMDBClientTest extends RobolectricTestCase {
     }
 
     @Test public void getIMDBService() {
-        assertThat(imdbClient.getIMDBService(), isA(IMDBService.class));
+        assertThat(imdbClient.getImdbService(), isA(IMDBService.class));
     }
 
     @After public void tearDown() {

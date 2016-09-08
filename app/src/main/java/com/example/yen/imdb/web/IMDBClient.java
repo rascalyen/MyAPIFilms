@@ -10,17 +10,17 @@ import okhttp3.OkHttpClient;
 public class IMDBClient {
 
     private final String baseURL;
-    private final IMDBService IMDBService;
+    private final IMDBService imdbService;
 
 
     @Inject
     public IMDBClient(OkHttpClient okHttpClient, Properties properties) {
         this.baseURL = properties.getProperty("baseURL");
-        IMDBService = RestClientGenerator.createService(IMDBService.class, okHttpClient, baseURL);
+        imdbService = RestClientGenerator.createService(IMDBService.class, okHttpClient, baseURL);
     }
 
     public IMDBClient(IMDBService imdbService) {
-        this.IMDBService = imdbService;
+        this.imdbService = imdbService;
         this.baseURL = null;
     }
 
@@ -28,8 +28,8 @@ public class IMDBClient {
         return baseURL;
     }
 
-    public IMDBService getIMDBService() {
-        return IMDBService;
+    public IMDBService getImdbService() {
+        return imdbService;
     }
 
 }

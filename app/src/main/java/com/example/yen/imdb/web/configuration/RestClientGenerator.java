@@ -7,7 +7,8 @@ import retrofit2.converter.jackson.JacksonConverterFactory;
 
 public class RestClientGenerator {
 
-    public static <S> S createService(Class<S> serviceClass, OkHttpClient okHttpClient, String baseUrl) {
+    public static <S> S createService(
+            Class<S> serviceClass, OkHttpClient okHttpClient, String baseUrl) {
 
         Retrofit.Builder builder = new Retrofit.Builder()
                 .baseUrl(baseUrl)

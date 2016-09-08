@@ -20,7 +20,7 @@ public class IMDBClientStub extends IMDBClient {
 
     public void getInTheaters(String token) {
 
-        getIMDBService().getInTheaters(token).enqueue(new Callback<IMDBResponse>() {
+        getImdbService().getInTheaters(token).enqueue(new Callback<IMDBResponse>() {
             @Override
             public void onResponse(Call<IMDBResponse> call, Response<IMDBResponse> response) {
                 setResponse(response);

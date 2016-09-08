@@ -18,14 +18,14 @@ import retrofit2.Response;
 
 public class MainPresenter implements Presenter<MainViewMVP> {
 
-    private IMDBClient IMDBClient;
+    private IMDBClient imdbClient;
     private Properties properties;
     private MainViewMVP mainView;
     private Call<IMDBResponse> call;
 
 
-    @Inject public MainPresenter(IMDBClient IMDBClient, Properties properties) {
-        this.IMDBClient = IMDBClient;
+    @Inject public MainPresenter(IMDBClient imdbClient, Properties properties) {
+        this.imdbClient = imdbClient;
         this.properties = properties;
     }
 
@@ -38,7 +38,7 @@ public class MainPresenter implements Presenter<MainViewMVP> {
     }
 
     protected void getInTheaters() {
-        call = IMDBClient.getIMDBService().getInTheaters(properties.getProperty("token"));
+        call = imdbClient.getImdbService().getInTheaters(properties.getProperty("token"));
 
         call.enqueue(new Callback<IMDBResponse>() {
             @Override

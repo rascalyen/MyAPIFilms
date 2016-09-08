@@ -20,13 +20,20 @@ public class DetailActivity extends BaseActivity {
 
     private static final String EXTRA_MOVIE = "EXTRA_MOVIE";
 
-    @Bind(R.id.toolbar)             Toolbar toolbar;
-    @Bind(R.id.image_movie)         ImageView poster;
-    @Bind(R.id.text_info)           TextView info;
-    @Bind(R.id.text_genre)          TextView genre;
-    @Bind(R.id.text_director)       TextView director;
-    @Bind(R.id.text_lang)           TextView language;
-    @Bind(R.id.text_plot)           TextView plot;
+    @Bind(R.id.toolbar)
+    Toolbar toolbar;
+    @Bind(R.id.image_movie)
+    ImageView poster;
+    @Bind(R.id.text_info)
+    TextView info;
+    @Bind(R.id.text_genre)
+    TextView genre;
+    @Bind(R.id.text_director)
+    TextView director;
+    @Bind(R.id.text_lang)
+    TextView language;
+    @Bind(R.id.text_plot)
+    TextView plot;
     @Inject Picasso picasso;
     private Movie movie;
 
@@ -65,12 +72,13 @@ public class DetailActivity extends BaseActivity {
 
         StringBuilder sb = new StringBuilder();
         sb.append(StringUtils.makeMinToHour(movie.getRuntime()));
-        sb.append((movie.getRated() == null || movie.getRated().isEmpty()) ? "Not Rated" : movie.getRated());
+        sb.append((movie.getRated() == null || movie.getRated().isEmpty()) ?
+                "Not Rated" : movie.getRated());
         info.setText(sb);
 
         sb.delete(0, sb.length());
         for (int i = 0; i < movie.getGenres().size(); i++) {
-            if (i == movie.getGenres().size()-1)
+            if (i == movie.getGenres().size() - 1)
                 sb.append(movie.getGenres().get(i));
             else
                 sb.append(movie.getGenres().get(i) + ", ");

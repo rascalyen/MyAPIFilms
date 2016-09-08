@@ -53,10 +53,13 @@ public class Configuration {
     private OkHttpClient setOkHttpClient(@NonNull Context context) {
 
         return new OkHttpClient.Builder()
-                .cache(new Cache(new File(context.getCacheDir(), properties.getProperty("diskCachePath")),
+                .cache(new Cache(new File(context.getCacheDir(),
+                        properties.getProperty("diskCachePath")),
                         Integer.parseInt(properties.getProperty("diskCacheSizeMB")) * 1024 * 1024))
-                .connectTimeout(Integer.parseInt(properties.getProperty("connectTimeoutSec")), TimeUnit.SECONDS)
-                .readTimeout(Integer.parseInt(properties.getProperty("readTimeoutSec")), TimeUnit.SECONDS)
+                .connectTimeout(Integer.parseInt(properties.getProperty("connectTimeoutSec")),
+                        TimeUnit.SECONDS)
+                .readTimeout(Integer.parseInt(properties.getProperty("readTimeoutSec")),
+                        TimeUnit.SECONDS)
                 .build();
     }
 

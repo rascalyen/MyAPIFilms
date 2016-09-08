@@ -18,8 +18,7 @@ public interface ActivityComponent {
 
     final class Initializer {
 
-        public static ActivityComponent init(
-                ApplicationComponent appComponent, Activity activity) {
+        public static ActivityComponent init(ApplicationComponent appComponent, Activity activity) {
 
             return DaggerActivityComponent.builder()
                     .applicationComponent(appComponent)

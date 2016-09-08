@@ -13,7 +13,8 @@ import butterknife.OnClick;
 
 public class MainActivity extends BaseActivity implements HasComponent<ActivityComponent> {
 
-    @Bind(R.id.toolbar)     Toolbar toolbar;
+    @Bind(R.id.toolbar)
+    Toolbar toolbar;
     private static final String MAIN_TAG = "MAIN";
 
 
@@ -31,7 +32,9 @@ public class MainActivity extends BaseActivity implements HasComponent<ActivityC
     private void initializeActivity() {
         setSupportActionBar(toolbar);
 
-        MainFragment mainFragment = (MainFragment) getSupportFragmentManager().findFragmentByTag(MAIN_TAG);
+        MainFragment mainFragment =
+                (MainFragment) getSupportFragmentManager().findFragmentByTag(MAIN_TAG);
+
         if (mainFragment == null)
             addFragment(R.id.fl_base, MainFragment.newInstance(), MAIN_TAG);
         else
@@ -40,7 +43,9 @@ public class MainActivity extends BaseActivity implements HasComponent<ActivityC
 
     @OnClick(R.id.text_refresh)
     public void onRefresh() {
-        MainFragment mainFragment = (MainFragment) getSupportFragmentManager().findFragmentByTag(MAIN_TAG);
+        MainFragment mainFragment =
+                (MainFragment) getSupportFragmentManager().findFragmentByTag(MAIN_TAG);
+        
         if (mainFragment != null && mainFragment.isVisible())
             mainFragment.getMainPresenter().initialize();
     }

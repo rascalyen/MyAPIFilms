@@ -21,12 +21,15 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 public class MainFragment extends BaseFragment implements MainViewMVP {
 
-    @Bind(R.id.rl_progress)     RelativeLayout progressView;
-    @Bind(R.id.rl_retry)        RelativeLayout noResultView;
-    @Bind(R.id.recycler)        RecyclerView recyclerView;
+    @Bind(R.id.rl_progress)
+    RelativeLayout progressView;
+    @Bind(R.id.rl_retry)
+    RelativeLayout noResultView;
+    @Bind(R.id.recycler)
+    RecyclerView recyclerView;
     @Inject MainPresenter mainPresenter;
     @Inject MovieAdapter movieAdapter;
-    private static String MOVIES_STATE = "MOVIES_STATE";
+    private static final String MOVIES_STATE = "MOVIES_STATE";
     private ArrayList<Movie> movies;
 
 
@@ -42,7 +45,8 @@ public class MainFragment extends BaseFragment implements MainViewMVP {
         super.onCreate(savedInstanceState);
     }
 
-    @Override public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    @Override public View onCreateView(
+            LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_movies, container, false);
         ButterKnife.bind(this, view);

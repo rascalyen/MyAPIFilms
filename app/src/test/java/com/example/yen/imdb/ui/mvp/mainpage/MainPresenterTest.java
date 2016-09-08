@@ -63,7 +63,8 @@ public class MainPresenterTest extends RobolectricTestCase {
 
 
     @Test public void initialize() {
-        given(imdbClient.getIMDBService().getInTheaters(properties.getProperty("token"))).willReturn(call);
+        given(imdbClient.getImdbService().getInTheaters(properties.getProperty("token")))
+                .willReturn(call);
 
         mainPresenter.initialize();
 
@@ -74,12 +75,14 @@ public class MainPresenterTest extends RobolectricTestCase {
 
     @Test public void getInTheaters() {
         given(properties.getProperty("token")).willReturn("string");
-        given(imdbClient.getIMDBService().getInTheaters(properties.getProperty("token"))).willReturn(call);
+        given(imdbClient.getImdbService().getInTheaters(properties.getProperty("token")))
+                .willReturn(call);
 
         mainPresenter.getInTheaters();
 
-        verify(imdbClient.getIMDBService()).getInTheaters(anyString());
-        verify(imdbClient.getIMDBService().getInTheaters(properties.getProperty("token"))).enqueue(callbackCaptor.capture());
+        verify(imdbClient.getImdbService()).getInTheaters(anyString());
+        verify(imdbClient.getImdbService().getInTheaters(properties.getProperty("token")))
+                .enqueue(callbackCaptor.capture());
     }
 
     @Test public void onSuccess() {
@@ -103,7 +106,8 @@ public class MainPresenterTest extends RobolectricTestCase {
     }
 
     @Test public void cancelCall() {
-        given(imdbClient.getIMDBService().getInTheaters(properties.getProperty("token"))).willReturn(call);
+        given(imdbClient.getImdbService().getInTheaters(properties.getProperty("token")))
+                .willReturn(call);
 
         mainPresenter.initialize();
         mainPresenter.cancelCall();

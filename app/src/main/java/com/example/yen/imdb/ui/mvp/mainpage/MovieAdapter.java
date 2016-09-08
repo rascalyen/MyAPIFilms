@@ -65,7 +65,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieHolder>
     private void setInfoText(MovieHolder holder, Movie movie) {
 
         StringBuilder sb = new StringBuilder();
-        sb.append((movie.getRated() == null || movie.getRated().isEmpty()) ? "Not Rated" : movie.getRated());
+        sb.append((movie.getRated() == null || movie.getRated().isEmpty()) ?
+                "Not Rated" : movie.getRated());
         sb.append(" | ");
         sb.append(StringUtils.makeMinToHour(movie.getRuntime()));
         sb.append(movie.getGenres().get(0));
@@ -81,13 +82,12 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieHolder>
     }
 
     public void addAll(List<Movie> movies) {
-        if ( !this.movies.isEmpty()) {
+        if (!this.movies.isEmpty()) {
             this.movies.clear();
             this.movies.addAll(movies);
-        }
-        else {
+        } else
             this.movies.addAll(movies);
-        }
+
         notifyDataSetChanged();
     }
 
@@ -101,10 +101,14 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieHolder>
 
     static class MovieHolder extends RecyclerView.ViewHolder {
 
-        @Bind(R.id.image_movie)     ImageView movieImage;
-        @Bind(R.id.text_title)      TextView title;
-        @Bind(R.id.text_info)       TextView info;
-        @Bind(R.id.text_view)       TextView viewDetail;
+        @Bind(R.id.image_movie)
+        ImageView movieImage;
+        @Bind(R.id.text_title)
+        TextView title;
+        @Bind(R.id.text_info)
+        TextView info;
+        @Bind(R.id.text_view)
+        TextView viewDetail;
 
 
         public MovieHolder(View itemView) {
