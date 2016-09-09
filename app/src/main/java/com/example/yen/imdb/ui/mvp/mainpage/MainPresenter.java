@@ -1,6 +1,7 @@
 package com.example.yen.imdb.ui.mvp.mainpage;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 import com.example.yen.imdb.data.entity.MovieEntity;
 import com.example.yen.imdb.data.model.Movie;
 import com.example.yen.imdb.data.response.IMDBResponse;
@@ -52,7 +53,7 @@ public class MainPresenter implements Presenter<MainViewMVP> {
 
             @Override
             public void onFailure(Call<IMDBResponse> call, Throwable t) {
-                System.out.println("######  MOM  I failed.....");
+                Log.i(MainPresenter.class.getSimpleName(), "######  MOM  I failed.....");
             }
         });
     }
@@ -78,8 +79,9 @@ public class MainPresenter implements Presenter<MainViewMVP> {
     private List<Movie> createMovieList(List<MovieEntity> movieEntities) {
         List<Movie> movies = new ArrayList<>();
 
-        for (MovieEntity entity : movieEntities)
+        for (MovieEntity entity : movieEntities) {
             movies.add(ModelMapper.toMovieModel(entity));
+        }
 
         return movies;
     }

@@ -20,18 +20,21 @@ public class ModelMapper {
         movie.setUrlPoster(movieEntity.getUrlPoster());
 
         List<String> languageList = new ArrayList<>();
-        for (String language : movieEntity.getLanguages())
+        for (String language : movieEntity.getLanguages()) {
             languageList.add(language);
+        }
         movie.setLanguages(languageList);
 
         List<String> genreList = new ArrayList<>();
-        for (String genre : movieEntity.getGenres())
+        for (String genre : movieEntity.getGenres()) {
             genreList.add(genre);
+        }
         movie.setGenres(genreList);
 
         List<Person> directorList = new ArrayList<>();
-        for (PersonEntity personEntity : movieEntity.getDirectors())
+        for (PersonEntity personEntity : movieEntity.getDirectors()) {
             directorList.add(new Person(personEntity.getName()));
+        }
         movie.setDirectors(directorList);
 
         return movie;

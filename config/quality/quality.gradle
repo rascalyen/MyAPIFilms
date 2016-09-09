@@ -10,21 +10,24 @@
  */
 apply plugin: 'checkstyle'
 apply plugin: 'findbugs'
+apply plugin: 'pmd'
 
 dependencies {
-    checkstyle 'com.puppycrawl.tools:checkstyle:7.1.1'
+    checkstyle 'com.puppycrawl.tools:checkstyle:6.19'
 }
 
 def qualityConfigDir = "$project.rootDir/config/quality";
 def reportsDir = "$project.buildDir/reports"
 
-check.dependsOn 'checkstyle', 'findbugs'
+check.dependsOn 'checkstyle', 'pmd', 'findbugs'
+preBuild.dependsOn 'pmd'
 
 
 task checkstyle(type: Checkstyle,
         group: 'Verification',
         description: 'Runs code style checks') {
 
+    ignoreFailures = false
     configFile file("$qualityConfigDir/checkstyle/checkstyle-config.xml")
     classpath = files( )
     source 'src'
@@ -32,8 +35,36 @@ task checkstyle(type: Checkstyle,
 
     reports {
         xml.enabled = true
+        html.enabled = true
         xml {
             destination "$reportsDir/checkstyle/checkstyle.xml"
+        }
+        html {
+            destination "$reportsDir/checkstyle/checkstyle.html"
+        }
+    }
+}
+
+
+task pmd(type: Pmd,
+        group: 'Verification',
+        description: 'Inspect sourcecode for bugs') {
+
+    ignoreFailures = false
+    ruleSetFiles = files("$qualityConfigDir/pmd/pmd-ruleset.xml")
+    ruleSets = []
+    source 'src'
+    include '**/*.java'
+    exclude '**/gen/**'
+
+    reports {
+        xml.enabled = true
+        html.enabled = true
+        xml {
+            destination "$reportsDir/pmd/pmd.xml"
+        }
+        html {
+            destination "$reportsDir/pmd/pmd.html"
         }
     }
 }

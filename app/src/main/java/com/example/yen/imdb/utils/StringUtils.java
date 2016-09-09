@@ -7,7 +7,7 @@ public abstract class StringUtils {
 
         if (s != null && !s.isEmpty()) {
             try {
-                int minute = Integer.parseInt(s.substring(0, s.indexOf(" ")));
+                int minute = Integer.parseInt(s.substring(0, s.indexOf(' ')));
                 int hour = minute / 60;
                 minute = minute % 60;
 

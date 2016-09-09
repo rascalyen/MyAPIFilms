@@ -71,9 +71,9 @@ public class DetailActivity extends BaseActivity {
         picasso.load(movie.getUrlPoster()).fit().into(poster);
 
         StringBuilder sb = new StringBuilder();
-        sb.append(StringUtils.makeMinToHour(movie.getRuntime()));
-        sb.append((movie.getRated() == null || movie.getRated().isEmpty()) ?
-                "Not Rated" : movie.getRated());
+        sb.append(StringUtils.makeMinToHour(movie.getRuntime()))
+                .append((movie.getRated() == null || movie.getRated().isEmpty()) ?
+                        "Not Rated" : movie.getRated());
         info.setText(sb);
 
         sb.delete(0, sb.length());
@@ -81,7 +81,7 @@ public class DetailActivity extends BaseActivity {
             if (i == movie.getGenres().size() - 1)
                 sb.append(movie.getGenres().get(i));
             else
-                sb.append(movie.getGenres().get(i) + ", ");
+                sb.append(movie.getGenres().get(i)).append(", ");
         }
         genre.setText(sb);
 

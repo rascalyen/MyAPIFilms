@@ -75,7 +75,7 @@ public class Configuration {
         try {
             properties.load(rawResource);
         } catch (IOException e) {
-            e.printStackTrace();
+            Log.e(Configuration.class.getSimpleName(), "Can't load properties: " + e.toString());
         }
 
         return properties;

@@ -66,10 +66,9 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieHolder>
 
         StringBuilder sb = new StringBuilder();
         sb.append((movie.getRated() == null || movie.getRated().isEmpty()) ?
-                "Not Rated" : movie.getRated());
-        sb.append(" | ");
-        sb.append(StringUtils.makeMinToHour(movie.getRuntime()));
-        sb.append(movie.getGenres().get(0));
+                "Not Rated" : movie.getRated()).append(" | ")
+                .append(StringUtils.makeMinToHour(movie.getRuntime()))
+                .append(movie.getGenres().get(0));
 
         holder.info.setText(sb);
     }
