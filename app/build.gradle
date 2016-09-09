@@ -30,8 +30,9 @@ android {
 
     lintOptions {
         warningsAsErrors false
-        checkReleaseBuilds false
-        abortOnError false
+        checkReleaseBuilds true
+        abortOnError true
+        lintConfig file("$project.rootDir/config/quality/lint/lint.xml")
 
         disable 'GoogleAppIndexingWarning' // App does not have deep linking.
         disable 'InvalidPackage' // Okio references java.nio that does not presented in Android SDK.

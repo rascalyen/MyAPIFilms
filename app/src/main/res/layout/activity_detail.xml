@@ -41,9 +41,7 @@
                 android:id="@+id/image_movie"
                 android:background="@color/black_87pc"
                 android:layout_width="121dp"
-                android:layout_height="178dp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentLeft="true"/>
+                android:layout_height="178dp"/>
 
             <LinearLayout
                 android:orientation="vertical"
@@ -71,7 +69,7 @@
                         style="@style/CardButtonTextStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Genre:"
+                        android:text="@string/genre"
                         android:paddingRight="6dp"
                         android:paddingTop="0dp"
                         android:paddingBottom="0dp"
@@ -100,7 +98,7 @@
                         style="@style/CardButtonTextStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Director:"
+                        android:text="@string/director"
                         android:paddingRight="6dp"
                         android:paddingTop="0dp"
                         android:paddingBottom="0dp"
@@ -127,7 +125,7 @@
                         style="@style/CardButtonTextStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Language:"
+                        android:text="@string/language"
                         android:paddingRight="6dp"
                         android:paddingTop="0dp"
                         android:paddingBottom="0dp"
