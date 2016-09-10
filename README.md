@@ -25,13 +25,13 @@ From this project you should find useful examples like,
 
 
 ### Quality Assurance
-* [Checkstyle](http://checkstyle.sourceforge.net/), [PMD](https://pmd.github.io/), [Findbugs](http://findbugs.sourceforge.net/) and [Lint](https://developer.android.com/studio/write/lint.html) for static code analysis
+* [Checkstyle](http://checkstyle.sourceforge.net/), [Findbugs](http://findbugs.sourceforge.net/), [PMD](https://pmd.github.io/) and [Lint](https://developer.android.com/studio/write/lint.html) for static code analysis
 * Unit test with [JUnit](http://junit.org/), [Mockito](http://mockito.org/) and [Robolectric](http://robolectric.org/) in JVM
 * Unit test asynchronous callback with Mockito
 
 #### Run "check" task from Gradle
 
-In this project, run check to ensure code quality in the following order: Checkstyle -> PMD -> Findbugs -> Lint -> Unit Tests.  You should find all configuration files under config/quality/..
+In this project, run check to ensure code quality in the following order: Checkstyle -> Findbugs -> PMD -> Lint -> Unit Tests.  You should find all configuration files under config/quality/..
 
 ```
 ./gradlew check
