@@ -29,7 +29,8 @@ public class BaseActivity extends AppCompatActivity {
                 FragmentManager fm = getFragmentManager();
                 if (fm.getBackStackEntryCount() > 0) {
                     fm.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-                } else {
+                }
+                else {
                     finish();
                 }
                 return true;

@@ -84,7 +84,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieHolder>
         if (!this.movies.isEmpty()) {
             this.movies.clear();
             this.movies.addAll(movies);
-        } else
+        }
+        else
             this.movies.addAll(movies);
 
         notifyDataSetChanged();

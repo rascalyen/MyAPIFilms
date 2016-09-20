@@ -21,8 +21,8 @@ public abstract class BaseFragment extends Fragment {
     protected void showToastMessage(String message) {
         try {
             Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
-
-        } catch (NullPointerException ex) {
+        }
+        catch (NullPointerException ex) {
             // getActivity() shouldn't be null.
         }
     }

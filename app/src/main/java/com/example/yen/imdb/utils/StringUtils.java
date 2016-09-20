@@ -12,8 +12,8 @@ public abstract class StringUtils {
                 minute = minute % 60;
 
                 return (minute == 0) ? hour + "hr | " : hour + "hr " + minute + "min" + " | ";
-
-            } catch (NumberFormatException ex) {
+            }
+            catch (NumberFormatException ex) {
                 return "";
             }
         }
