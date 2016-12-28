@@ -46,5 +46,5 @@ In this project, run check to ensure code quality in the following order: Checks
 
 ### TODO
 - <s>MVVM + Data binding</s>  -> see branch [dataBinding](https://github.com/rascalyen/ApiMovies/tree/dataBinding)
-- RxJava/RxAndroid
+- <s>RxJava/RxAndroid</s> -> Overkill for this project. There's only one call...
 - Kotlin
