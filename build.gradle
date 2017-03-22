@@ -1,14 +1,24 @@
 buildscript {
+
     repositories {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.0'
+        classpath 'com.android.tools.build:gradle:2.2.3'
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
     }
+
+    ext.SUPPORT_LIBRARY_VERSION = '25.3.0'
+    ext.DAGGER2_VERSION = '2.9'
+    ext.RETROFIT2_VERSION = '2.1.0'
+    ext.LEAKCANARY_VERSION = '1.4-beta2'
+    ext.OKHTTP_VERSION = '3.2.0'
+    ext.PICASSO_VERSION = '2.5.2'
+
 }
 
 allprojects {
+
     repositories {
         jcenter()
         mavenCentral()

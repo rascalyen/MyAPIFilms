@@ -18,7 +18,8 @@ From this project you should find useful examples like,
 * Use [Butterknife](https://github.com/JakeWharton/butterknife) for view injection in Activity/Fragment
 * Use [Retrofit2](http://square.github.io/retrofit/) and [Jackson](https://github.com/FasterXML/jackson) to call RESTful API and parse returned JSON response
 * [Picasso](http://square.github.io/picasso/) as image client
-* Read properties from /res/raw resource
+* Define productFlavors in gradle script
+* Read properties from /res/raw resource (However, productFlavor is preferable)
 * How to save/restore Fragment's state
 * Use RecyclerView and CardView
 * [LeakCanary](https://github.com/square/leakcanary) to find memory leak EARLY

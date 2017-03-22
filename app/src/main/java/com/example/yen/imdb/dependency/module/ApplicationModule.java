@@ -47,8 +47,8 @@ public class ApplicationModule {
     }
 
     @Provides @Singleton
-    IMDBClient provideTomatoClient(OkHttpClient okHttpClient, Properties properties) {
-        return new IMDBClient(okHttpClient, properties);
+    IMDBClient provideIMDBClient(OkHttpClient okHttpClient) {
+        return new IMDBClient(okHttpClient);
     }
 
 }

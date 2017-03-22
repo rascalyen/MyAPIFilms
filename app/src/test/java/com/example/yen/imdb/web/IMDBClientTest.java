@@ -19,7 +19,7 @@ public class IMDBClientTest extends RobolectricTestCase {
 
     @Before public void setUp() {
         configs = new Configuration(RuntimeEnvironment.application);
-        imdbClient = new IMDBClient(configs.getOkHttpClient(), configs.getProperties());
+        imdbClient = new IMDBClient(configs.getOkHttpClient());
     }
 
     @Test public void getIMDBService() {

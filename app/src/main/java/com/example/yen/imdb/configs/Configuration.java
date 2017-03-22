@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.util.Log;
+import com.example.yen.imdb.BuildConfig;
 import com.example.yen.imdb.R;
 import com.jakewharton.picasso.OkHttp3Downloader;
 import com.squareup.picasso.Picasso;
@@ -56,10 +57,8 @@ public class Configuration {
                 .cache(new Cache(new File(context.getCacheDir(),
                         properties.getProperty("diskCachePath")),
                         Integer.parseInt(properties.getProperty("diskCacheSizeMB")) * 1024 * 1024))
-                .connectTimeout(Integer.parseInt(properties.getProperty("connectTimeoutSec")),
-                        TimeUnit.SECONDS)
-                .readTimeout(Integer.parseInt(properties.getProperty("readTimeoutSec")),
-                        TimeUnit.SECONDS)
+                .connectTimeout(BuildConfig.TIMEOUT_IN_SEC, TimeUnit.SECONDS)
+                .readTimeout(BuildConfig.TIMEOUT_IN_SEC, TimeUnit.SECONDS)
                 .build();
     }
 
