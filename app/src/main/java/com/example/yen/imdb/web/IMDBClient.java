@@ -1,9 +1,7 @@
 package com.example.yen.imdb.web;
 
-import com.example.yen.imdb.BuildConfig;
 import com.example.yen.imdb.web.configuration.RestClientGenerator;
 import com.example.yen.imdb.web.service.IMDBService;
-import java.util.Properties;
 import javax.inject.Inject;
 import okhttp3.OkHttpClient;
 
@@ -14,8 +12,8 @@ public class IMDBClient {
 
 
     @Inject
-    public IMDBClient(OkHttpClient okHttpClient) {
-        imdbService = RestClientGenerator.createService(IMDBService.class, okHttpClient, BuildConfig.BASE_URL);
+    public IMDBClient(OkHttpClient okHttpClient, String baseUrl) {
+        imdbService = RestClientGenerator.createService(IMDBService.class, okHttpClient, baseUrl);
     }
 
     public IMDBClient(IMDBService imdbService) {

@@ -1,10 +1,12 @@
 package com.example.yen.imdb.dependency.module;
 
 import android.app.Application;
+import com.example.yen.imdb.BuildConfig;
 import com.example.yen.imdb.configs.Configuration;
 import com.example.yen.imdb.web.IMDBClient;
 import com.squareup.picasso.Picasso;
 import java.util.Properties;
+import javax.inject.Named;
 import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
@@ -37,9 +39,14 @@ public class NetworkModule {
         return config.getPicasso();
     }
 
+    @Provides @Named("IMDB_BASE_URL")
+    String provideIMDBBaseUrl() {
+        return BuildConfig.BASE_URL;
+    }
+
     @Provides @Singleton
-    IMDBClient provideIMDBClient(OkHttpClient okHttpClient) {
-        return new IMDBClient(okHttpClient);
+    IMDBClient provideIMDBClient(OkHttpClient okHttpClient, @Named("IMDB_BASE_URL") String baseUrl) {
+        return new IMDBClient(okHttpClient, baseUrl);
     }
 
 }
