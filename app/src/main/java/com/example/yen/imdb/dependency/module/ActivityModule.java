@@ -1,6 +1,7 @@
 package com.example.yen.imdb.dependency.module;
 
 import android.app.Activity;
+import com.example.yen.imdb.dependency.scope.PerActivity;
 import dagger.Module;
 import dagger.Provides;
 
@@ -14,7 +15,7 @@ public class ActivityModule {
         this.activity = activity;
     }
 
-    @Provides Activity provideActivity() {
+    @Provides @PerActivity Activity provideActivity() {
         return this.activity;
     }
 
