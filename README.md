@@ -1,11 +1,11 @@
 # MyAPIFilms IMDB
 
 Showcase common android implementation with [MyAPIFilms](http://api.myapifilms.com/index.do) IMDB API. This app shows “IN THEATERS” movie list on main page, and shows clicked movie details on next page.
-
+<p align="left">
 <img height="380" src="https://github.com/rascalyen/ApiMovies/blob/master/screenshot/00.png" />
 <img height="380" src="https://github.com/rascalyen/ApiMovies/blob/master/screenshot/01.png" />
 <img height="380" src="https://github.com/rascalyen/ApiMovies/blob/master/screenshot/02.png" />
-<br>
+</p><br>
 
 [Click here for demo video](http://tinyurl.com/zcpotsl)
 
