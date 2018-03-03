@@ -23,16 +23,22 @@ import static org.mockito.Mockito.verify;
 
 public class IMDBServiceTest extends RobolectricTestCase {
 
-    @Mock IMDBService imdbService;
-    @Mock Call<IMDBResponse> call;
-    @Mock Throwable throwable;
-    @Mock IMDBResponse imdbResponse;
+    @Mock
+    IMDBService imdbService;
+    @Mock
+    Call<IMDBResponse> call;
+    @Mock
+    Throwable throwable;
+    @Mock
+    IMDBResponse imdbResponse;
     private Response<IMDBResponse> response;  // Mockito wouldn't mock final class
-    @Captor ArgumentCaptor<Callback<IMDBResponse>> callbackCaptor;
+    @Captor
+    ArgumentCaptor<Callback<IMDBResponse>> callbackCaptor;
     private IMDBClientStub imdbClient;
 
 
-    @Before public void setUp() {
+    @Before
+    public void setUp() {
         MockitoAnnotations.initMocks(this);
         imdbClient = new IMDBClientStub(imdbService);
         createMockResponse();
@@ -42,13 +48,15 @@ public class IMDBServiceTest extends RobolectricTestCase {
         response = Response.success(imdbResponse);
     }
 
-    @Test public void getInTheaters() {
-        given(imdbService.getInTheaters("")).willReturn(call);
+    @Test
+    public void getInTheaters() {
+        given(imdbService.getInTheaters("", "", "")).willReturn(call);
 
         imdbClient.getInTheaters("");
 
-        verify(imdbService).getInTheaters(eq(""));
-        verify(imdbService.getInTheaters("")).enqueue(callbackCaptor.capture());
+        verify(imdbService).getInTheaters(eq(""), eq(""), eq(""));
+        verify(imdbService.getInTheaters("", "", "")).
+                enqueue(callbackCaptor.capture());
         assertNull(imdbClient.getResponse());
         assertNull(imdbClient.getThrowable());
 
@@ -59,7 +67,8 @@ public class IMDBServiceTest extends RobolectricTestCase {
         assertThat(imdbClient.getThrowable(), is(equalTo(throwable)));
     }
 
-    @After public void tearDown() {
+    @After
+    public void tearDown() {
         imdbService = null;
         response = null;
         throwable = null;

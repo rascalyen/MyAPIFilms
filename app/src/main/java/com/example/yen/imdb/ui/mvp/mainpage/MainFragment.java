@@ -14,23 +14,25 @@ import com.example.yen.imdb.ui.BaseFragment;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 
 public class MainFragment extends BaseFragment implements MainViewMVP {
 
-    @Bind(R.id.rl_progress)
+    @BindView(R.id.rl_progress)
     RelativeLayout progressView;
-    @Bind(R.id.rl_retry)
+    @BindView(R.id.rl_retry)
     RelativeLayout noResultView;
-    @Bind(R.id.recycler)
+    @BindView(R.id.recycler)
     RecyclerView recyclerView;
     @Inject MainPresenter mainPresenter;
     @Inject MovieAdapter movieAdapter;
     private static final String MOVIES_STATE = "MOVIES_STATE";
     private ArrayList<Movie> movies;
+    private Unbinder unbinder;
 
 
     public static MainFragment newInstance() {
@@ -49,7 +51,7 @@ public class MainFragment extends BaseFragment implements MainViewMVP {
             LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_movies, container, false);
-        ButterKnife.bind(this, view);
+        unbinder = ButterKnife.bind(this, view);
         return view;
     }
 
@@ -92,7 +94,7 @@ public class MainFragment extends BaseFragment implements MainViewMVP {
 
     @Override public void onDestroyView() {
         super.onDestroyView();
-        ButterKnife.unbind(this);
+        unbinder.unbind();
         mainPresenter.cancelCall();
     }
 

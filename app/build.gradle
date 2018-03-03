@@ -2,41 +2,51 @@ apply plugin: 'com.android.application'
 apply from: '../config/quality/quality.gradle'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.1"
+    compileSdkVersion 26
+    buildToolsVersion '26.0.2'
 
     defaultConfig {
         applicationId "com.example.yen.imdb"
-        minSdkVersion 14
-        targetSdkVersion 25
+        minSdkVersion 19
+        targetSdkVersion 26
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_7
-        targetCompatibility JavaVersion.VERSION_1_7
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    flavorDimensions "consumer"
 
     productFlavors {
         def baseURL = "\"http://api.myapifilms.com/imdb/\""
-        def timeoutInSec = "10"
+        def timeoutInSec = "60"
+        def formatJSON = "\"json\""
+        def language = "\"en-us\""
 
         dev {
+            dimension "consumer"
             applicationIdSuffix ".dev"
 
-            timeoutInSec = "15"
+            timeoutInSec = "90"
 
             buildConfigField "String", "BASE_URL", baseURL
             buildConfigField "int", "TIMEOUT_IN_SEC", timeoutInSec
+            buildConfigField "String", "FORMAT_JSON", formatJSON
+            buildConfigField "String", "LANGUAGE", language
         }
 
         prod {
+            dimension "consumer"
             applicationIdSuffix ".prod"
 
             buildConfigField "String", "BASE_URL", baseURL
             buildConfigField "int", "TIMEOUT_IN_SEC", timeoutInSec
+            buildConfigField "String", "FORMAT_JSON", formatJSON
+            buildConfigField "String", "LANGUAGE", language
         }
     }
 
@@ -45,6 +55,12 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
         }
     }
 
@@ -62,35 +78,46 @@ android {
         exclude('META-INF/LICENSE')
         exclude('META-INF/NOTICE')
     }
+
+    configurations.all { config ->
+        if (config.name.contains('UnitTest')) {
+            config.resolutionStrategy.eachDependency { details ->
+                if (details.requested.group == 'com.squareup.leakcanary' && details.requested.name == 'leakcanary-android') {
+                    details.useTarget(group: details.requested.group, name: 'leakcanary-android-no-op', version: details.requested.version)
+                }
+            }
+        }
+    }
 }
 
 dependencies {
-    final BUTTERKNIFE_VERSION = '7.0.1'
+    final BUTTERKNIFE_VERSION = '8.8.1'
 
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile "com.android.support:appcompat-v7:$SUPPORT_LIBRARY_VERSION"
-    compile "com.android.support:design:$SUPPORT_LIBRARY_VERSION"
-    compile "com.android.support:cardview-v7:$SUPPORT_LIBRARY_VERSION"
-    compile "com.android.support:recyclerview-v7:$SUPPORT_LIBRARY_VERSION"
-    compile "com.google.dagger:dagger:$DAGGER2_VERSION"
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "com.android.support:appcompat-v7:$SUPPORT_LIBRARY_VERSION"
+    implementation "com.android.support:design:$SUPPORT_LIBRARY_VERSION"
+    implementation "com.android.support:cardview-v7:$SUPPORT_LIBRARY_VERSION"
+    implementation "com.android.support:recyclerview-v7:$SUPPORT_LIBRARY_VERSION"
+    implementation "com.google.dagger:dagger:$DAGGER2_VERSION"
     annotationProcessor "com.google.dagger:dagger-compiler:$DAGGER2_VERSION"
-    compile "com.squareup.retrofit2:converter-jackson:$RETROFIT2_VERSION"
-    compile ("com.squareup.retrofit2:retrofit:$RETROFIT2_VERSION") {
+    implementation "com.squareup.retrofit2:converter-jackson:$RETROFIT2_VERSION"
+    implementation ("com.squareup.retrofit2:retrofit:$RETROFIT2_VERSION") {
         exclude module: 'okhttp'
     }
-    compile "com.squareup.okhttp3:okhttp:$OKHTTP_VERSION"
-    compile "com.squareup.picasso:picasso:$PICASSO_VERSION"
-    compile 'com.jakewharton.picasso:picasso2-okhttp3-downloader:1.0.2'
-    compile "com.jakewharton:butterknife:$BUTTERKNIFE_VERSION"
-    debugCompile "com.squareup.leakcanary:leakcanary-android:$LEAKCANARY_VERSION"
-    releaseCompile "com.squareup.leakcanary:leakcanary-android-no-op:$LEAKCANARY_VERSION"
-    // Unit test
-    testCompile "com.squareup.leakcanary:leakcanary-android-no-op:$LEAKCANARY_VERSION"
-    testCompile 'junit:junit:4.12'
-    testCompile 'org.robolectric:robolectric:3.2'
-    testCompile 'org.mockito:mockito-core:1.10.19'
-    // Quality
-    compile 'com.google.code.findbugs:annotations:3.0.0'
+    implementation "com.squareup.okhttp3:okhttp:$OKHTTP_VERSION"
+    implementation "com.squareup.picasso:picasso:$PICASSO_VERSION"
+    implementation 'com.jakewharton.picasso:picasso2-okhttp3-downloader:1.0.2'
 
-    compile "io.reactivex:rxjava:1.0.2"
+    implementation "com.jakewharton:butterknife:$BUTTERKNIFE_VERSION"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$BUTTERKNIFE_VERSION"
+
+    debugImplementation "com.squareup.leakcanary:leakcanary-android:$LEAKCANARY_VERSION"
+    releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$LEAKCANARY_VERSION"
+    // Unit test
+    testImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$LEAKCANARY_VERSION"
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'org.robolectric:robolectric:3.5'
+    testImplementation 'org.mockito:mockito-core:1.10.19'
+    // Quality
+    implementation 'com.google.code.findbugs:annotations:3.0.0'
 }

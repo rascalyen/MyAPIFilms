@@ -20,17 +20,19 @@ public class IMDBClientStub extends IMDBClient {
 
     public void getInTheaters(String token) {
 
-        getImdbService().getInTheaters(token).enqueue(new Callback<IMDBResponse>() {
-            @Override
-            public void onResponse(Call<IMDBResponse> call, Response<IMDBResponse> response) {
-                setResponse(response);
-            }
+        getImdbService().getInTheaters(token, "", "").
+                enqueue(new Callback<IMDBResponse>() {
+                    @Override
+                    public void onResponse(Call<IMDBResponse> call,
+                                           Response<IMDBResponse> response) {
+                        setResponse(response);
+                    }
 
-            @Override
-            public void onFailure(Call<IMDBResponse> call, Throwable t) {
-                setThrowable(t);
-            }
-        });
+                    @Override
+                    public void onFailure(Call<IMDBResponse> call, Throwable t) {
+                        setThrowable(t);
+                    }
+                });
     }
 
     public void setResponse(Response<IMDBResponse> response) {

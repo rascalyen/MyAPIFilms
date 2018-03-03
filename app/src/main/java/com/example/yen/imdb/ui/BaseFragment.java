@@ -30,6 +30,7 @@ public abstract class BaseFragment extends Fragment {
     /**
      * Get a component for dependency injection by its type.
      */
+    @SuppressWarnings("unchecked")
     protected <C> C getComponent(Class<C> componentType) {
         return componentType.cast( ((HasComponent<C>) getActivity()).getComponent() );
     }

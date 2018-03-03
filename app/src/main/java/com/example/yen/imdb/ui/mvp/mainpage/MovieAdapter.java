@@ -14,7 +14,7 @@ import com.example.yen.imdb.utils.StringUtils;
 import com.squareup.picasso.Picasso;
 import java.util.List;
 import javax.inject.Inject;
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
@@ -101,13 +101,13 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieHolder>
 
     static class MovieHolder extends RecyclerView.ViewHolder {
 
-        @Bind(R.id.image_movie)
+        @BindView(R.id.image_movie)
         ImageView movieImage;
-        @Bind(R.id.text_title)
+        @BindView(R.id.text_title)
         TextView title;
-        @Bind(R.id.text_info)
+        @BindView(R.id.text_info)
         TextView info;
-        @Bind(R.id.text_view)
+        @BindView(R.id.text_view)
         TextView viewDetail;
 
 

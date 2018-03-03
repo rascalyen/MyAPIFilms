@@ -1,5 +1,6 @@
 package com.example.yen.imdb.ui.mvp.mainpage;
 
+import com.example.yen.imdb.BuildConfig;
 import com.example.yen.imdb.RobolectricTestCase;
 import com.example.yen.imdb.data.entity.InTheaterEntity;
 import com.example.yen.imdb.data.entity.MovieEntity;
@@ -63,8 +64,8 @@ public class MainPresenterTest extends RobolectricTestCase {
 
 
     @Test public void initialize() {
-        given(imdbClient.getImdbService().getInTheaters(properties.getProperty("token")))
-                .willReturn(call);
+        given(imdbClient.getImdbService().getInTheaters(properties.getProperty("token"),
+                BuildConfig.FORMAT_JSON, BuildConfig.LANGUAGE)).willReturn(call);
 
         mainPresenter.initialize();
 
@@ -75,14 +76,14 @@ public class MainPresenterTest extends RobolectricTestCase {
 
     @Test public void getInTheaters() {
         given(properties.getProperty("token")).willReturn("string");
-        given(imdbClient.getImdbService().getInTheaters(properties.getProperty("token")))
-                .willReturn(call);
+        given(imdbClient.getImdbService().getInTheaters(properties.getProperty("token"),
+                BuildConfig.FORMAT_JSON, BuildConfig.LANGUAGE)).willReturn(call);
 
         mainPresenter.getInTheaters();
 
-        verify(imdbClient.getImdbService()).getInTheaters(anyString());
-        verify(imdbClient.getImdbService().getInTheaters(properties.getProperty("token")))
-                .enqueue(callbackCaptor.capture());
+        verify(imdbClient.getImdbService()).getInTheaters(anyString(), anyString(), anyString());
+        verify(imdbClient.getImdbService().getInTheaters(properties.getProperty("token"),
+                BuildConfig.FORMAT_JSON, BuildConfig.LANGUAGE)).enqueue(callbackCaptor.capture());
     }
 
     @Test public void onSuccess() {
@@ -106,8 +107,8 @@ public class MainPresenterTest extends RobolectricTestCase {
     }
 
     @Test public void cancelCall() {
-        given(imdbClient.getImdbService().getInTheaters(properties.getProperty("token")))
-                .willReturn(call);
+        given(imdbClient.getImdbService().getInTheaters(properties.getProperty("token"),
+                BuildConfig.FORMAT_JSON, BuildConfig.LANGUAGE)).willReturn(call);
 
         mainPresenter.initialize();
         mainPresenter.cancelCall();

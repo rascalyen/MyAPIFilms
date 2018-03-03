@@ -9,6 +9,7 @@ import retrofit2.http.Query;
 public interface IMDBService {
 
     @GET("inTheaters")
-    Call<IMDBResponse> getInTheaters(@Query("token") String apiKey);
+    Call<IMDBResponse> getInTheaters(@Query("token") String apiKey, @Query("format") String format,
+                                     @Query("language") String language);
 
 }

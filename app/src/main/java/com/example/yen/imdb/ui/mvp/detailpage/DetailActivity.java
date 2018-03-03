@@ -12,7 +12,7 @@ import com.example.yen.imdb.ui.BaseActivity;
 import com.example.yen.imdb.utils.StringUtils;
 import com.squareup.picasso.Picasso;
 import javax.inject.Inject;
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
@@ -20,19 +20,19 @@ public class DetailActivity extends BaseActivity {
 
     private static final String EXTRA_MOVIE = "EXTRA_MOVIE";
 
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @Bind(R.id.image_movie)
+    @BindView(R.id.image_movie)
     ImageView poster;
-    @Bind(R.id.text_info)
+    @BindView(R.id.text_info)
     TextView info;
-    @Bind(R.id.text_genre)
+    @BindView(R.id.text_genre)
     TextView genre;
-    @Bind(R.id.text_director)
+    @BindView(R.id.text_director)
     TextView director;
-    @Bind(R.id.text_lang)
+    @BindView(R.id.text_lang)
     TextView language;
-    @Bind(R.id.text_plot)
+    @BindView(R.id.text_plot)
     TextView plot;
     @Inject Picasso picasso;
     private Movie movie;

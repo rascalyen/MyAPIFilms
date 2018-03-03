@@ -2,6 +2,7 @@ package com.example.yen.imdb.ui.mvp.mainpage;
 
 import android.support.annotation.NonNull;
 import android.util.Log;
+import com.example.yen.imdb.BuildConfig;
 import com.example.yen.imdb.data.entity.MovieEntity;
 import com.example.yen.imdb.data.model.Movie;
 import com.example.yen.imdb.data.response.IMDBResponse;
@@ -39,7 +40,8 @@ public class MainPresenter implements Presenter<MainViewMVP> {
     }
 
     protected void getInTheaters() {
-        call = imdbClient.getImdbService().getInTheaters(properties.getProperty("token"));
+        call = imdbClient.getImdbService().getInTheaters(properties.getProperty("token"),
+                BuildConfig.FORMAT_JSON, BuildConfig.LANGUAGE);
 
         call.enqueue(new Callback<IMDBResponse>() {
             @Override

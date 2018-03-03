@@ -45,7 +45,8 @@ public class NetworkModule {
     }
 
     @Provides @Singleton
-    IMDBClient provideIMDBClient(OkHttpClient okHttpClient, @Named("IMDB_BASE_URL") String baseUrl) {
+    IMDBClient provideIMDBClient(OkHttpClient okHttpClient,
+                                 @Named("IMDB_BASE_URL") String baseUrl) {
         return new IMDBClient(okHttpClient, baseUrl);
     }
 

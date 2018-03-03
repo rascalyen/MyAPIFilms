@@ -8,5 +8,5 @@ import org.robolectric.annotation.Config;
 
 @Ignore
 @RunWith(RobolectricTestRunner.class)
-@Config(constants = BuildConfig.class, manifest = "./AndroidManifest.xml")
+@Config(constants = BuildConfig.class)
 public class RobolectricTestCase {}

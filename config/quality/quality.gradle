@@ -37,10 +37,10 @@ task checkstyle(type: Checkstyle,
         xml.enabled = true
         html.enabled = true
         xml {
-            destination "$reportsDir/checkstyle/checkstyle.xml"
+            destination file("$reportsDir/checkstyle/checkstyle.xml")
         }
         html {
-            destination "$reportsDir/checkstyle/checkstyle.html"
+            destination file("$reportsDir/checkstyle/checkstyle.html")
         }
     }
 }
@@ -48,8 +48,9 @@ task checkstyle(type: Checkstyle,
 
 task findbugs(type: FindBugs,
         group: 'Verification',
-        description: 'Inspect java bytecode for bugs',
-        dependsOn: ['compileDebugSources','compileReleaseSources']) {
+        description: 'Inspect java bytecode for bugs'
+        //dependsOn: ['compileDebugSources','compileReleaseSources']
+        ) {
 
     ignoreFailures = false
     effort = "max"
@@ -65,10 +66,10 @@ task findbugs(type: FindBugs,
         xml.enabled = true
         html.enabled = false
         xml {
-            destination "$reportsDir/findbugs/findbugs.xml"
+            destination file("$reportsDir/findbugs/findbugs.xml")
         }
         html {
-            destination "$reportsDir/findbugs/findbugs.html"
+            destination file("$reportsDir/findbugs/findbugs.html")
         }
     }
 }
@@ -89,10 +90,10 @@ task pmd(type: Pmd,
         xml.enabled = true
         html.enabled = true
         xml {
-            destination "$reportsDir/pmd/pmd.xml"
+            destination file("$reportsDir/pmd/pmd.xml")
         }
         html {
-            destination "$reportsDir/pmd/pmd.html"
+            destination file("$reportsDir/pmd/pmd.html")
         }
     }
 }

@@ -1,4 +1,3 @@
-baseURL =  http://api.myapifilms.com/imdb/
 token = 159ab6ca-37ea-4351-ba42-9ef903beacc3
 diskCacheSizeMB = 256
 diskCachePath = IMDB_HTTP

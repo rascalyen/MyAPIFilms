@@ -6,14 +6,14 @@ import com.example.yen.imdb.R;
 import com.example.yen.imdb.dependency.HasComponent;
 import com.example.yen.imdb.dependency.component.ActivityComponent;
 import com.example.yen.imdb.ui.BaseActivity;
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 
 public class MainActivity extends BaseActivity implements HasComponent<ActivityComponent> {
 
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     Toolbar toolbar;
     private static final String MAIN_TAG = "MAIN";
 
