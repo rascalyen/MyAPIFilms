@@ -8,10 +8,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.example.yen.imdb.R;
+import com.example.yen.imdb.configs.GlideApp;
 import com.example.yen.imdb.data.model.Movie;
 import com.example.yen.imdb.ui.navigation.Navigator;
 import com.example.yen.imdb.utils.StringUtils;
-import com.squareup.picasso.Picasso;
 import java.util.List;
 import javax.inject.Inject;
 import butterknife.BindView;
@@ -20,13 +20,11 @@ import butterknife.ButterKnife;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieHolder> {
 
-    private Picasso picasso;
     private Navigator navigator;
     private List<Movie> movies;
 
 
-    @Inject public MovieAdapter(Picasso picasso, Navigator navigator) {
-        this.picasso = picasso;
+    @Inject public MovieAdapter(Navigator navigator) {
         this.navigator = navigator;
     }
 
@@ -52,7 +50,9 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieHolder>
 
         holder.title.setText(movie.getTitle());
         setInfoText(holder, movie);
-        picasso.load(movie.getUrlPoster()).fit().into(holder.movieImage);
+
+        GlideApp.with(context).load(movie.getUrlPoster()).fitCenter().into(holder.movieImage);
+
         holder.viewDetail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

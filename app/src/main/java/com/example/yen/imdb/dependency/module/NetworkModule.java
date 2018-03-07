@@ -4,7 +4,6 @@ import android.app.Application;
 import com.example.yen.imdb.BuildConfig;
 import com.example.yen.imdb.configs.Configuration;
 import com.example.yen.imdb.web.IMDBClient;
-import com.squareup.picasso.Picasso;
 import java.util.Properties;
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -32,11 +31,6 @@ public class NetworkModule {
     @Provides
     OkHttpClient provideOkHttpClient(Configuration config) {
         return config.getOkHttpClient();
-    }
-
-    @Provides
-    Picasso providePicasso(Configuration config) {
-        return config.getPicasso();
     }
 
     @Provides @Named("IMDB_BASE_URL")

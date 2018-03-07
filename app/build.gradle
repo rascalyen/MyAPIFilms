@@ -105,8 +105,10 @@ dependencies {
         exclude module: 'okhttp'
     }
     implementation "com.squareup.okhttp3:okhttp:$OKHTTP_VERSION"
-    implementation "com.squareup.picasso:picasso:$PICASSO_VERSION"
-    implementation 'com.jakewharton.picasso:picasso2-okhttp3-downloader:1.0.2'
+
+    implementation "com.github.bumptech.glide:okhttp3-integration:$GLIDE_VERSION"
+    implementation "com.github.bumptech.glide:glide:$GLIDE_VERSION"
+    annotationProcessor "com.github.bumptech.glide:compiler:$GLIDE_VERSION"
 
     implementation "com.jakewharton:butterknife:$BUTTERKNIFE_VERSION"
     annotationProcessor "com.jakewharton:butterknife-compiler:$BUTTERKNIFE_VERSION"

@@ -1,13 +1,10 @@
 package com.example.yen.imdb.configs;
 
 import android.content.Context;
-import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import com.example.yen.imdb.BuildConfig;
 import com.example.yen.imdb.R;
-import com.jakewharton.picasso.OkHttp3Downloader;
-import com.squareup.picasso.Picasso;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -23,30 +20,11 @@ public class Configuration {
 
     private Properties properties;
     private OkHttpClient okHttpClient;
-    private Picasso picasso;
 
 
     @Inject public Configuration(@NonNull Context context) {
         this.properties = setProperties(context);
         this.okHttpClient = setOkHttpClient(context);
-        this.picasso = setPicasso(context);
-    }
-
-
-    private Picasso setPicasso(@NonNull Context context) {
-
-        return new Picasso.Builder(context) //.indicatorsEnabled(true)
-                .downloader(new OkHttp3Downloader(okHttpClient))
-                .listener(new Picasso.Listener() {
-                    @Override
-                    public void onImageLoadFailed(Picasso picasso, Uri uri, Exception exception) {
-                        Log.e("com.example.yen.imdb", "Can't load image: " + uri);
-                    }
-                }).build();
-    }
-
-    public Picasso getPicasso() {
-        return picasso;
     }
 
 

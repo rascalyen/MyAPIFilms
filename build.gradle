@@ -1,6 +1,7 @@
 buildscript {
 
     repositories {
+        mavenCentral()
         jcenter()
         google()
     }
@@ -9,16 +10,17 @@ buildscript {
     }
 
     ext.SUPPORT_LIBRARY_VERSION = '26.1.0'
-    ext.DAGGER2_VERSION = '2.9'
-    ext.RETROFIT2_VERSION = '2.1.0'
+    ext.DAGGER2_VERSION = '2.14.1'
+    ext.RETROFIT2_VERSION = '2.3.0'
     ext.LEAKCANARY_VERSION = '1.5.4'
-    ext.OKHTTP_VERSION = '3.2.0'
-    ext.PICASSO_VERSION = '2.5.2'
+    ext.OKHTTP_VERSION = '3.9.1'
+    ext.GLIDE_VERSION = '4.3.1'
 
 }
 
 allprojects {
     repositories {
+        mavenCentral()
         jcenter()
         google()
     }

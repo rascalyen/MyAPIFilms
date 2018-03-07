@@ -7,11 +7,10 @@ import android.support.v7.widget.Toolbar;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.example.yen.imdb.R;
+import com.example.yen.imdb.configs.GlideApp;
 import com.example.yen.imdb.data.model.Movie;
 import com.example.yen.imdb.ui.BaseActivity;
 import com.example.yen.imdb.utils.StringUtils;
-import com.squareup.picasso.Picasso;
-import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -34,7 +33,6 @@ public class DetailActivity extends BaseActivity {
     TextView language;
     @BindView(R.id.text_plot)
     TextView plot;
-    @Inject Picasso picasso;
     private Movie movie;
 
 
@@ -68,8 +66,7 @@ public class DetailActivity extends BaseActivity {
     }
 
     private void setupMovieDetail() {
-        picasso.load(movie.getUrlPoster()).fit().into(poster);
-
+        GlideApp.with(this).load(movie.getUrlPoster()).fitCenter().into(poster);
         StringBuilder sb = new StringBuilder();
         sb.append(StringUtils.makeMinToHour(movie.getRuntime()))
                 .append((movie.getRated() == null || movie.getRated().isEmpty()) ?

@@ -5,7 +5,6 @@ import com.example.yen.imdb.IMDBApplication;
 import com.example.yen.imdb.dependency.module.ApplicationModule;
 import com.example.yen.imdb.dependency.module.NetworkModule;
 import com.example.yen.imdb.web.IMDBClient;
-import com.squareup.picasso.Picasso;
 import java.util.Properties;
 import javax.inject.Singleton;
 import dagger.Component;
@@ -18,7 +17,6 @@ public interface ApplicationComponent {
     void injectApplication(IMDBApplication application);
 
     Properties properties();
-    Picasso picasso();
     IMDBClient imdbClient();
 
 

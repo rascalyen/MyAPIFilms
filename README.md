@@ -17,7 +17,7 @@ From this project you should find useful examples like,
 * Use Dependency Injection ([Dagger2](http://google.github.io/dagger/)) to separate configuration (properties, imageClient, httpClient, etc.) and UI usage
 * Use [Butterknife](https://github.com/JakeWharton/butterknife) for view injection in Activity/Fragment
 * Use [Retrofit2](http://square.github.io/retrofit/) and [Jackson](https://github.com/FasterXML/jackson) to call RESTful API and parse returned JSON response
-* [Picasso](http://square.github.io/picasso/) as image client
+* [Glide](https://github.com/bumptech/glide) as image client
 * Define productFlavors in gradle script
 * Read properties from /res/raw resource (However, productFlavor is preferable)
 * How to save/restore Fragment's state

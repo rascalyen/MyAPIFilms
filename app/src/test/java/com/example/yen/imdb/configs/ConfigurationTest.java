@@ -1,7 +1,6 @@
 package com.example.yen.imdb.configs;
 
 import com.example.yen.imdb.RobolectricTestCase;
-import com.squareup.picasso.Picasso;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,10 +18,6 @@ public class ConfigurationTest extends RobolectricTestCase {
 
     @Before public void setUp() {
         config = new Configuration(RuntimeEnvironment.application);
-    }
-
-    @Test public void getPicasso() {
-        assertThat(config.getPicasso(), isA(Picasso.class));
     }
 
     @Test public void getOkHttpClient() {
