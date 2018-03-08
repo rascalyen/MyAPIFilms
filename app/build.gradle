@@ -98,13 +98,13 @@ dependencies {
     implementation "com.android.support:design:$SUPPORT_LIBRARY_VERSION"
     implementation "com.android.support:cardview-v7:$SUPPORT_LIBRARY_VERSION"
     implementation "com.android.support:recyclerview-v7:$SUPPORT_LIBRARY_VERSION"
+
     implementation "com.google.dagger:dagger:$DAGGER2_VERSION"
     annotationProcessor "com.google.dagger:dagger-compiler:$DAGGER2_VERSION"
-    implementation "com.squareup.retrofit2:converter-jackson:$RETROFIT2_VERSION"
-    implementation ("com.squareup.retrofit2:retrofit:$RETROFIT2_VERSION") {
-        exclude module: 'okhttp'
-    }
-    implementation "com.squareup.okhttp3:okhttp:$OKHTTP_VERSION"
+
+    implementation "com.squareup.retrofit2:retrofit:$RETROFIT2_VERSION"
+    implementation "com.squareup.retrofit2:converter-moshi:$RETROFIT2_VERSION"
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.10.0'
 
     implementation "com.github.bumptech.glide:okhttp3-integration:$GLIDE_VERSION"
     implementation "com.github.bumptech.glide:glide:$GLIDE_VERSION"

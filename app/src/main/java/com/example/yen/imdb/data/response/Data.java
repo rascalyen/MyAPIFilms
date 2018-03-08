@@ -1,24 +1,20 @@
 package com.example.yen.imdb.data.response;
 
-import com.example.yen.imdb.data.entity.InTheaterEntity;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.example.yen.imdb.data.model.InTheater;
 import java.util.ArrayList;
 import java.util.List;
 
 
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class Data {
 
-    @JsonProperty("inTheaters")
-    private List<InTheaterEntity> inTheaters = new ArrayList<>();
+    private List<InTheater> inTheaters = new ArrayList<>();
 
 
-    public List<InTheaterEntity> getInTheaters() {
+    public List<InTheater> getInTheaters() {
         return inTheaters;
     }
 
-    public void setInTheaters(List<InTheaterEntity> inTheaters) {
+    public void setInTheaters(List<InTheater> inTheaters) {
         this.inTheaters = inTheaters;
     }
 

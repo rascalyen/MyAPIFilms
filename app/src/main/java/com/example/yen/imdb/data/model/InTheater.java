@@ -1,20 +1,14 @@
-package com.example.yen.imdb.data.entity;
+package com.example.yen.imdb.data.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.ArrayList;
 import java.util.List;
 
 
-@JsonIgnoreProperties(ignoreUnknown = true)
-public class InTheaterEntity {
+public class InTheater {
 
-    @JsonProperty("openingThisWeek")
     private String openingThisWeek;
-    @JsonProperty("inTheatersNow")
     private String inTheatersNow;
-    @JsonProperty("movies")
-    private List<MovieEntity> movies = new ArrayList<>();
+    private List<Movie> movies = new ArrayList<>();
 
 
     public String getOpeningThisWeek() {
@@ -25,11 +19,11 @@ public class InTheaterEntity {
         this.openingThisWeek = openingThisWeek;
     }
 
-    public List<MovieEntity> getMovies() {
+    public List<Movie> getMovies() {
         return movies;
     }
 
-    public void setMovies(List<MovieEntity> movies) {
+    public void setMovies(List<Movie> movies) {
         this.movies = movies;
     }
 

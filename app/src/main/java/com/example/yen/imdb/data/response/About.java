@@ -1,15 +1,9 @@
 package com.example.yen.imdb.data.response;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
-
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class About {
 
-    @JsonProperty("version")
     private String version;
-    @JsonProperty("serverTime")
     private String serverTime;
 
 

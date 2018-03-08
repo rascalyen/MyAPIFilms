@@ -14,6 +14,7 @@ import javax.inject.Inject;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 
 
 public class Configuration {
@@ -37,6 +38,8 @@ public class Configuration {
                         Integer.parseInt(properties.getProperty("diskCacheSizeMB")) * 1024 * 1024))
                 .connectTimeout(BuildConfig.TIMEOUT_IN_SEC, TimeUnit.SECONDS)
                 .readTimeout(BuildConfig.TIMEOUT_IN_SEC, TimeUnit.SECONDS)
+                .addInterceptor(new HttpLoggingInterceptor()
+                        .setLevel(HttpLoggingInterceptor.Level.HEADERS))
                 .build();
     }
 

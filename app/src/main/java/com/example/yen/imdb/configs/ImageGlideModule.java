@@ -1,6 +1,5 @@
 package com.example.yen.imdb.configs;
 
-
 import android.content.Context;
 import android.support.annotation.NonNull;
 import com.bumptech.glide.GlideBuilder;

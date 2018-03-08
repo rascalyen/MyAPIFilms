@@ -13,7 +13,6 @@ buildscript {
     ext.DAGGER2_VERSION = '2.14.1'
     ext.RETROFIT2_VERSION = '2.3.0'
     ext.LEAKCANARY_VERSION = '1.5.4'
-    ext.OKHTTP_VERSION = '3.9.1'
     ext.GLIDE_VERSION = '4.3.1'
 
 }

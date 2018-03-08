@@ -2,8 +2,7 @@ package com.example.yen.imdb.ui.mvp.mainpage;
 
 import com.example.yen.imdb.BuildConfig;
 import com.example.yen.imdb.RobolectricTestCase;
-import com.example.yen.imdb.data.entity.InTheaterEntity;
-import com.example.yen.imdb.data.entity.MovieEntity;
+import com.example.yen.imdb.data.model.InTheater;
 import com.example.yen.imdb.data.model.Movie;
 import com.example.yen.imdb.data.response.Data;
 import com.example.yen.imdb.data.response.Error;
@@ -37,13 +36,13 @@ public class MainPresenterTest extends RobolectricTestCase {
     @Mock IMDBResponse imdbResponse;
     @Mock Data data;
     @Mock Error error;
-    @Mock InTheaterEntity inTheaterEntity;
-    @Mock MovieEntity movieEntity;
+    @Mock InTheater inTheater;
+    @Mock Movie movie;
     @Captor ArgumentCaptor<Callback<IMDBResponse>> callbackCaptor;
     private IMDBClient imdbClient;
     private MainPresenter mainPresenter;
-    private List<InTheaterEntity> theaters = new ArrayList<>();
-    private List<MovieEntity> movies = new ArrayList<>();
+    private List<InTheater> theaters = new ArrayList<>();
+    private List<Movie> movies = new ArrayList<>();
 
 
     @Before public void setUp() {
@@ -56,10 +55,10 @@ public class MainPresenterTest extends RobolectricTestCase {
     }
 
     private void createMockInTheater() {
-        movies.add(movieEntity);
-        inTheaterEntity.setMovies(movies);
-        theaters.add(inTheaterEntity);
-        theaters.add(inTheaterEntity);
+        movies.add(movie);
+        inTheater.setMovies(movies);
+        theaters.add(inTheater);
+        theaters.add(inTheater);
     }
 
 
@@ -125,8 +124,8 @@ public class MainPresenterTest extends RobolectricTestCase {
         imdbResponse = null;
         data = null;
         error = null;
-        inTheaterEntity = null;
-        movieEntity = null;
+        inTheater = null;
+        movie = null;
         callbackCaptor = null;
         mainPresenter = null;
         theaters = null;
