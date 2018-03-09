@@ -5,13 +5,13 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 import com.example.yen.imdb.BuildConfig;
 import com.example.yen.imdb.R;
+import com.facebook.stetho.okhttp3.StethoInterceptor;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -29,7 +29,6 @@ public class Configuration {
     }
 
 
-    @SuppressFBWarnings("ICAST_INTEGER_MULTIPLY_CAST_TO_LONG")
     private OkHttpClient setOkHttpClient(@NonNull Context context) {
 
         return new OkHttpClient.Builder()
@@ -40,6 +39,7 @@ public class Configuration {
                 .readTimeout(BuildConfig.TIMEOUT_IN_SEC, TimeUnit.SECONDS)
                 .addInterceptor(new HttpLoggingInterceptor()
                         .setLevel(HttpLoggingInterceptor.Level.HEADERS))
+                .addNetworkInterceptor(new StethoInterceptor())
                 .build();
     }
 

@@ -34,7 +34,7 @@ task checkstyle(type: Checkstyle,
     include '**/*.java'
 
     reports {
-        xml.enabled = true
+        xml.enabled = false
         html.enabled = true
         xml {
             destination file("$reportsDir/checkstyle/checkstyle.xml")
@@ -63,8 +63,8 @@ task findbugs(type: FindBugs,
     exclude '**/gen/**'
 
     reports {
-        xml.enabled = true
-        html.enabled = false
+        xml.enabled = false
+        html.enabled = true
         xml {
             destination file("$reportsDir/findbugs/findbugs.xml")
         }
@@ -87,7 +87,7 @@ task pmd(type: Pmd,
     exclude '**/gen/**'
 
     reports {
-        xml.enabled = true
+        xml.enabled = false
         html.enabled = true
         xml {
             destination file("$reportsDir/pmd/pmd.xml")
