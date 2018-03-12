@@ -3,7 +3,8 @@ package com.example.yen.imdb.ui;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.widget.Toast;
-import com.example.yen.imdb.dependency.HasComponent;
+import com.example.yen.imdb.IMDBApplication;
+import com.example.yen.imdb.configs.dagger.HasComponent;
 
 
 public abstract class BaseFragment extends Fragment {
@@ -11,6 +12,13 @@ public abstract class BaseFragment extends Fragment {
     @Override public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
+    }
+
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        IMDBApplication.getRefWatcher(getActivity()).watch(this);
     }
 
     /**

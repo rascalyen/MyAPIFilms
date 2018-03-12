@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.example.yen.imdb.R;
 import com.example.yen.imdb.configs.GlideApp;
+import com.example.yen.imdb.configs.dagger.scope.PerActivity;
 import com.example.yen.imdb.data.model.Movie;
 import com.example.yen.imdb.ui.navigation.Navigator;
 import com.example.yen.imdb.utils.StringUtils;
@@ -18,6 +19,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
+@PerActivity
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieHolder> {
 
     private Navigator navigator;

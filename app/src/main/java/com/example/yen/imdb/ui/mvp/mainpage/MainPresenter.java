@@ -3,10 +3,11 @@ package com.example.yen.imdb.ui.mvp.mainpage;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import com.example.yen.imdb.BuildConfig;
+import com.example.yen.imdb.configs.dagger.scope.PerActivity;
 import com.example.yen.imdb.data.model.Movie;
-import com.example.yen.imdb.data.response.IMDBResponse;
+import com.example.yen.imdb.data.web.response.IMDBResponse;
 import com.example.yen.imdb.ui.Presenter;
-import com.example.yen.imdb.web.IMDBClient;
+import com.example.yen.imdb.data.web.api.IMDBService;
 import java.util.List;
 import java.util.Properties;
 import javax.inject.Inject;
@@ -15,16 +16,17 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
+@PerActivity
 public class MainPresenter implements Presenter<MainViewMVP> {
 
-    private IMDBClient imdbClient;
+    private IMDBService imdbService;
     private Properties properties;
     private MainViewMVP mainView;
     private Call<IMDBResponse> call;
 
 
-    @Inject public MainPresenter(IMDBClient imdbClient, Properties properties) {
-        this.imdbClient = imdbClient;
+    @Inject public MainPresenter(IMDBService imdbService, Properties properties) {
+        this.imdbService = imdbService;
         this.properties = properties;
     }
 
@@ -37,7 +39,7 @@ public class MainPresenter implements Presenter<MainViewMVP> {
     }
 
     protected void getInTheaters() {
-        call = imdbClient.getImdbService().getInTheaters(properties.getProperty("token"),
+        call = imdbService.getInTheaters(properties.getProperty("token"),
                 BuildConfig.FORMAT_JSON, BuildConfig.LANGUAGE);
 
         call.enqueue(new Callback<IMDBResponse>() {

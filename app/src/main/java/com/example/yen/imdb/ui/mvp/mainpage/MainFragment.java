@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import com.example.yen.imdb.R;
 import com.example.yen.imdb.data.model.Movie;
-import com.example.yen.imdb.dependency.component.ActivityComponent;
+import com.example.yen.imdb.configs.dagger.component.ActivityComponent;
 import com.example.yen.imdb.ui.BaseFragment;
 import java.util.ArrayList;
 import java.util.List;

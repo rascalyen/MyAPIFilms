@@ -6,8 +6,8 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import com.example.yen.imdb.IMDBApplication;
-import com.example.yen.imdb.dependency.component.ActivityComponent;
-import com.example.yen.imdb.dependency.component.ApplicationComponent;
+import com.example.yen.imdb.configs.dagger.component.ActivityComponent;
+import com.example.yen.imdb.configs.dagger.component.ApplicationComponent;
 
 
 public class BaseActivity extends AppCompatActivity {

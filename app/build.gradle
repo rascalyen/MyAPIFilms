@@ -51,7 +51,10 @@ android {
     }
 
     buildTypes {
-        debug {}
+        debug {
+            buildConfigField "okhttp3.logging.HttpLoggingInterceptor.Level", "HTTP_LOG_LEVEL",
+                    "okhttp3.logging.HttpLoggingInterceptor.Level.BODY"
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -79,6 +82,7 @@ android {
         exclude('META-INF/NOTICE')
     }
 
+    // Ignore leakcanary for unit tests
     configurations.all { config ->
         if (config.name.contains('UnitTest')) {
             config.resolutionStrategy.eachDependency { details ->
@@ -110,13 +114,13 @@ dependencies {
     implementation "com.jakewharton:butterknife:$BUTTERKNIFE_VERSION"
     annotationProcessor "com.jakewharton:butterknife-compiler:$BUTTERKNIFE_VERSION"
     // Debug
-    implementation "com.squareup.okhttp3:logging-interceptor:$OKHTTP3_VERSION"
-    implementation "com.facebook.stetho:stetho:$STETHO_VERSION"
-    implementation "com.facebook.stetho:stetho-okhttp3:$STETHO_VERSION"
+    debugImplementation "com.squareup.okhttp3:logging-interceptor:$OKHTTP3_VERSION"
+    debugImplementation "com.facebook.stetho:stetho:$STETHO_VERSION"
+    debugImplementation "com.facebook.stetho:stetho-okhttp3:$STETHO_VERSION"
     debugImplementation "com.squareup.leakcanary:leakcanary-android:$LEAKCANARY_VERSION"
+    // Release
     releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$LEAKCANARY_VERSION"
     // Unit test
-    testImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$LEAKCANARY_VERSION"
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.robolectric:robolectric:3.5'
     testImplementation 'org.mockito:mockito-core:1.10.19'

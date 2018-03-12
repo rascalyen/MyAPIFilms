@@ -1,29 +1,32 @@
 package com.example.yen.imdb;
 
 import android.app.Application;
-import android.os.Build;
-import com.example.yen.imdb.dependency.component.ApplicationComponent;
-import com.facebook.stetho.Stetho;
+import android.content.Context;
+import com.example.yen.imdb.configs.DebugConfiguration;
+import com.example.yen.imdb.configs.dagger.component.ApplicationComponent;
 import com.squareup.leakcanary.LeakCanary;
+import com.squareup.leakcanary.RefWatcher;
 
 
 public class IMDBApplication extends Application {
 
     private ApplicationComponent applicationComponent;
+    private RefWatcher refWatcher;
 
     @Override public void onCreate() {
         super.onCreate();
 
-        if (!isRoboUnitTest())
-            Stetho.initializeWithDefaults(this);
-
-        if (LeakCanary.isInAnalyzerProcess(this)) {
-            // This process is dedicated to LeakCanary for heap analysis.
-            // You should not init your app in this process.
-            return;
-        }
-        LeakCanary.install(this);
+        new DebugConfiguration().setup(this);
+        setupLeakCanary();
         injectComponent();
+    }
+
+
+    private void setupLeakCanary() {
+
+        if (LeakCanary.isInAnalyzerProcess(this))   return;
+
+        LeakCanary.install(this);
     }
 
     private void injectComponent() {
@@ -31,12 +34,12 @@ public class IMDBApplication extends Application {
         applicationComponent.injectApplication(this);
     }
 
-    public ApplicationComponent getApplicationComponent() {
-        return this.applicationComponent;
+    public static RefWatcher getRefWatcher(Context context) {
+        return ((IMDBApplication) context.getApplicationContext()).refWatcher;
     }
 
-    public static boolean isRoboUnitTest() {
-        return "robolectric".equals(Build.FINGERPRINT);
+    public ApplicationComponent getApplicationComponent() {
+        return this.applicationComponent;
     }
 
 }
