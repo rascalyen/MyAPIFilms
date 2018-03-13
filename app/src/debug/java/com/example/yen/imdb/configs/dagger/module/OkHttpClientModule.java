@@ -15,7 +15,7 @@ import okhttp3.logging.HttpLoggingInterceptor;
 public class OkHttpClientModule implements BaseHttpClientModule {
 
     @Provides @Singleton
-    OkHttpClient provideOkHttpClient(Cache cache,
+    static OkHttpClient provideOkHttpClient(Cache cache,
                                      HttpLoggingInterceptor http, StethoInterceptor stetho) {
 
         return new OkHttpClient.Builder()

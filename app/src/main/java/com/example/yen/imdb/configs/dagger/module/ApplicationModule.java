@@ -24,12 +24,12 @@ public class ApplicationModule {
     }
 
     @Provides
-    Properties provideProperties(AppConfiguration appConfiguration) {
+    static Properties provideProperties(AppConfiguration appConfiguration) {
         return appConfiguration.getProperties();
     }
 
     @Provides
-    Cache provideCache(AppConfiguration appConfiguration) {
+    static Cache provideCache(AppConfiguration appConfiguration) {
         return appConfiguration.getCache();
     }
 

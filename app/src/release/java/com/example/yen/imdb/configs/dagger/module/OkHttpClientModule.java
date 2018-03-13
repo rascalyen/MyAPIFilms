@@ -13,7 +13,7 @@ import okhttp3.OkHttpClient;
 public class OkHttpClientModule implements BaseHttpClientModule {
 
     @Provides @Singleton
-    OkHttpClient provideOkHttpClient(Cache cache) {
+    static OkHttpClient provideOkHttpClient(Cache cache) {
 
         return new OkHttpClient.Builder()
                 .cache(cache)

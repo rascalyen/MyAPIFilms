@@ -9,12 +9,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 import javax.inject.Inject;
-import javax.inject.Singleton;
 import okhttp3.Cache;
 
 
-@Singleton
-public class AppConfiguration {
+public final class AppConfiguration {
 
     private Properties properties;
     private Cache cache;

@@ -5,11 +5,9 @@ import android.support.annotation.NonNull;
 import com.example.yen.imdb.data.model.Movie;
 import com.example.yen.imdb.ui.mvp.detailpage.DetailActivity;
 import javax.inject.Inject;
-import javax.inject.Singleton;
 
 
-@Singleton
-public class Navigator {
+public final class Navigator {
 
     @Inject public Navigator() {}
 

@@ -19,11 +19,15 @@ From this project you should find useful examples like,
 * Use [Retrofit2](http://square.github.io/retrofit/) and [Moshi](https://github.com/square/moshi) to call RESTful API and parse returned JSON response
 * [Glide](https://github.com/bumptech/glide) as image client
 * Define productFlavors in gradle script
-* Read properties from /res/raw resource (However, productFlavor is preferable)
+* Read properties from /res/raw resource (However, BuildConfig is preferable)
 * How to save/restore Fragment's state
 * Use RecyclerView and CardView
-* [LeakCanary](https://github.com/square/leakcanary) to find memory leak EARLY
 
+### Debug Environment
+* Two different Dagger setups for debug and release
+* [LeakCanary](https://github.com/square/leakcanary) to find memory leak EARLY
+* [OkHttp Logging Interceptor](https://github.com/square/okhttp/tree/master/okhttp-logging-interceptor)
+* [Stetho](http://facebook.github.io/stetho/) - A debug bridge to Chrome browser
 
 ### Quality Assurance
 * [Checkstyle](http://checkstyle.sourceforge.net/), [Findbugs](http://findbugs.sourceforge.net/), [PMD](https://pmd.github.io/) and [Lint](https://developer.android.com/studio/write/lint.html) for static code analysis
@@ -32,18 +36,21 @@ From this project you should find useful examples like,
 
 #### Run "check" task from Gradle
 
-In this project, run check to ensure code quality in the following order: Checkstyle -> Findbugs -> PMD -> Lint -> Unit Tests.  You should find all configuration files under config/quality/..
+In this project, run check to ensure code quality in the following order: Checkstyle -> Findbugs -> Lint -> PMD -> Unit Tests.  You should find all configuration files under config/quality/..
 
 ```
 ./gradlew check
 ```
-
 
 ### References
 - [Introduction to MVP on Android](https://github.com/konmik/konmik.github.io/wiki/Introduction-to-Model-View-Presenter-on-Android)
 - [Architecting Android… The clean way?](http://fernandocejas.com/2014/09/03/architecting-android-the-clean-way/)
 - [Dependency Injection with Dagger 2](https://guides.codepath.com/android/Dependency-Injection-with-Dagger-2)
 
+#### Dagger2 gotcha
+* [Keeping the Daggers Sharp](https://medium.com/square-corner-blog/keeping-the-daggers-sharp-%EF%B8%8F-230b3191c3f)
+* [Dagger 2 on production — reducing methods count](https://medium.com/azimolabs/dagger-2-on-production-reducing-methods-count-5a13ff671e30)
+* [Dagger 2. Custom scopes, Subcomponents](https://proandroiddev.com/dagger-2-part-ii-custom-scopes-component-dependencies-subcomponents-697c1fa1cfc)
 
 ### TODO
 - <s>MVVM + Data binding</s>  -> see branch [dataBinding](https://github.com/rascalyen/ApiMovies/tree/dataBinding)

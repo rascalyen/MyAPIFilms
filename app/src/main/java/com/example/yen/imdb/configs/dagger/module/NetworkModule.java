@@ -15,12 +15,13 @@ import retrofit2.converter.moshi.MoshiConverterFactory;
 public class NetworkModule {
 
     @Provides @Named("IMDB_BASE_URL")
-    String provideIMDBBaseUrl() {
+    static String provideIMDBBaseUrl() {
         return BuildConfig.BASE_URL;
     }
 
     @Provides @Singleton
-    Retrofit provideRetrofit(OkHttpClient okHttpClient, @Named("IMDB_BASE_URL") String baseUrl) {
+    static Retrofit provideRetrofit(
+            OkHttpClient okHttpClient, @Named("IMDB_BASE_URL") String baseUrl) {
 
         return new Retrofit.Builder()
                 .baseUrl(baseUrl)
@@ -30,7 +31,7 @@ public class NetworkModule {
     }
 
     @Provides @Singleton
-    IMDBService provideIMDBService(Retrofit retrofit) {
+    static IMDBService provideIMDBService(Retrofit retrofit) {
         return retrofit.create(IMDBService.class);
     }
 

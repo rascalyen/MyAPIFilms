@@ -50,6 +50,16 @@ android {
         }
     }
 
+    signingConfigs {
+        // make your own key for release build
+        release {
+            storeFile file("./keystore/sample.jks")
+            storePassword "sample"
+            keyAlias "sample"
+            keyPassword "sample"
+        }
+    }
+
     buildTypes {
         debug {
             buildConfigField "okhttp3.logging.HttpLoggingInterceptor.Level", "HTTP_LOG_LEVEL",
@@ -58,6 +68,8 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+            signingConfig signingConfigs.release
         }
     }
 

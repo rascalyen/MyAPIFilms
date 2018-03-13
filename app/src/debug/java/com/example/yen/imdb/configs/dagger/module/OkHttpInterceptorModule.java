@@ -12,12 +12,12 @@ import okhttp3.logging.HttpLoggingInterceptor;
 public class OkHttpInterceptorModule {
 
     @Provides @Singleton
-    HttpLoggingInterceptor provideHttpLoggingInterceptor() {
+    static HttpLoggingInterceptor provideHttpLoggingInterceptor() {
         return new HttpLoggingInterceptor().setLevel(BuildConfig.HTTP_LOG_LEVEL);
     }
 
     @Provides @Singleton
-    StethoInterceptor provideStethoInterceptor() {
+    static StethoInterceptor provideStethoInterceptor() {
         return new StethoInterceptor();
     }
 

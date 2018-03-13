@@ -5,11 +5,11 @@ import com.example.yen.imdb.configs.dagger.scope.PerActivity;
 import com.example.yen.imdb.ui.BaseActivity;
 import com.example.yen.imdb.ui.mvp.detailpage.DetailActivity;
 import com.example.yen.imdb.ui.mvp.mainpage.MainFragment;
-import dagger.Component;
+import dagger.Subcomponent;
 
 
 @PerActivity
-@Component(dependencies = ApplicationComponent.class, modules = ActivityModule.class)
+@Subcomponent(modules = ActivityModule.class)
 public interface ActivityComponent {
 
     void inject(MainFragment resultFragment);
@@ -21,10 +21,7 @@ public interface ActivityComponent {
         public static ActivityComponent init(
                 ApplicationComponent appComponent, BaseActivity activity) {
 
-            return DaggerActivityComponent.builder()
-                    .applicationComponent(appComponent)
-                    .activityModule(new ActivityModule(activity))
-                    .build();
+            return appComponent.plus(new ActivityModule(activity));
         }
     }
 
