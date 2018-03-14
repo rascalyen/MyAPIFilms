@@ -29,6 +29,7 @@ ext {
     buildToolsVersion = '26.0.2'
 
     SUPPORT_LIBRARY_VERSION = '26.1.0'
+    LIFECYCLE_VERSION = '1.1.0'
     DAGGER2_VERSION = '2.14.1'
     RETROFIT2_VERSION = '2.3.0'
     GLIDE_VERSION = '4.3.1'
