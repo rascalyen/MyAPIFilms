@@ -26,7 +26,7 @@ public class IMDBApplication extends Application {
 
         if (LeakCanary.isInAnalyzerProcess(this))   return;
 
-        LeakCanary.install(this);
+        refWatcher = LeakCanary.install(this);
     }
 
     private void injectComponent() {
