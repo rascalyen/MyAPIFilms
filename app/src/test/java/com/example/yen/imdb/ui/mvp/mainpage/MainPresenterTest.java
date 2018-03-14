@@ -5,21 +5,18 @@ import com.example.yen.imdb.RobolectricTestCase;
 import com.example.yen.imdb.data.model.InTheater;
 import com.example.yen.imdb.data.model.Movie;
 import com.example.yen.imdb.data.web.response.Data;
-import com.example.yen.imdb.data.web.response.Error;
 import com.example.yen.imdb.data.web.response.IMDBResponse;
 import com.example.yen.imdb.data.web.api.IMDBService;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.ArgumentCaptor;
-import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-import retrofit2.Call;
-import retrofit2.Callback;
+import io.reactivex.Observable;
+import io.reactivex.disposables.CompositeDisposable;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.anyListOf;
 import static org.mockito.Matchers.anyString;
@@ -31,22 +28,20 @@ public class MainPresenterTest extends RobolectricTestCase {
     @Mock IMDBService imdbService;
     @Mock Properties properties;
     @Mock MainViewMVP mainView;
-    @Mock Call<IMDBResponse> call;
+    @Mock Observable<IMDBResponse> call;
     @Mock IMDBResponse imdbResponse;
     @Mock Data data;
-    @Mock Error error;
     @Mock InTheater inTheater;
     @Mock Movie movie;
-    @Captor ArgumentCaptor<Callback<IMDBResponse>> callbackCaptor;
     private MainPresenter mainPresenter;
     private List<InTheater> theaters = new ArrayList<>();
     private List<Movie> movies = new ArrayList<>();
+    private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
 
     @Before public void setUp() {
         MockitoAnnotations.initMocks(this);
-
-        mainPresenter = new MainPresenter(imdbService, properties);
+        mainPresenter = new MainPresenter(imdbService, properties, compositeDisposable);
         mainPresenter.attachViewMVP(mainView);
         createMockInTheater();
     }
@@ -78,8 +73,6 @@ public class MainPresenterTest extends RobolectricTestCase {
         mainPresenter.getInTheaters();
 
         verify(imdbService).getInTheaters(anyString(), anyString(), anyString());
-        verify(imdbService.getInTheaters(properties.getProperty("token"),
-                BuildConfig.FORMAT_JSON, BuildConfig.LANGUAGE)).enqueue(callbackCaptor.capture());
     }
 
     @Test public void onSuccess() {
@@ -89,27 +82,6 @@ public class MainPresenterTest extends RobolectricTestCase {
         mainPresenter.onSuccess(imdbResponse);
 
         verify(mainView).viewMovies(anyListOf(Movie.class));
-        verify(mainView).hideProgress();
-    }
-
-    @Test public void onError() {
-        given(imdbResponse.getError()).willReturn(error);
-
-        mainPresenter.onError(imdbResponse);
-
-        verify(mainView).showRetry();
-        verify(mainView).hideProgress();
-        verify(mainView).showMessage(anyString());
-    }
-
-    @Test public void cancelCall() {
-        given(imdbService.getInTheaters(properties.getProperty("token"),
-                BuildConfig.FORMAT_JSON, BuildConfig.LANGUAGE)).willReturn(call);
-
-        mainPresenter.initialize();
-        mainPresenter.cancelCall();
-
-        verify(call).cancel();
     }
 
     @After public void tearDown() {
@@ -119,13 +91,12 @@ public class MainPresenterTest extends RobolectricTestCase {
         call = null;
         imdbResponse = null;
         data = null;
-        error = null;
         inTheater = null;
         movie = null;
-        callbackCaptor = null;
         mainPresenter = null;
         theaters = null;
         movies = null;
+        compositeDisposable = null;
     }
 
 }

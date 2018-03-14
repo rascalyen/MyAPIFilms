@@ -12,6 +12,9 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        buildConfigField "String", "FORMAT_JSON", "\"json\""
+        buildConfigField "String", "LANGUAGE", "\"en-us\""
     }
 
     compileOptions {
@@ -24,8 +27,6 @@ android {
     productFlavors {
         def baseURL = "\"http://api.myapifilms.com/imdb/\""
         def timeoutInSec = "60"
-        def formatJSON = "\"json\""
-        def language = "\"en-us\""
 
         dev {
             dimension "consumer"
@@ -35,8 +36,7 @@ android {
 
             buildConfigField "String", "BASE_URL", baseURL
             buildConfigField "int", "TIMEOUT_IN_SEC", timeoutInSec
-            buildConfigField "String", "FORMAT_JSON", formatJSON
-            buildConfigField "String", "LANGUAGE", language
+
         }
 
         prod {
@@ -45,8 +45,6 @@ android {
 
             buildConfigField "String", "BASE_URL", baseURL
             buildConfigField "int", "TIMEOUT_IN_SEC", timeoutInSec
-            buildConfigField "String", "FORMAT_JSON", formatJSON
-            buildConfigField "String", "LANGUAGE", language
         }
     }
 
@@ -69,7 +67,7 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 
-            signingConfig signingConfigs.release
+            //signingConfig signingConfigs.release
         }
     }
 
@@ -122,6 +120,10 @@ dependencies {
 
     implementation "com.squareup.retrofit2:retrofit:$RETROFIT2_VERSION"
     implementation "com.squareup.retrofit2:converter-moshi:$RETROFIT2_VERSION"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$RETROFIT2_VERSION"
+
+    implementation "io.reactivex.rxjava2:rxjava:$RXJAVA_VERSION"
+    implementation "io.reactivex.rxjava2:rxandroid:$RXANDROID_VERSION"
 
     implementation "com.github.bumptech.glide:okhttp3-integration:$GLIDE_VERSION"
     implementation "com.github.bumptech.glide:glide:$GLIDE_VERSION"

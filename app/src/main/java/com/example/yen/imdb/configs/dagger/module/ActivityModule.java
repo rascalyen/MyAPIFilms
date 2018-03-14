@@ -5,6 +5,7 @@ import com.example.yen.imdb.configs.dagger.scope.PerActivity;
 import com.example.yen.imdb.ui.BaseActivity;
 import dagger.Module;
 import dagger.Provides;
+import io.reactivex.disposables.CompositeDisposable;
 
 
 @Module
@@ -19,6 +20,11 @@ public class ActivityModule {
     @Provides @PerActivity
     Activity provideBaseActivity() {
         return activity;
+    }
+
+    @Provides @PerActivity
+    CompositeDisposable provideCompositeDisposable() {
+        return new CompositeDisposable();
     }
 
 }
