@@ -55,12 +55,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieHolder>
 
         GlideApp.with(context).load(movie.getUrlPoster()).fitCenter().into(holder.movieImage);
 
-        holder.viewDetail.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                navigator.navigateToDetail(context, movie);
-            }
-        });
+        holder.viewDetail.setOnClickListener(v -> navigator.navigateToDetail(context, movie));
 
     }
 
