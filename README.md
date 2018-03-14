@@ -17,6 +17,7 @@ From this project you should find useful examples like,
 * Use Dependency Injection ([Dagger2](http://google.github.io/dagger/)) to separate configuration (properties, imageClient, httpClient, etc.) and UI usage
 * Use [Butterknife](https://github.com/JakeWharton/butterknife) for view injection in Activity/Fragment
 * Use [Retrofit2](http://square.github.io/retrofit/) and [Moshi](https://github.com/square/moshi) to call RESTful API and parse returned JSON response
+* [RxJAVA](https://github.com/ReactiveX/RxJava) as Retrofit2 call adapter
 * [Glide](https://github.com/bumptech/glide) as image client
 * Define productFlavors in gradle script
 * Read properties from /res/raw resource (However, BuildConfig is preferable)
@@ -32,7 +33,6 @@ From this project you should find useful examples like,
 ### Quality Assurance
 * [Checkstyle](http://checkstyle.sourceforge.net/), [Findbugs](http://findbugs.sourceforge.net/), [PMD](https://pmd.github.io/) and [Lint](https://developer.android.com/studio/write/lint.html) for static code analysis
 * Unit test with [JUnit](http://junit.org/), [Mockito](http://mockito.org/) and [Robolectric](http://robolectric.org/) in JVM
-* Unit test asynchronous callback with Mockito
 
 #### Run "check" task from Gradle
 
@@ -55,4 +55,5 @@ In this project, run check to ensure code quality in the following order: Checks
 ### TODO
 - <s>MVVM + Data binding</s>  -> see branch [dataBinding](https://github.com/rascalyen/ApiMovies/tree/dataBinding)
 - <s>RxJava/RxAndroid</s> -> Overkill for this project. There's only one call...
+- ViewModel + LiveData (Favor MVVM)
 - Kotlin
