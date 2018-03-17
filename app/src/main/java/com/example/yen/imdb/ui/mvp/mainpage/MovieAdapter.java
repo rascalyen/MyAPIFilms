@@ -35,6 +35,10 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieHolder>
         this.movies = movies;
     }
 
+    public List<Movie> getMovies() {
+        return this.movies;
+    }
+
     @Override
     public MovieHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
@@ -108,7 +112,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieHolder>
         TextView viewDetail;
 
 
-        public MovieHolder(View itemView) {
+        MovieHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }

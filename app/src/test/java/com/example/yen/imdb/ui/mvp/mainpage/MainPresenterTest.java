@@ -79,7 +79,7 @@ public class MainPresenterTest extends RobolectricTestCase {
         given(imdbResponse.getData()).willReturn(data);
         given(imdbResponse.getData().getInTheaters()).willReturn(theaters);
 
-        mainPresenter.onSuccess(imdbResponse);
+        mainPresenter.onNext(imdbResponse);
 
         verify(mainView).viewMovies(anyListOf(Movie.class));
     }

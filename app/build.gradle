@@ -113,7 +113,6 @@ dependencies {
 
     implementation "android.arch.lifecycle:extensions:$LIFECYCLE_VERSION"
     implementation "android.arch.lifecycle:common-java8:$LIFECYCLE_VERSION"
-    annotationProcessor "android.arch.lifecycle:compiler:$LIFECYCLE_VERSION"
 
     implementation "com.google.dagger:dagger:$DAGGER2_VERSION"
     annotationProcessor "com.google.dagger:dagger-compiler:$DAGGER2_VERSION"

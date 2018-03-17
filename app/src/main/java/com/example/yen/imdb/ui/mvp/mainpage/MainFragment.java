@@ -30,7 +30,6 @@ public class MainFragment extends BaseFragment implements MainViewMVP {
     @Inject MainPresenter mainPresenter;
     @Inject MovieAdapter movieAdapter;
     private static final String MOVIES_STATE = "MOVIES_STATE";
-    private ArrayList<Movie> movies;
     private Unbinder unbinder;
 
 
@@ -57,20 +56,14 @@ public class MainFragment extends BaseFragment implements MainViewMVP {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putParcelableArrayList(MOVIES_STATE, movies);
+        outState.putParcelableArrayList(MOVIES_STATE, (ArrayList<Movie>) movieAdapter.getMovies());
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-        if (savedInstanceState != null)
-            movies = savedInstanceState.getParcelableArrayList(MOVIES_STATE);
-        else if (movies == null)
-            movies = new ArrayList<>();
-
         injectComponent();
-        setRecyclerView();
+        setRecyclerView(savedInstanceState);
         initialize();
     }
 
@@ -78,8 +71,17 @@ public class MainFragment extends BaseFragment implements MainViewMVP {
         this.getComponent(ActivityComponent.class).inject(this);
     }
 
-    private void setRecyclerView() {
-        movieAdapter.setMovies(movies);
+    private void setRecyclerView(Bundle savedInstanceState) {
+
+        if (!(savedInstanceState == null ||
+                savedInstanceState.getParcelableArrayList(MOVIES_STATE) == null)) {
+
+            movieAdapter.setMovies(savedInstanceState.getParcelableArrayList(MOVIES_STATE));
+        }
+        else {
+            movieAdapter.setMovies(new ArrayList<>());
+        }
+
         recyclerView.setAdapter(movieAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
     }
@@ -87,7 +89,7 @@ public class MainFragment extends BaseFragment implements MainViewMVP {
     private void initialize() {
         mainPresenter.attachViewMVP(this);
 
-        if (movies.isEmpty())
+        if (movieAdapter.getMovies().isEmpty())
             mainPresenter.initialize();
     }
 
@@ -136,18 +138,12 @@ public class MainFragment extends BaseFragment implements MainViewMVP {
 
     @Override
     public void clearMovies() {
-        if (movieAdapter != null) {
-            movieAdapter.clearAll();
-            movies.clear();
-        }
+        if (movieAdapter != null)   movieAdapter.clearAll();
     }
 
     @Override
     public void viewMovies(List<Movie> movies) {
-        if (movieAdapter != null) {
-            movieAdapter.addAll(movies);
-            this.movies = (ArrayList<Movie>) movies;
-        }
+        if (movieAdapter != null)   movieAdapter.addAll(movies);
     }
 
     public MainPresenter getMainPresenter() {
