@@ -21,7 +21,8 @@ public class MainPresenter implements Presenter<MainViewMVP> {
     private MainViewMVP mainView;
 
 
-    @Inject public MainPresenter(MovieRepository movieRepo, CompositeDisposable compositeDisposable) {
+    @Inject public MainPresenter(MovieRepository movieRepo,
+                                 CompositeDisposable compositeDisposable) {
         this.movieRepo = movieRepo;
         this.compositeDisposable = compositeDisposable;
     }

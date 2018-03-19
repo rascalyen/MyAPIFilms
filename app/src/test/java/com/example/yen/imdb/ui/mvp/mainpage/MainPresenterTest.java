@@ -1,12 +1,13 @@
 package com.example.yen.imdb.ui.mvp.mainpage;
 
-import com.example.yen.imdb.BuildConfig;
+import android.util.Log;
 import com.example.yen.imdb.RobolectricTestCase;
 import com.example.yen.imdb.data.model.InTheater;
 import com.example.yen.imdb.data.model.Movie;
+import com.example.yen.imdb.data.repository.MovieRepository;
+import com.example.yen.imdb.data.web.api.IMDBService;
 import com.example.yen.imdb.data.web.response.Data;
 import com.example.yen.imdb.data.web.response.IMDBResponse;
-import com.example.yen.imdb.data.web.api.IMDBService;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,14 +18,16 @@ import java.util.List;
 import java.util.Properties;
 import io.reactivex.Observable;
 import io.reactivex.disposables.CompositeDisposable;
-import static org.mockito.BDDMockito.given;
+import io.reactivex.disposables.Disposable;
 import static org.mockito.Matchers.anyListOf;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.verify;
+import static org.junit.Assert.assertEquals;
 
 
 public class MainPresenterTest extends RobolectricTestCase {
 
+    @Mock MovieRepository movieRepo;
     @Mock IMDBService imdbService;
     @Mock Properties properties;
     @Mock MainViewMVP mainView;
@@ -33,6 +36,7 @@ public class MainPresenterTest extends RobolectricTestCase {
     @Mock Data data;
     @Mock InTheater inTheater;
     @Mock Movie movie;
+    @Mock Throwable throwable;
     private MainPresenter mainPresenter;
     private List<InTheater> theaters = new ArrayList<>();
     private List<Movie> movies = new ArrayList<>();
@@ -41,7 +45,20 @@ public class MainPresenterTest extends RobolectricTestCase {
 
     @Before public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mainPresenter = new MainPresenter(imdbService, properties, compositeDisposable);
+
+        compositeDisposable.add(new Disposable() {
+            @Override
+            public void dispose() {
+                Log.d(MainPresenterTest.class.getSimpleName(), "test cancelCall");
+            }
+
+            @Override
+            public boolean isDisposed() {
+                return false;
+            }
+        });
+
+        mainPresenter = new MainPresenter(movieRepo, compositeDisposable);
         mainPresenter.attachViewMVP(mainView);
         createMockInTheater();
     }
@@ -55,36 +72,38 @@ public class MainPresenterTest extends RobolectricTestCase {
 
 
     @Test public void initialize() {
-        given(imdbService.getInTheaters(properties.getProperty("token"),
-                BuildConfig.FORMAT_JSON, BuildConfig.LANGUAGE)).willReturn(call);
-
-        mainPresenter.initialize();
-
-        verify(mainView).clearMovies();
-        verify(mainView).hideRetry();
-        verify(mainView).showProgress();
+        // TODO - test with RxJAVA
     }
 
     @Test public void getInTheaters() {
-        given(properties.getProperty("token")).willReturn("string");
-        given(imdbService.getInTheaters(properties.getProperty("token"),
-                BuildConfig.FORMAT_JSON, BuildConfig.LANGUAGE)).willReturn(call);
-
-        mainPresenter.getInTheaters();
-
-        verify(imdbService).getInTheaters(anyString(), anyString(), anyString());
+        // TODO - test with RxJAVA
     }
 
-    @Test public void onSuccess() {
-        given(imdbResponse.getData()).willReturn(data);
-        given(imdbResponse.getData().getInTheaters()).willReturn(theaters);
+    @Test public void onNext() {
 
-        mainPresenter.onNext(imdbResponse);
+        mainPresenter.onNext(movies);
 
         verify(mainView).viewMovies(anyListOf(Movie.class));
     }
 
+    @Test public void onError() {
+
+        mainPresenter.onError(throwable);
+
+        verify(mainView).showRetry();
+        verify(mainView).showMessage(anyString());
+    }
+
+    @Test public void cancelCall() {
+
+        mainPresenter.cancelCall();
+
+        assertEquals(true, compositeDisposable.size() == 0);
+    }
+
+
     @After public void tearDown() {
+        movieRepo = null;
         imdbService = null;
         properties = null;
         mainView = null;
@@ -93,6 +112,7 @@ public class MainPresenterTest extends RobolectricTestCase {
         data = null;
         inTheater = null;
         movie = null;
+        throwable = null;
         mainPresenter = null;
         theaters = null;
         movies = null;
