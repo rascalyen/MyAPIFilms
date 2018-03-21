@@ -1,5 +1,6 @@
-package com.example.yen.imdb.ui.mvp.mainpage;
+package com.example.yen.imdb.ui.mvvm.mainpage;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,14 +13,13 @@ import com.example.yen.imdb.data.model.Movie;
 import com.example.yen.imdb.configs.dagger.component.ActivityComponent;
 import com.example.yen.imdb.ui.BaseFragment;
 import java.util.ArrayList;
-import java.util.List;
 import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 
-public class MainFragment extends BaseFragment implements MainViewMVP {
+public class MainFragment extends BaseFragment {
 
     @BindView(R.id.rl_progress)
     RelativeLayout progressView;
@@ -27,8 +27,8 @@ public class MainFragment extends BaseFragment implements MainViewMVP {
     RelativeLayout noResultView;
     @BindView(R.id.recycler)
     RecyclerView recyclerView;
-    @Inject MainPresenter mainPresenter;
     @Inject MovieAdapter movieAdapter;
+    private MainViewModel viewModel;
     private static final String MOVIES_STATE = "MOVIES_STATE";
     private Unbinder unbinder;
 
@@ -62,92 +62,60 @@ public class MainFragment extends BaseFragment implements MainViewMVP {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        viewModel = ViewModelProviders.of(getActivity()).get(MainViewModel.class);
         injectComponent();
-        setRecyclerView(savedInstanceState);
+        setupRecyclerView();
+        observeUI();
         initialize();
     }
 
     private void injectComponent() {
         this.getComponent(ActivityComponent.class).inject(this);
+        this.getComponent(ActivityComponent.class).inject(viewModel);
     }
 
-    private void setRecyclerView(Bundle savedInstanceState) {
-
-        if (!(savedInstanceState == null ||
-                savedInstanceState.getParcelableArrayList(MOVIES_STATE) == null)) {
-
-            movieAdapter.setMovies(savedInstanceState.getParcelableArrayList(MOVIES_STATE));
-        }
-        else {
-            movieAdapter.setMovies(new ArrayList<>());
-        }
-
+    private void setupRecyclerView() {
+        movieAdapter.setMovies(viewModel.getMoviesObservable().getValue());
         recyclerView.setAdapter(movieAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
     }
 
+    private void observeUI() {
+
+        viewModel.getProgressObservable().observe(this, isLoading -> {
+            progressView.setVisibility(isLoading ? View.VISIBLE : View.GONE);
+            getActivity().setProgressBarIndeterminateVisibility(isLoading);
+        });
+
+        viewModel.getRetryObservable().observe(this,
+                isRetry -> noResultView.setVisibility(isRetry ? View.VISIBLE : View.GONE));
+
+        viewModel.getMoviesObservable().observe(this, movies ->  {
+            movieAdapter.addAll(new ArrayList<>(movies));
+        });
+
+        viewModel.getErrorMsgObservable().observe(this, this::showToastMessage);
+    }
+
     private void initialize() {
-        mainPresenter.attachViewMVP(this);
 
         if (movieAdapter.getMovies().isEmpty())
-            mainPresenter.initialize();
+            viewModel.initialize();
     }
 
     @Override public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
-        mainPresenter.cancelCall();
+        viewModel.cancelCall();
     }
 
-    @Override public void onDestroy() {
-        mainPresenter.detachViewMVP();
-        super.onDestroy();
-    }
-
-
-    @Override
-    public void showProgress() {
-        if (progressView != null) {
-            progressView.setVisibility(View.VISIBLE);
-            this.getActivity().setProgressBarIndeterminateVisibility(true);
-        }
-    }
-
-    @Override
-    public void hideProgress() {
-        if (progressView != null) {
-            progressView.setVisibility(View.GONE);
-            this.getActivity().setProgressBarIndeterminateVisibility(false);
-        }
-    }
-
-    @Override
-    public void showRetry() {
-        noResultView.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public void hideRetry() {
-        noResultView.setVisibility(View.GONE);
-    }
-
-    @Override
-    public void showMessage(String message) {
-        this.showToastMessage(message);
-    }
-
-    @Override
     public void clearMovies() {
         if (movieAdapter != null)   movieAdapter.clearAll();
     }
 
-    @Override
-    public void viewMovies(List<Movie> movies) {
-        if (movieAdapter != null)   movieAdapter.addAll(movies);
-    }
-
-    public MainPresenter getMainPresenter() {
-        return mainPresenter;
+    public MainViewModel getMainViewModel() {
+        return viewModel;
     }
 
 }

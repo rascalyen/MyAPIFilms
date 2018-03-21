@@ -3,8 +3,8 @@ package com.example.yen.imdb.configs.dagger.component;
 import com.example.yen.imdb.configs.dagger.module.ActivityModule;
 import com.example.yen.imdb.configs.dagger.scope.PerActivity;
 import com.example.yen.imdb.ui.BaseActivity;
-import com.example.yen.imdb.ui.mvp.detailpage.DetailActivity;
-import com.example.yen.imdb.ui.mvp.mainpage.MainFragment;
+import com.example.yen.imdb.ui.mvvm.mainpage.MainFragment;
+import com.example.yen.imdb.ui.mvvm.mainpage.MainViewModel;
 import dagger.Subcomponent;
 
 
@@ -13,7 +13,7 @@ import dagger.Subcomponent;
 public interface ActivityComponent {
 
     void inject(MainFragment resultFragment);
-    void inject(DetailActivity activity);
+    void inject(MainViewModel mainViewModel);
 
 
     final class Initializer {

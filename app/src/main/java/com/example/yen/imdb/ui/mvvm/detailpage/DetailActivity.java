@@ -1,5 +1,6 @@
-package com.example.yen.imdb.ui.mvp.detailpage;
+package com.example.yen.imdb.ui.mvvm.detailpage;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -33,7 +34,8 @@ public class DetailActivity extends BaseActivity {
     TextView language;
     @BindView(R.id.text_plot)
     TextView plot;
-    private Movie movie;
+
+    DetailViewModel viewModel;
 
 
     public static Intent getCalled(Context context, Movie movie) {
@@ -45,7 +47,7 @@ public class DetailActivity extends BaseActivity {
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         preSetViews();
-        injectComponent();
+
         initializeActivity();
     }
 
@@ -54,18 +56,17 @@ public class DetailActivity extends BaseActivity {
         ButterKnife.bind(this);
     }
 
-    private void injectComponent() {
-        activityComponent.inject(this);
-    }
-
     private void initializeActivity() {
-        movie = getIntent().getParcelableExtra(EXTRA_MOVIE);
+        viewModel = ViewModelProviders.of(this).get(DetailViewModel.class);
+        viewModel.setMovieObservable(getIntent().getParcelableExtra(EXTRA_MOVIE));
 
-        setupActionBar();
-        setupMovieDetail();
+        viewModel.getMovieObservable().observe(this, movie1 -> {
+            setupActionBar(movie1);
+            setupMovieDetail(movie1);
+        });
     }
 
-    private void setupMovieDetail() {
+    private void setupMovieDetail(Movie movie) {
         GlideApp.with(this).load(movie.getUrlPoster()).fitCenter().into(poster);
         StringBuilder sb = new StringBuilder();
         sb.append(StringUtils.makeMinToHour(movie.getRuntime()))
@@ -87,7 +88,7 @@ public class DetailActivity extends BaseActivity {
         plot.setText(movie.getPlot());
     }
 
-    private void setupActionBar() {
+    private void setupActionBar(Movie movie) {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(movie.getTitle());

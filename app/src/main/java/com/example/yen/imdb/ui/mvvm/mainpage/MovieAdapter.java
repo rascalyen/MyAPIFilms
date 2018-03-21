@@ -1,4 +1,4 @@
-package com.example.yen.imdb.ui.mvp.mainpage;
+package com.example.yen.imdb.ui.mvvm.mainpage;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -31,11 +31,11 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieHolder>
     }
 
 
-    public void setMovies(List<Movie> movies) {
+    void setMovies(List<Movie> movies) {
         this.movies = movies;
     }
 
-    public List<Movie> getMovies() {
+    List<Movie> getMovies() {
         return this.movies;
     }
 
@@ -81,7 +81,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieHolder>
         return movies == null ? 0 : movies.size();
     }
 
-    public void addAll(List<Movie> movies) {
+    void addAll(List<Movie> movies) {
         if (!this.movies.isEmpty()) {
             this.movies.clear();
             this.movies.addAll(movies);
@@ -92,7 +92,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieHolder>
         notifyDataSetChanged();
     }
 
-    public void clearAll() {
+    void clearAll() {
         if (!this.movies.isEmpty()) {
             this.movies.clear();
             notifyDataSetChanged();

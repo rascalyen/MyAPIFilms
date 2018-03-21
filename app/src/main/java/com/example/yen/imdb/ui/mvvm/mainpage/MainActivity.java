@@ -1,4 +1,4 @@
-package com.example.yen.imdb.ui.mvp.mainpage;
+package com.example.yen.imdb.ui.mvvm.mainpage;
 
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -46,8 +46,10 @@ public class MainActivity extends BaseActivity implements HasComponent<ActivityC
         MainFragment mainFragment =
                 (MainFragment) getSupportFragmentManager().findFragmentByTag(MAIN_TAG);
         
-        if (mainFragment != null && mainFragment.isVisible())
-            mainFragment.getMainPresenter().initialize();
+        if (mainFragment != null && mainFragment.isVisible()) {
+            mainFragment.clearMovies();
+            mainFragment.getMainViewModel().initialize();
+        }
     }
 
     @Override

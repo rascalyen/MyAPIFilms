@@ -11,7 +11,7 @@ public abstract class BaseFragment extends Fragment {
 
     @Override public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setRetainInstance(true);      // onSaveInstanceState in child fragment already
+        //setRetainInstance(true);
     }
 
 

@@ -13,7 +13,7 @@ Showcase common android implementation with [MyAPIFilms](http://api.myapifilms.c
 ### Technical Features
 From this project you should find useful examples like,
 
-* Build android with MVP design pattern
+* Build android with MVVM design pattern + [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel.html) + [LiveData](https://developer.android.com/topic/libraries/architecture/livedata.html)
 * Use Dependency Injection ([Dagger2](http://google.github.io/dagger/)) to separate configuration (properties, imageClient, httpClient, etc.) and UI usage
 * Use [Butterknife](https://github.com/JakeWharton/butterknife) for view injection in Activity/Fragment
 * Use [Retrofit2](http://square.github.io/retrofit/) and [Moshi](https://github.com/square/moshi) to call RESTful API and parse returned JSON response
@@ -53,7 +53,7 @@ In this project, run check to ensure code quality in the following order: Checks
 * [Dagger 2. Custom scopes, Subcomponents](https://proandroiddev.com/dagger-2-part-ii-custom-scopes-component-dependencies-subcomponents-697c1fa1cfc)
 
 ### TODO
+- <s>MVP</s> -> see branch [mvp](https://github.com/rascalyen/MyAPIFilms/tree/mvp)
 - <s>MVVM + Data binding</s>  -> see branch [dataBinding](https://github.com/rascalyen/ApiMovies/tree/dataBinding)
 - <s>RxJava/RxAndroid</s> -> Overkill for this project. There's only one call...
-- ViewModel + LiveData (Favor MVVM)
 - Kotlin
