@@ -107,18 +107,14 @@ public class MainFragment extends BaseFragment implements MainViewMVP {
 
     @Override
     public void showProgress() {
-        if (progressView != null) {
-            progressView.setVisibility(View.VISIBLE);
-            this.getActivity().setProgressBarIndeterminateVisibility(true);
-        }
+        progressView.setVisibility(View.VISIBLE);
+        this.getActivity().setProgressBarIndeterminateVisibility(true);
     }
 
     @Override
     public void hideProgress() {
-        if (progressView != null) {
-            progressView.setVisibility(View.GONE);
-            this.getActivity().setProgressBarIndeterminateVisibility(false);
-        }
+        progressView.setVisibility(View.GONE);
+        this.getActivity().setProgressBarIndeterminateVisibility(false);
     }
 
     @Override

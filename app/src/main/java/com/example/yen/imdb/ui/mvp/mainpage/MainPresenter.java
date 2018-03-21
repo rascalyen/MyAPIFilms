@@ -21,21 +21,21 @@ public class MainPresenter implements Presenter<MainViewMVP> {
     private MainViewMVP mainView;
 
 
-    @Inject public MainPresenter(MovieRepository movieRepo,
-                                 CompositeDisposable compositeDisposable) {
+    @Inject MainPresenter(MovieRepository movieRepo,
+                  CompositeDisposable compositeDisposable) {
         this.movieRepo = movieRepo;
         this.compositeDisposable = compositeDisposable;
     }
 
 
-    public void initialize() {
+    void initialize() {
         mainView.clearMovies();
         mainView.hideRetry();
         mainView.showProgress();
         getInTheaters();
     }
 
-    protected void getInTheaters() {
+    private void getInTheaters() {
         Disposable disposable = movieRepo.loadInTheaterMovies()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::onNext, this::onError, () -> mainView.hideProgress());
@@ -43,18 +43,22 @@ public class MainPresenter implements Presenter<MainViewMVP> {
         compositeDisposable.add(disposable);
     }
 
-    protected void onNext(List<Movie> movies) {
-        mainView.viewMovies(movies);
+    void onNext(List<Movie> movies) {
+
+        if (movies.isEmpty())
+            mainView.showRetry();
+        else
+            mainView.viewMovies(movies);
     }
 
-    protected void onError(Throwable throwable) {
+    void onError(Throwable throwable) {
         mainView.showRetry();
         mainView.showMessage("#####  MOM I failed  #####");
         Log.i(MainPresenter.class.getSimpleName(), throwable.getMessage());
     }
 
-    public void cancelCall() {
-        compositeDisposable.clear();
+    void cancelCall() {
+        compositeDisposable.dispose();
     }
 
     @Override

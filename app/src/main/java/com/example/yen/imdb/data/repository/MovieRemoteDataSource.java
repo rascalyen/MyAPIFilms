@@ -28,11 +28,15 @@ public class MovieRemoteDataSource {
 
         return imdbService.getInTheaters(properties.getProperty("token"),
                 BuildConfig.FORMAT_JSON, BuildConfig.LANGUAGE)
-                .filter(response -> response != null && response.getError() == null)
-                .flatMap(r -> {
-                    List<Movie> m = new ArrayList<>(r.getData().getInTheaters().get(1).getMovies());
-                    m.addAll(r.getData().getInTheaters().get(0).getMovies());
-                    return Observable.just(m);
+                .flatMap(response ->
+                {
+                    List<Movie> movies = new ArrayList<>();
+
+                    if (response != null && response.getError() == null) {
+                        movies.addAll(response.getData().getInTheaters().get(1).getMovies());
+                        movies.addAll(response.getData().getInTheaters().get(0).getMovies());
+                    }
+                    return Observable.just(movies);
                 })
                 .subscribeOn(Schedulers.io());
     }

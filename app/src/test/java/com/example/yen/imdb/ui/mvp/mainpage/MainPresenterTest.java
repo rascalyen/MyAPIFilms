@@ -79,6 +79,13 @@ public class MainPresenterTest extends RobolectricTestCase {
         // TODO - test with RxJAVA
     }
 
+    @Test public void onNext_EmptyList() {
+
+        mainPresenter.onNext(new ArrayList<Movie>());
+
+        verify(mainView).showRetry();
+    }
+
     @Test public void onNext() {
 
         mainPresenter.onNext(movies);
@@ -98,7 +105,7 @@ public class MainPresenterTest extends RobolectricTestCase {
 
         mainPresenter.cancelCall();
 
-        assertEquals(true, compositeDisposable.size() == 0);
+        assertEquals(true, compositeDisposable.isDisposed());
     }
 
 
