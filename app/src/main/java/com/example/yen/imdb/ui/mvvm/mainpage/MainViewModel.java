@@ -44,7 +44,11 @@ public class MainViewModel extends ViewModel {
     }
 
     private void onNext(List<Movie> movies) {
-        moviesObservable.setValue(movies);
+
+        if (movies.isEmpty())
+            retryObservable.setValue(true);
+        else
+            moviesObservable.setValue(movies);
     }
 
     private void onError(Throwable throwable) {

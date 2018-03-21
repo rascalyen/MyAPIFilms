@@ -91,8 +91,9 @@ public class MainFragment extends BaseFragment {
         viewModel.getRetryObservable().observe(this,
                 isRetry -> noResultView.setVisibility(isRetry ? View.VISIBLE : View.GONE));
 
-        viewModel.getMoviesObservable().observe(this, movies ->  {
-            movieAdapter.addAll(new ArrayList<>(movies));
+        viewModel.getMoviesObservable().observe(this, movies -> {
+            if (noResultView.getVisibility() == View.GONE)
+                movieAdapter.addAll(new ArrayList<>(movies));
         });
 
         viewModel.getErrorMsgObservable().observe(this, this::showToastMessage);
