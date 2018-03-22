@@ -28,8 +28,7 @@ public class MovieRemoteDataSource {
 
         return imdbService.getInTheaters(properties.getProperty("token"),
                 BuildConfig.FORMAT_JSON, BuildConfig.LANGUAGE)
-                .flatMap(response ->
-                {
+                .flatMap(response -> {
                     List<Movie> movies = new ArrayList<>();
 
                     if (response != null && response.getError() == null) {
