@@ -29,7 +29,6 @@ public class MainFragment extends BaseFragment {
     RecyclerView recyclerView;
     @Inject MovieAdapter movieAdapter;
     private MainViewModel viewModel;
-    private static final String MOVIES_STATE = "MOVIES_STATE";
     private Unbinder unbinder;
 
 
@@ -51,12 +50,6 @@ public class MainFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_movies, container, false);
         unbinder = ButterKnife.bind(this, view);
         return view;
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putParcelableArrayList(MOVIES_STATE, (ArrayList<Movie>) movieAdapter.getMovies());
     }
 
     @Override
