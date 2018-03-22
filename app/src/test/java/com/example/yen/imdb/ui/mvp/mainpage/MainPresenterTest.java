@@ -79,7 +79,7 @@ public class MainPresenterTest extends RobolectricTestCase {
         // TODO - test with RxJAVA
     }
 
-    @Test public void onNext_EmptyList() {
+    @Test public void onNextWithEmptyList() {
 
         mainPresenter.onNext(new ArrayList<Movie>());
 
