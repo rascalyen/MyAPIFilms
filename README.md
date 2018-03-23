@@ -21,7 +21,7 @@ From this project you should find useful examples like,
 * [Glide](https://github.com/bumptech/glide) as image client
 * Define productFlavors in gradle script
 * Read properties from /res/raw resource (However, BuildConfig is preferable)
-* How to save/restore Fragment's state
+* <s>How to save/restore Fragment's state</s> -> No need thanks to ViewModel
 * Use RecyclerView and CardView
 
 ### Debug Environment
