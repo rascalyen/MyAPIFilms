@@ -1,6 +1,13 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.getkeepsafe.dexcount'
-apply from: '../config/quality/quality.gradle'
+apply from: "$project.rootDir/config/quality/quality.gradle"
+//apply plugin: 'kotlin-android'
+//apply plugin: 'kotlin-android-extensions'
+
+
+def versionMajor = 0
+def versionMinor = 0
+def buildNumber = 1
 
 android {
     compileSdkVersion rootProject.targetSdkVersion
@@ -10,9 +17,10 @@ android {
         applicationId "com.example.yen.imdb"
         minSdkVersion rootProject.minSdkVersion
         targetSdkVersion rootProject.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        versionCode versionMajor * 1000000 + versionMinor * 1000 + buildNumber
+        versionName "${versionMajor}.${versionMinor}.${buildNumber}"
 
         buildConfigField "String", "FORMAT_JSON", "\"json\""
         buildConfigField "String", "LANGUAGE", "\"en-us\""
@@ -83,14 +91,19 @@ android {
         checkReleaseBuilds true
         abortOnError true
         lintConfig file("$project.rootDir/config/quality/lint/lint.xml")
-
-        disable 'GoogleAppIndexingWarning' // App does not have deep linking.
-        disable 'InvalidPackage' // Okio references java.nio that does not presented in Android SDK.
     }
 
     packagingOptions {
         exclude('META-INF/LICENSE')
         exclude('META-INF/NOTICE')
+    }
+
+    // Generate apk with versionName
+    applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            output.outputFileName = new File(
+                    output.outputFile.name.replace(".apk", "-" + variant.versionName + ".apk"))
+        }
     }
 
     // Ignore leakcanary for unit tests
@@ -106,6 +119,8 @@ android {
 }
 
 dependencies {
+    // Kotlin
+    //implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$KOTLIN_VERSION"
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "com.android.support:appcompat-v7:$SUPPORT_LIBRARY_VERSION"
     implementation "com.android.support:design:$SUPPORT_LIBRARY_VERSION"
