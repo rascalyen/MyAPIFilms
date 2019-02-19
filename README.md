@@ -55,5 +55,5 @@ In this project, run check to ensure code quality in the following order: Checks
 ### TODO
 - <s>MVP</s> -> see branch [mvp](https://github.com/rascalyen/MyAPIFilms/tree/mvp)
 - <s>MVVM + Data binding</s>  -> see branch [dataBinding](https://github.com/rascalyen/ApiMovies/tree/dataBinding)
-- <s>RxJava/RxAndroid</s> -> Overkill for this project. There's only one call...
+- <s>RxJava/RxAndroid</s>
 - Kotlin
