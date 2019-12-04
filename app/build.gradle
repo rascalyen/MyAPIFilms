@@ -34,7 +34,7 @@ android {
     flavorDimensions "consumer"
 
     productFlavors {
-        def baseURL = "\"http://api.myapifilms.com/imdb/\""
+        def baseURL = "\"https://www.myapifilms.com/imdb/\""
         def timeoutInSec = "60"
 
         dev {
