@@ -1,4 +1,4 @@
-baseURL =  http://api.myapifilms.com/imdb/
+baseURL =  https://www.myapifilms.com/imdb/
 token = 159ab6ca-37ea-4351-ba42-9ef903beacc3
 connectTimeoutSec = 12
 readTimeoutSec = 12
